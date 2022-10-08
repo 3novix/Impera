@@ -16,9 +16,9 @@
   <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"/>
   <link rel="stylesheet" href="css/theme.css">
   <link rel="stylesheet" href="css/style.css">
-  <script src="numAbbre.js"></script>
 </head>
-<body>
+<body onload="done()">
+  <div id="startscreen"><!--A simple animation for loading... most likely the app logo--></div>
   <div id="column1-2" class="gjs-row">
     <div id="row1-2" class="gjs-cell rblocks">
       <div class="samewidther sparent"><form onsubmit="return search()"><input id="sany" placeholder="I'm searching... " type="text" name="search anything" data-title="search stuffs" class="slicki"/><button class="gtext"><i class="la la-search"></i></button></form></div>
