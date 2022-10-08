@@ -13,7 +13,26 @@
 *{
   font-family: Arial;
 }
-
+:root{
+  --col1:29, 155, 240;
+  --col2:255, 77, 181;
+  --col3:146, 141, 210;
+  --primary:255, 255, 255;
+  --secondary:0, 0, 0;
+  --color1:rgb(var(--col1));
+  --color2:rgb(var(--col2));
+  --color3:rgb(var(--col3));
+  --gray1:rgba(250, 250, 250, 0.41);
+  --shadow:rgba(128,128,128,0.2);
+  --gray2:rgba(255, 255, 255, 0.677);
+  --pri:rgb(var(--primary));
+  --sec:rgb(var(--secondary));
+  --pri9:rgba(255, 255, 255, 0.24);
+  --gradi: linear-gradient(135deg, var(--color1), var(--color2));
+  --gradi2: linear-gradient(270deg, var(--color2) 20%, var(--color1) 90%);
+  --gradient3: linear-gradient(270deg, var(--col2) 20%, var(--col1), var(--col3));
+  --bwe:10px 0px;
+}
 /**Tooltip or is it title tip?**/
 [data-title]:hover:after {
   opacity: 1;
@@ -232,13 +251,6 @@ p{
   box-shadow: none;
   box-shadow:1px -1px 4px 1px var(--color1), -1px 1px 4px 1px var(--color2), inset 0px 0px 2px 1px var(--shadow);
 }
-#iqyv::after{
-  position: relative;
-  width: inherit;
-  height: inherit;
-  background-color: black;
-  margin-top: 10px;
-}
 #iosnd{
   width:70%;
 }
@@ -369,7 +381,8 @@ p{
 /*.loi img{margin: 10px}*/
 .bottoms{
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
+  overflow: hidden;
   width: 100%;
   height: 70px;
 }
@@ -516,10 +529,11 @@ button{
   box-shadow: 0px 0px 2px 2px var(--shadow);
 }
 .postattachments{
+  display:none;
   position: relative;
   overflow: visible;
-  height: fit-content;
-  width: calc(100% + 17.5px);
+  height: 200px;
+  width: calc(100% + 27.5px);
 }
 .inside{
   display: flex;
@@ -530,10 +544,12 @@ button{
   height: 100%;
   margin-left: -27.5px;
   z-index: 20;
+  border-top: 3px solid var(--color2);
+  border-bottom: 3px solid var(--color1);
+
 }
 .inside img{
   max-height: 200px;
-  border-top: 2px solid var(--color2);
 }
 .posts{
   display: flex;
@@ -559,7 +575,6 @@ button{
 }
 .underp{
   width: 50px;
-  height: 50px;
 }
 .mpost{
   width: calc(100% - 55px);
@@ -570,8 +585,9 @@ button{
   flex-flow: row wrap;
   align-items: center;
   width: 100%;
-  line-height: 40px;
+  line-height: 30px;
 }
+.postUser div button{height: 30px; width: 30px;}
 .user-options{
   width: 40px;
   height: 40px;
@@ -582,10 +598,19 @@ button{
 .posterpic, .loi img{
   width: 50px;
   height: 50px;
-  box-shadow: 1px 1px 2px 1px var(--color2), -1px -1px 2px 1px var(--color1), inset 0 0 1px 0 var(--gray2);
+  box-shadow: 1px 1px 2px 1px var(--color2), -1px -1px 2px 1px var(--color1);
   border-radius: 100%;
   transition: box-shadow 1s;
 }
+#iqyv::after{
+    box-shadow: inset 3px 3px 10px 0 #ffffff;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
 .projects-pic{
   box-shadow: none;
   box-shadow: 1px 1px 2px 1px var(--color1), -1px -1px 2px 1px var(--color2);
@@ -613,7 +638,7 @@ button{
 .postContents{
   padding: 5px;
   display: flex;
-  min-height: 80px;
+  min-height: 60px;
   overflow: visible;
 }
 .hdivider{
@@ -797,6 +822,7 @@ button{
   color: var(--pri);
   transition: box-shadow 0.2s;
   box-shadow: 0 0 5px 0px rgba(100, 100, 100, 0.5);
+  z-index: 80;
 }
 .classf:active{
   box-shadow: 1px 1px 2px 1px var(--color2), -1px -1px 2px 1px var(--color1), 0 0 5px 2px var(--shadow);
@@ -842,8 +868,16 @@ button{
   text-align: left;
   padding-left: 10px;
 }
-@media (max-width: 900px){
-  /**FOR MOBILE AND TAB**/
+#startscreen{
+  width: 100%;
+  height: 100%;
+  top: 0;
+  position: fixed;
+  z-index: 110;
+  left: 0;
+  background-color: var(--pri);
+}
+@media screen and (min-device-width: 768px){
   .gjs-row{
     flex-wrap:wrap;
   }
@@ -860,12 +894,14 @@ button{
     bottom: 80px;
   }  
 }
-@media (max-width: 320px) {
+@media screen and (max-device-width: 480px)
+and (orientation: portrait) {
   .rblocks{
     display: none;
   }
+  #ibczo-2{display: none;}
   #row1-2{display: flex;}
-  .rblocks{max-width: none;}
+  #nav{display: flex;}
 }
 /**FOR SMALL LAPTOP SCREENS**/
 @media (min-width: 1200px){
@@ -881,3 +917,4 @@ button{
   }
   .rblocks{display: flex;}
 }
+
