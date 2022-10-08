@@ -45,6 +45,10 @@ function threshold(limit, callback){
 
 const ls = localStorage;
 
+async function done(){
+    //close loading screen and set up other stuffs.
+    ge('startscreen').style.display = "none";
+}
 function showToast(message, mtype, ftime, callback){
     let toasty= document.createElement('div');
     document.body.appendChild(toasty);
@@ -131,7 +135,7 @@ function showToast(message, mtype, ftime, callback){
         ent.currentTarget.className += " gtext";
     }
     
-    document.getElementById(tabn).getAttribute('data-title');
+    //document.getElementById(tabn).getAttribute('data-title');
     async function remindme(projectID, notifon){
         if(notifon == 'false'){
             //if notification is off
