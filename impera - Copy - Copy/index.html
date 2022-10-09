@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no, maximum-scale=1">
   
   <title>Impera.io</title>
+  <link rel="preload" href="img/logo.svg" as="image"/>
   <link rel="preload" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" as="style"/>
   <link rel="preload" href="css/theme.css" as="style">
   <link rel="preload" href="css/style.css" as="style">
@@ -18,7 +19,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body onload="done()">
-  <div id="startscreen"><!--A simple animation for loading... most likely the app logo--></div>
+  <div id="startscreen"><img width="100px" height="100px" src="img/logo.svg" id="logo"/></div>
   <div id="column1-2" class="gjs-row">
     <div id="row1-2" class="gjs-cell rblocks">
       <div class="samewidther sparent"><form onsubmit="return search()"><input id="sany" placeholder="I'm searching... " type="text" name="search anything" data-title="search stuffs" class="slicki"/><button class="gtext"><i class="la la-search"></i></button></form></div>
@@ -124,7 +125,13 @@
     <div class="rblocks vdivider"><span style="background-image: linear-gradient(315deg, var(--color2), var(--color1));"></span></div>
     <!--LAST TAB... WILL BE USED TO SHOW PROJECTS. THUS, ILL MAKE THIS A LITTLE BIGGER.. also, maybe the projects will be the hashtags, while underscore can refer to the users-->
     <div id="iht7k" class="gjs-cell rblocks">
-      <div style="width: 100%; height:60px"><div id="titlep" class="gradient-text">Projects</div></div>
+      <div style="width: 100%; height:60px"><div id="titlep" class="gradient-text">Projects</div>
+      <div id="pfilter">
+        <button class="pfilterb">Popular</button>
+        <button class="pfilterb">Latest</button>
+        <button class="pfilterb">Trending</button>
+      </div>
+    </div>
       <div id="projectsin" >
         
         <div class="gjs-row projects">
@@ -162,6 +169,17 @@
   </div>
   
   <div></div>
+
+<!--Direct Messaging(DM) dialog-->
+  <div id="dm">
+    <div id="messagetop"><div><img id="recipent"/><p id="rename"></p></div><div id="mta"><button class="actions"></button></div></div>
+    <div id="messagebody"></div>
+    <div id="messageinputs"><input type="text" spellcheck="false" id="senderinput"/><div id="mta2"><button class="actions"></button><button class="actions"></button></div></div>
+  </div>
+
+<!--Dialog for a new post-->
+  <div class="dialogs" id="newpost"><div id="ieof"><img><input type="text" name="new message" placeholder="Write your backstory"></div><div><button class="actions"></button></div></div>
+
   <main id="mainpost"><div id="ptop"><p id="pname"></p><img id="pimg" class="square user-img"/><p id="pusername" class="col1"></p></div></main>
   <!---REMINDER... I will make a section under project overview to show "tagged posts", this will show all posts where the project is tagged-->
   
@@ -173,7 +191,10 @@
     <button data-title="projects" class="tabb" onclick="opentab(event, 'iht7k')"><i class="la la-hashtag"></i></button>
     <button data-title="messages" class="tabb" onclick="opentab(event, 'tab3')"><i class="la la-envelope"></i></button>
   </div>
-  
+
+  <!--information toast-->
+  <div id="ctt"></div>
+
   <div id="miniprofile">
     <p class="description"></p>
     <div><button data-title="follow"></button></div>
