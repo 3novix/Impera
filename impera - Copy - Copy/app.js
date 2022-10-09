@@ -47,7 +47,10 @@ const ls = localStorage;
 
 async function done(){
     //close loading screen and set up other stuffs.
+    ge('startscreen').style.opacity = 0;
+    setTimeout(function(){
     ge('startscreen').style.display = "none";
+    }, 2000)
 }
 function showToast(message, mtype, ftime, callback){
     let toasty= document.createElement('div');
@@ -110,8 +113,12 @@ function showToast(message, mtype, ftime, callback){
         document.getElementsByTagName('button')[y].onmouseover = function(element){
             console.log(element);
             threshold(3, ()=>{
+                ge('ctt').pageYOffset=element.screenY;
+                ge('ctt').pageXOffset=element.screenX;
                 ge('ctt').style.display = 'block';
                 ge('ctt').style.opacity = '1';
+                console.log(element.target);
+                ge('ctt').innerHTML = element.target.dataTitle;
             })
         }
     }
