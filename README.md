@@ -21,7 +21,7 @@ Users can follow and connect with their favorite creators more easily, while the
 
 ### Team
 * @victorlawrencw
-* @codekami
+* @code-kami
 
 We did both the Frontend and Backend hand-in-hand
 
