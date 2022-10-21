@@ -2,7 +2,7 @@
 SocialFi project for Moralis x Google 2022 Hackathon.
 
 ## Quick links
-[Using the app](https://github.com/victorlawrencw/Impera##using-the-app)
+[Using the app](https://github.com/victorlawrencw/Impera#using-the-app)
 
 Impera.io is a social crowdfunding web project made using Moralis for the 2022 Moralis x Google Hackathon. This web app combines the connectivity of a typical social media application like Twitter and a crowdfunding website like Kickstarter.
 
