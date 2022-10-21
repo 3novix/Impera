@@ -2,8 +2,9 @@
 SocialFi project for Moralis x Google 2022 Hackathon.
 
 ## Quick links
-- [Introduction](https://github.com/victorlawrencw/Impera#Introduction)
+- [Introduction](https://github.com/victorlawrencw/Impera#introduction)
 - [Using the app](https://github.com/victorlawrencw/Impera#using-the-app)
+- [Team](https://github.com/victorlawrencw/Impera#team)
 - [Development Journal](https://github.com/victorlawrencw/Impera#development-journal)
 
 ### Introduction
@@ -18,5 +19,11 @@ Using Polygon technology as its main track, Impera.io save the you from high gas
 
 Users can follow and connect with their favorite creators more easily, while they keep tabs on the projects that interests them. and the creators can easily gather a crowd on a single platform.
 
-### Development journal...
+### Team
+* @victorlawrencw
+* @codekami
+
+We did both the Frontend and Backend hand-in-hand
+
+### Development journal
 We divided our schedule by weeks. The first week is for frontend, the following three weeks is for backend(since we still have so much to test on the app) and the remaining days for deployment and documentation.
