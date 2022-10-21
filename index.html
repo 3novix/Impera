@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no, maximum-scale=1">
+  <meta name="keywords" content="Impera, Social kickstarter, social crowdfunding">
+  <meta name="description" content="iMPERA.io - Join a community of enthusiasts and help fund world-changing projects to reality">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Impera.io">
+  <meta name="twitter:description" content="A community of enthusiasts and startups, connecting ideas and making them a reality">
+  <meta name="twitter:site" content="@CSS">
+  <meta name="twitter:creator" content="@oruko_mi">
+  <meta name="twitter:image" content="img/logo.svg">
+  
+  <title>Impera.io</title>
+  
+  <script lang="javascript">
+    function ge(id){
+      const el = document.getElementById(id);
+      return el;
+    }
+    function gc(classname){
+      const el = document.getElementsByClassName(classname);
+      return el;
+    }
+    
+    const ls = localStorage;
+    
+    function themeaton(){
+      let theme = ls.getItem('theme');
+      
+      if(theme == 'light' || theme == 'dark'){
+        let meta = document.createElement('meta');
+        meta.name = 'theme-color';
+        if(theme == 'light'){
+          let preload = document.createElement('link');
+          preload.rel = 'preload';
+          preload.as ='style';
+          preload.href = 'css/light.css';
+          document.head.append(preload);
+          
+          let theme_e = document.createElement('link');
+          theme_e.rel = 'stylesheet';
+          theme_e.href = 'css/light.css';
+          document.head.append(theme_e);
+          
+          meta.content = '#ffffff';
+        }
+        else{
+          let preload = document.createElement('link');
+          preload.rel = 'preload';
+          preload.as ='style';
+          preload.href = 'css/dark.css';
+          document.head.append(preload);
+          
+          let theme_e = document.createElement('link');
+          theme_e.rel = 'stylesheet';
+          theme_e.href = 'css/dark.css';
+          document.head.append(theme_e);
+          
+          meta.content = '#000000';
+        }
+      }
+      else{ls.setItem('theme', 'light'); themeaton();}
+    }
+    themeaton();
+
+    {
+    function cfd(){
+      const querst = window.location.search.indexOf('thread=');
+      const quersp = window.location.search.indexOf('project=');
+      if(querst != -1){
+        if(window.location.search.indexOf('&&') == -1){
+          //to get threadID from the url's get form data
+          const tid = window.location.search.slice(querst+7);
+        }
+        else{
+          const tidx =  window.location.search.slice(querst+7);
+          const tid = tidx.slice(0, tidx.indexOf("&&"));
+        }
+        //now we validate the info to avoid potential hacking exploit
+        if(tid.match(/^[A-Za-z0-9]*$/)){
+          loadthread()
+        }
+      }
+      else if(quersp != -1){
+        if(window.location.search.indexOf('&&') == -1){
+          //to get threadID from the url's get form data
+          const pid = window.location.search.slice(quersp+8);
+        }
+        else{
+          const pidx =  window.location.search.slice(quersp+8)
+          const pid = pidx.slice(0, pidx.indexOf("&&"));
+        }
+        //now validation.
+        if(pid.match(/^[A-Za-z0-9]*$/)){
+          loadproject()
+        }
+      }
+    }
+    cfd()
+  }
+
+  </script>
+  <link rel="preload" href="img/logo.svg" as="image"/>
+  <link rel="icon" href="img/logo.svg" sizes="any">
+  
+  <link rel="preload" href="Fonts/CaviarDreams.ttf" as="font"/>
+  <link rel="preload" href="Fonts/sofiapro-light.otf" as="font"/>
+  <link rel="preload" href="Fonts/Neou-Bold.ttf" as="font"/>
+  
+  
+  <link rel="preload" href="css/style.css" as="style"/>
+  <link rel="preload" href="la/css/line-awesome.css" as="style"/>
+  
+  
+  <link rel="stylesheet" href="la/css/line-awesome.css"/>
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Theme included stylesheets -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+  
+  <!-- Moralis SDK code -->
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script src="https://unpkg.com/moralis-v1/dist/moralis.js"></script>
+  
+  <!-- Main Quill library -->
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+</head>
+<body onload="done()">
+  <div id="startscreen"><!--A simple animation for loading... most likely the app logo--><img width="100px" height="100px" src="img/logo.svg" id="logo"/></div>
+  <div id="column1-2" class="gjs-row">
+    <div id="row1-2" class="gjs-cell rblocks">
+      <div class="samewidther sparent"><form style="width: 100%;" onsubmit="return search()"><input id="sany" placeholder="I'm searching... " spellcheck="false" type="text" name="search-anything" data-title="search stuffs" class="slicki"/><button class="gtext" style="align-self: end;"><i class="la la-search"></i></button></form></div>
+      <div id="iqkf-2" class="gjs-row samewidther square">
+        <div id="ixcvh-2" onclick="profile()" class="gjs-cell square innerboxes">
+          <div id="iosnd" class="square">
+            <img id="iqyv" src="img/pp1.JPG"/>
+          </div>
+          <div id="i35re" class="gjs-row">
+            <div id="i2ag" onclick="" class="nnuy">
+              <p id="followerC" class="numc col2">10k
+              </p>
+              <p class="ntext">followers</p>
+            </div>
+            <div id="ipl6i" onclick="" class="nnuy">
+              <p id="followingC" class="numc col1">2
+              </p>
+              <p class="ntext">following</p>
+              <br/>
+            </div>
+          </div>
+          <div id="i127i" class="gjs-row">
+            <div id="ifr7x" data-title="ethAddress" class="pttx"></div>
+            <button id="iola" data-title="copy" class="pttx square"><i style="color:rgb(var(--primary)); font-size: 18px;" class="la la-clone la-1.5x"></i></button>
+          </div>
+        </div>
+      </div>
+      <div id="i33j-2" class="gjs-row samewidther">
+        <div id="ipbs-2" class="gjs-cell square innerboxes">
+          <!--THIS BLOCK CONTAINS LINKS TO OTHER PART OF THE APP-->
+          <div class="square"><button class="b2 square tcol1"><i class="la la-bell la-2x"></i></button><p class="b2text">Notifications</p></div>
+          <div class="square" onclick="if(ls.getItem('theme') == 'light'){ls.setItem('theme', 'dark'); themeaton()}else{ls.setItem('theme', 'light'); themeaton()}"><button class="b2 square tcol2"><i class="la la-yin-yang la-2x"></i></button><p class="b2text">Toggle theme</p></div>
+          <div class="square" onclick="opendialog('events')"><button class="b2 square tcol3"><i class="la la-calender-alt la-2x"></i></button><p class="b2text">Events</p></div>
+          <div class="square"><button class="b2 square tcol4"><i class="la la-cogs la-2x"></i></button><p class="b2text">Settings</p></div>
+        </div>
+      </div>
+      <span id="filler"></span>
+    </div>
+    
+    <div class="rblocks vdivider"><span style="background-image: linear-gradient(135deg, var(--color2), var(--color1));"></span></div>
+    
+    <!--Since this is an experimetal copy of the original piece... I'M GOING ALL OUT!-->
+    <!--POSTS TAB-->
+    <div id="ibczo-2" class="gjs-cell rblocks">
+      <!--All posts will be arranged here vertically-->
+      <div id="postsholder">
+        <div style="width:100%; min-height: 70px; order:100;"></div>
+        <!--Each thread has a unique id-->
+        <div id="ruf49fjf" class="thread" onclick="openthread(this.id)">
+          <!--An Example of a post to see how it looks like-->
+          <div class="postsin">
+            <div class="sosmm"></div>
+            <div class="userstalk">
+              <div class="underp"><img class="posterpic" src="img/pp1.JPG"/></div>
+              <span class="asl gbv" style="width: 2.5px;"></span>
+              <div class="underp"><img src="img/pp3.JPG" class="projects-pic"/></div>
+            </div>
+            
+            <div class="mpost">
+              <div class="postUser"><p class="hhname">Starboy</p><span class="hdivider"></span><p class="username col3"> theWeeknd</p><div style="flex-grow:5;"><button class="acol2 actions user-options"><div class="la la-ellipsis-h"></div></button>
+              <div class="moreoptions"><button><div>Block User</div></button><button><div>Kill User</div></button><button><div>Stalk User</div></button></div>
+            </div></div>
+            <div class="postContents">Hello world, welcome to Impera.io, a place where idea roams free to take flight after receiving guidance from its mothers</div>
+            <div class="postattachments"><div class="inside"><img src="img/apic.JPG"/></div></div>
+            <div class="refered"></div>
+            <div class="postActions">
+              <!--contains actions related to the post... i.e like, share, save and reply/comment-->
+              <button class="actions acol1 la la-comment"></button>
+              <!--I Will use quote instead of retweet. gotta be original-->
+              <button class="actions acol2 las la-quote-right"></button>
+              <button class="actions acol3 la la-heart"></button>
+              <button class="actions acol4 la la-share"></button>
+            </div>
+            
+            <div class="tcomments">
+              <div class="sosmm"></div>
+              <div class="userstalk" style="height: auto;">
+                <div class="underp"><img class="posterpic" src="img/pp2.jpg"/></div><span class="asl gb"></span>
+                <div class="underp"></div>
+              </div>
+              <div class="mpost">
+                <div class="postUser"><p class="hhname">Asty Mikka</p><span class="hdivider"></span><p class="username col3"> Otherworlder</p><div style="flex-grow:5;"><button class="acol2 actions user-options"><div class="la la-ellipsis-h"></div></button>
+                <div class="moreoptions"><button><div>Block User</div></button><button><div>Kill User</div></button><button><div>Stalk User</div></button></div>
+              </div></div>
+              <div class="postContents">Hey, I'm from England, where we speak german for our magic spells, and Japanese as our national language, while we have French names. Yes, Its Isekai!</div>
+              <div class="postattachments"><div class="inside"><img src="img/meme.JPG"/></div></div>
+              <div class="refered"></div>
+              <div class="postActions">
+                <!--contains actions related to the post... i.e like, share, save and reply/comment-->
+                <button class="actions acol1 la la-comment"></button>
+                <button class="actions acol2 las la-quote-right"></button>
+                <button class="actions acol3 la la-heart"></button>
+                <button class="actions acol4 la la-share"></button>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div id="mainpost">
+    <div id="ptop"><button class="actions acol2 la la-arrow-left"></button><p id="pname"></p><div style="display: inline-block; flex-grow: 1; text-align:center; height:50px"><img id="pimg" class="square user-img" src="img/pp1.JPG"/></div><p id="pusername" class="col1"></p><button class="actions acol1 la la-ellipsis-h"></button></div>
+    <div id="maincontents"></div>
+    <div id="mainbottom">
+      <!--contains all the comments and stuffs-->
+    </div>
+  </div>
+  
+  <!--floating button for sth related to the tab-->
+  <button class="classf" onclick="opendialog('writepost')"><i class="la la-feather-alt"></i></button>
+</div>
+
+<div class="rblocks vdivider"><span style="background-image: linear-gradient(315deg, var(--color2), var(--color1));"></span></div>
+<!--LAST TAB... WILL BE USED TO SHOW PROJECTS. THUS, ILL MAKE THIS A LITTLE BIGGER.. also, maybe the projects will be the hashtags, while underscore can refer to the users-->
+<div id="iht7k" class="gjs-cell rblocks">
+  <div style="width: 100%;"><div id="titlep" class="gradient-text">Projects</div>
+  <div id="pfilter">
+    <button class="pfilterb active" onclick="filterprojects(this)">Popular</button>
+    <button class="pfilterb" onclick="filterprojects(this)">Latest</button>
+    <button class="pfilterb" onclick="filterprojects(this)">Trending</button>
+  </div>
+</div>
+<div id="projectsin" class="filters">
+  
+  <div class="gjs-row projects">
+    <div id="ij549" class="gjs-cell innerboxes">
+      <div class="pr-contents">
+        <!--THE PROJECT'S/KICKSTART'S IMAGE-->
+        <img alt="project image" src="img/projectA.jpg"/>
+        <p><!--In case user has additional text to add. has to be short though--></p>
+      </div>
+      
+      <div style="display:flex; width: 100%; flex-direction:column; align-items:center; justify-content:center; height: 10px;"><span class="hdivider full"></span></div>
+      
+      <div class="bottoms">
+        <div class="loi"><img class="userimg" src="img/pp3.JPG"/></div>
+        
+        <div class="boto2">
+          <div class="btokd"><!--name of the project--><p>Bikers &amp; Wisdom</p><p>83%</p></div>
+          <div class="project-info-tab">
+            <div class="iald">1.9k backers</div>
+            <div class="iald">$1.9M Funded</div>
+            <!--All projects will harbor different ID, for the sake of easier identification, since projects name can be simlar or be the same-->
+            <button data-project="" class="actions acol1" onclick="/*Add project to remind me*/remindme(this)"><i class="la la-bell"></i></button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+<!--floating button for sth related to the tab-->
+<button class="classf" onclick="opendialog('newproject')" style="top: 10px;"><i class="la la-plus"></i></button>
+</div>
+
+</div>
+
+<div id="newproject" class="dialogs">
+  <div class="divc">
+    <div style="width: 100%; height: 50px; display: flex; flex-direction: row; justify-content: stretch;"><div style="height: 40px; line-height:40px">New Project</div><button style="margin-right:10px; justify-self: flex-end;" class="actions acol2 la la-times" onclick="closedialog('newproject')"></button></div>
+    <form style="display: flex; flex-direction: column; height: calc(100% - 50px); overflow: hidden;" onsubmit="return submit_project();">
+      <div style="display: flex; flex-direction: row; gap: 10px;">
+        <div style="width: 200px; height:200px">
+          <img class="gtext" id="replacer" onclick="removeimg()" src="" alt="project image">
+          <input class="gtext" id="p_image_input" name="p_image" spellcheck="false" title="image for project" type="file" accept=".png, .jpg, .jpeg, .bmp" required/>
+        </div>
+        <div class="vdivider" style="align-self:stretch"><span style="background-image: linear-gradient(135deg, var(--color2), var(--color1)); border-radius: 0;"></span></div>
+        <div id="simpleinputs">
+          <div class="input-box"><label for="inppname">Title</label><input type="text" name="p_name" id="inppname" required autofocus></div>
+          <div class="input-box"><label for="ingoal">Goal</label><input type="number" name="p_goal" id="ingoal" required></div>
+          <div class="input-box"><label for="deadline">Deadline</label><input type="number" max="12" min="1" value="1" name="months" id="deadline" required></div>
+          <div class="tags-holder">
+            <label title="">Select tags</label>
+            <!--max tags allowed should 3-->
+            <button class="niche" onclick="niche(this); return false;"></button>
+          </div>
+        </div>
+      </div>
+      <div style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
+        <div id="editor">
+          <h1>My project title...</h1>
+          <p>Some  <strong>important</strong> information on your project</p>
+          <p><br></p>
+        </div>
+      </div>
+      <div style="width: 100%; height:52px; display:flex; flex-flow:row wrap; align-items:center; justify-content:flex-end">
+      <input type="submit" class="specialb" style="border-radius: 0; box-shadow: 0 0 10px 1px var(--shadow);" value="Create Project">
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--Direct Messaging(DM) dialog-->
+<div id="dm" class="dialogs">
+  <div id="chat" class="divc">
+    <div id="dmmin"><button class="actions la la-times"></button></div>
+    <div id="messagetop"><div><img id="recipent"/><p id="rename"></p></div><button class="actions"></button></div>
+    <div id="messagebody"></div>
+    <div id="messageinputs"><input type="text" spellcheck="false" id="senderinput"/>
+      <div contenteditable="true"></div>
+      <div id="mta2"><button class="actions"></button><button class="actions"></button></div>
+    </div>
+  </div>
+  <div id="dmmenu">
+    <div class=""></div>
+  </div>
+</div>
+
+<!--Dialog for a new post-->
+<div class="dialogs" id="writepost">
+  <div class="divc">
+    <div style="width: 100%; height:50px; display: flex; flex-direction: row; gap:10px"><img src="img/pp1.JPG"/><p>New Post</p></div>
+    <div id="ieof"><textarea id="posttexts" type="text" name="new post" placeholder="Write your project backstory..." required></textarea></div>
+    <div id="postbottomh">
+      <div id="images-s"></div>
+      <input max="4" title="add attachments" class="actions la la-image" type="file" name="attach" id="attachb" accept=".png, .jpg, .jpeg, .bmp, .mp3, .gif, .mp4"/>
+      <div><button class="specialb">Post</button></div>
+    </div>
+  </div>
+</div>
+
+<!---REMINDER... I will make a section under project overview to show "tagged posts", this will show all posts where the project is tagged-->
+
+<div id="fullprojects" class="dialogs">
+  <div class="divc">
+    <div><button class="actions"></button></div>
+    <div id="allprojects">
+      
+    </div>
+    <div id="overview">
+      <div id="content">
+        <!--Here I wll import the formated html as projects description-->
+      </div>
+      <div id="fundbox"><div id="ethfund"><input id="fundinput" onchange=""/><button id="dollar" class="la la-dollar" onclick="togglecurrency(this.id)"></button></div><button id="fundbutton">Fund</button></div>
+    </div>
+  </div>
+</div>
+
+<div id="profile">
+  <div id="profile-top"><img id="back-img"><img id="main-img"></div>
+  <div id="profile-mid"></div>
+  <div id="profile-deeds"></div>
+</div>
+
+
+<div id="niche" class="dialogs">
+  <div class="divc">
+    <p>You cannot skip this step</p>
+    <div>
+      <!--A COUPLE OF BUTTONS FOR CHOOSING WHAT YOU'RE INTO(sounds like fetishes). THIS WILL HELP IN SORTING OUT WHAT POST AND PROJECTS THE USER WILL SEE. The buttons will contain images-->
+      <!--Arts, Programming, Gamming, Sports, Social Media, Entertainment. we can a function for narrowing down fetishes, like, {{Entertainment:[{Anime:{}, img:''}, {Entertainment:{}, img:''}], img:''}, {Art:{}, img:''}}-->
+      <button name="Art" title="" class="nicheb" onclick="niche(this.name)">Art</button>
+      <button name="Design &amp; tech" title="" class="nicheb" onclick="niche(this.name)">Design &amp; tech</button>
+      <button name="Film" title="" class="nicheb" onclick="niche(this.name)">Film</button>
+      <button name="Food &amp; Farm Tech" title="" class="nicheb" onclick="niche(this.name)">Food &amp; Farm Tech</button>
+      <button name="Games" title="" class="nicheb" onclick="niche(this.name)">Games</button>
+      <button name="Music" title="" class="nicheb" onclick="niche(this.name)">Music</button>
+      <button name="Books" title="" class="nicheb" onclick="niche(this.name)">Books</button>
+    </div>
+  </div>
+</div>
+
+<div id="zoomer"></div>
+
+<!--SECTION OF FLOATERS-->
+<!--TABS FOR NAVIGATING ON Mobile-->
+<div id="nav">
+  <button data-title="home" class="tabb" onclick="opentab(event, 'row1-2')"><i class="la la-home"></i></button>    
+  <button data-title="posts" class="tabb" onclick="opentab(event, 'ibczo-2')"><i class="la la-feather"></i></button>
+  <button data-title="projects" class="tabb" onclick="opentab(event, 'iht7k')"><i class="la la-hashtag"></i></button>
+  <button data-title="messages" class="tabb" onclick="opentab(event, 'tab3')"><i class="la la-envelope"></i></button>
+</div>
+
+<!--information toast-->
+<div id="ctt"></div>
+
+<div id="miniprofile">
+  <p class="description"></p>
+  <div><button data-title="follow"></button></div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  
+  const list = [
+  entertainment = {'Anime':{img:''}, 'Movies':{img:''}, name:function(){return this}, subs:function(){for(let u in this){}}}, 
+  art = {'Digital Art':{}}
+  ];
+  
+  function checklist(){
+    for(let l = 0; l<list.length; l++){
+      let nname = list[l].name;
+      let nsub = list[l].sub;
+    }
+    return nname
+  }
+  
+  function niche(nm){
+    const el = document.createElement('div');
+    ge(nm).append(el);
+    if(checklist() == nm){
+      //we have to expand the user's preference
+      el.innerHTML = ''+checkinner;
+    }
+    else{
+      //just select the niche without expanding it further. this settles this funtion
+    }
+  }
+</script>
+</body>
+</html>
