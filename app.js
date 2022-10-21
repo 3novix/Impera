@@ -3,9 +3,13 @@ const search_placeholders = ["", 'projects', 'threads', 'users', 'trends', 'Impe
 const currency = ['$', 'eth'];
 
 function qs(res){
-    return document.querySelectorAll(res);
-    
+    console.log(document.querySelectorAll(res).length);
+    for(let q = 0; q< document.querySelectorAll(res).length; q++){
+        console.log(document.querySelectorAll(res)[q].id);
+        return ge(document.querySelectorAll(res)[q].id);
+    }
 }
+
 function toggler(curr, array){
     let cuup;
     let cu = array.indexOf(curr);
@@ -90,7 +94,8 @@ function threshold(limit, callback){
 }
 
 function opendialog(curr){
-    if(curr == 'newprojects'){
+    if(curr == 'newproject'){
+        console.log(curr)
         //I should just put in as global since it already loaded the scripts.
         const toolbarOptions = [
             ['bold', 'italic', 'underline'],
@@ -116,12 +121,20 @@ function opendialog(curr){
                 toolbar: toolbarOptions
             },
             placeholder: 'About project...',
-            theme: 'snow'  // or 'bubble'
+            theme: 'snow'
         });
     }
-
-    qs('.dialogs').style.display = none;
-    ge(curr).style.display = 'block';
+    
+    //qs('.dialogs').style.opacity = '0';
+    for(let q = 0; q<document.getElementsByClassName('dialogs').length; q++){
+        document.getElementsByClassName('dialogs')[q].style.opacity = '0';
+        document.getElementsByClassName('dialogs')[q].style.display = 'none';
+    }
+    setTimeout(function(){
+        ge(curr).style.display = 'block';
+        ge(curr).style.opacity = '1';
+    }, 2000);
+    
     window.onclick = function(event) {
         //Close when user clicks outside the dialog box
         if (event.target == ge(curr)) {
@@ -129,7 +142,12 @@ function opendialog(curr){
         }
     }
 }
-
+function closedialog(){
+    for(let q = 0; q<document.getElementsByClassName('dialogs').length; q++){
+        document.getElementsByClassName('dialogs')[q].style.opacity = '0';
+        document.getElementsByClassName('dialogs')[q].style.display = 'none';
+    }
+}
 async function done(){
     //close loading screen and set up other stuffs.
     ge('startscreen').style.opacity = 0;
@@ -145,9 +163,9 @@ function showToast(message, mtype, ftime, callback){
     
     let col_array = ['var(--sec)','var(--color1)','var(--color2)','var(--color3)'];
     switch(mtype){
-        case 0: message = '<span id="indi" style="background:'+col_array[mtype]+'"></span>'+message; break;
-        case 1: message = '<span id="indi" style="background:'+col_array[mtype]+'"></span>'+message; break;
-        case 2: message = '<span id="indi" style="background:'+col_array[mtype]+'"></span>'+message; break
+        case 0: message = '<span class="indi" style="background:'+col_array[mtype]+'"></span>'+message; break;
+        case 1: message = '<span class="indi" style="background:'+col_array[mtype]+'"></span>'+message; break;
+        case 2: message = '<span class="indi" style="background:'+col_array[mtype]+'"></span>'+message; break
     };
     
     toasty.onclick = function(){
@@ -170,7 +188,7 @@ function showToast(message, mtype, ftime, callback){
     return toasty
 }
 
-ge('pimg').onmouseover = function(evt){
+qs('.imgtp').onmouseover = function(evt){
     let now = 0;
     threshold(3, function(){
         /**Show the users profile**/
@@ -179,7 +197,7 @@ ge('pimg').onmouseover = function(evt){
     });
     //let threshold = setInterval(function(){now++; if(now == 3){clearInterval(threshold);}}, 100)
 }
-ge('pimg').onmouseleave = function(){
+qs('.imgtp').onmouseleave = function(){
     clearInterval(th);
     if(ge('miniprofile').display == "block" && ge('miniprofile').onmouseover == false){
         //fade away peacefully, I aint gonna do anything fancy with this
@@ -189,17 +207,17 @@ ge('pimg').onmouseleave = function(){
 }
 
 //MAKING A TOOLTIP
- qs('button').onmouseover = function(element){
-        console.log(element);
-        threshold(3, ()=>{
-            ge('ctt').pageYOffset=element.screenY;
-            ge('ctt').pageXOffset=element.screenX;
-            ge('ctt').style.display = 'block';
-            ge('ctt').style.opacity = '1';
-            console.log(element.target);
-            ge('ctt').innerHTML = element.target.dataTitle;
-        })
-    }
+qs('button').onmouseover = function(element){
+    console.log(element);
+    threshold(3, ()=>{
+        ge('ctt').pageYOffset=element.screenY;
+        ge('ctt').pageXOffset=element.screenX;
+        ge('ctt').style.display = 'block';
+        ge('ctt').style.opacity = '1';
+        console.log(element.target);
+        ge('ctt').innerHTML = element.target.dataTitle;
+    })
+}
 
 function opentab(ent, tabn){
     //change the layout due to the device used being mobile -- USING A CLASSIC TAB FUNCTION FROM W3SCHOOLS
@@ -221,7 +239,7 @@ function opentab(ent, tabn){
 }
 
 //FOR FILTERING THE PROJECTS
-function filterprojects(ent, tabn){
+function filterprojects(ent){
     //change the layout due to the device used being mobile -- USING A CLASSIC TAB FUNCTION FROM W3SCHOOLS
     let i, tabb;
     
@@ -247,8 +265,7 @@ function filterprojects(ent, tabn){
     }
     
     // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(tabn).style.display = "flex";
-    ent.className += " gtext";
+    ent.className += " active";
 }
 
 async function readUserData(){
@@ -273,25 +290,73 @@ async function readUserData(){
 document.addEventListener('click', function(ev){
     
 });
-console.log(document.getElementsByClassName('threads'));
 
-
+document.getElementById('p_image_input').onchange = function(evt){
+    //replace a the element behind with the image.
+    const file = evt.target.files;
+    
+    //CHANGE THE ELEMENTS THERE
+    ge('p_image_input').style.display = 'none';
+    ge('replacer').src = file[0];
+    ge('replacer').style.display = 'block';
+    
+}
+function requestUser(){
+    const user = Moralis.User.current();
+    return {username:user.get('username'), img:user.get('img')}
+}
 function submit_project(){
-    if(quill.getLength() > 200);
+    if(quill.getLength() > 200 || document.getElementsByName('p_image')[0].value != null || (document.getElementsByName('p_name')[0].value.length < 20 && document.getElementsByName('p_name')[0].value > 3)){
+        //validate the whole stuff before sending it over to moralis.
+        
+    }
+    else if(quill.getLength() < 201){
+        showToast('Description is lesser than 200 characters');
+    }
 }
 
+function zoom(iel, action, ev){
+    if(iel != null){
+        if(action == 'in'){
+            document.getElementById('zoomer').innerHTML = iel.outerHTML;
+            document.getElementById('zoomer').style.display = 'block';
+            document.getElementById('zoomer').style.left = (ev.pageX - (document.getElementById('zoomer').clientWidth/2))+'px';
+        }
+        else if(action == 'out'){
+            document.getElementById('zoomer').innerHTML = '';
+            document.getElementById('zoomer').style.display = 'none';
+        }
+    }
+}
 
 {
     setTimeout(async function(){
-        var quill = new Quill('#contents', {
-            modules: {
-
-            },
+        var quill = new Quill('#content', {
             theme: 'snow',
             readOnly:true
-          })
-        }, 0)
+        })
+    }, 0)
 }
+document.getElementById('attachb').onchange = function(ev){
+    const files = evt.target.files;
+    for(let f = 0; f<files.length; f++){
+        const cr = document.createElement('img');
+        cr.className = 'samples';
+        cr.onmouseover = function(ev){zoom(cr, 'in', ev)}; //zoom in on onto itself
+        cr.onmouseleave = zoom(cr, 'out'); //zoom out on onto itself
+        cr.src = files[f];
+        document.getElementById('images-s').append(cr);
+    }
+}
+function submit_post(){
+    const texts = document.getElementById('posttexts').value;
+    const attachments = documnet.getElementById('attachb').files; //It is an array.
+    const user = requestUser();
+    const contents = {text:texts, attachments:attachments};
+    
+    newPost(contents, user)
+}
+
 ///
 ///////
 ///////////////
@@ -321,7 +386,7 @@ function projecttags(txt){
 /************/
 /*** BACKEND CODES! ***/
 /***********/
-if(Moralis == null){
+if(Moralis != null){
     //If user is online, sync Moralis
     // connect to Moralis server
     const appId = "TuUBmOeQz5UnRUZhMRLz0EulIoH16P4l3HYpj1Cw";
@@ -338,12 +403,59 @@ if(Moralis == null){
         aclx.setPublicWriteAccess(false);
         aclx.setWriteAccess(Moralis.User.current().id, true);
     }
+    const nacc = new Moralis.ACL();
+    nacc.setReadAccess('', true);
+    nacc.setWriteAccess('', true);
+    
+    const ppACL = new Moralis.ACL(Moralis.User.current());
+    ppACL.setPublicReadAccess(true);
 }
-
-newPost = async(contents, attachments, userInfo)=>{
+search = async()=>{
+    const sval = ge('sany').value;
+    if(sval.indexOf('#') == 0){
+        const search = new Moralis.Query("Threads");
+        search.startsWith("content", sval);
+        search.find().then(function(wefound){
+            //wefound is an array containg all the stuffs we are getting from the database.
+            
+        })
+    }
+    if(sval.indexOf('$') == 0){
+        const search = new Moralis.Query("Projects");
+        search.startsWith("name", sval);
+        search.descending('backers');
+        search.find().then(function(wefound){
+            //wefound is an array containg all the stuffs we are getting from the database.
+            
+        })
+    }
+    if(sval.indexOf('@') == 0){
+        const search = new Moralis.Query("Users");
+        search.startsWith("username", sval);
+        search.descending('followers');
+        search.find().then(function(wefound){
+            //wefound is an array containg all the stuffs we are getting from the database.
+            
+        })
+    }
+    ge('searchbox').style.top = ge('sany').offsetTop;
+    ge('searchbox').style.left = ge('sany').offsetLeft;
+    ge('searchbox').style.display = 'block';
+    
+    //search through the database for the closest match
+    const search = new Moralis.Query("Projects");
+    search.startsWith("name", sval);
+    search.find().then(function(wefound){
+        //wefound is an array containg all the stuffs we are getting from the database.
+        
+    })
+    
+    return false;
+}
+newPost = async(contents, userInfo)=>{
     const posts = Moralis.Object.extend('posts', {
         likes:function(){
-            return this.get('likes');
+            return this.get('likes'); //returns a array
         },
         reposts:function(){
             return this.get('reposts');
@@ -351,8 +463,8 @@ newPost = async(contents, attachments, userInfo)=>{
     });
     const post = new posts();
     post.set('contents', contents);
-    post.set('', attachments);
     post.set('user', userInfo);
+    post.setACL(ppACL);
     
     await post.save();
     return post
@@ -371,8 +483,10 @@ newProject = async(title, image, userInfo, defgoal, deadline)=>{
         },
         goal:function(){
             return this.get('goal')
+        },
+        obj:function(){
+            return {funded:this.get('funded'), backers:this.get('backers'), goal:this.get('goal'), contents:this.get('contents'), title:this.get('title')}
         }
-        
     });
     
     const contents = quill.getContents;
@@ -381,10 +495,38 @@ newProject = async(title, image, userInfo, defgoal, deadline)=>{
     project.set('img', image);
     project.set('contents', contents);
     project.set('user', userInfo);
-    project.set('goal', defgoal)
+    project.set('goal', defgoal);
+    project.set('deadline', deadline); //deadline is a number
+    project.setACL(ppACL)
     
     await project.save();
     return project
+}
+
+async function actions(postId, type){
+    //keeping the code as compact as possible
+    if(Moralis.User.current()){
+        const query = new Moralis.Query('table_name');
+        const results = await query.find();
+        
+        switch(type){
+            case 'comment':{
+                
+            } break;
+            case 'like':{
+                if(postId/**get if the user has already liked it. might be an array... i.e ['userID', '', '']**/){}
+            } break;
+            case 'requote':{
+                if(postId/**get if the user has already quoted it**/){}
+            } break;
+            case 'share':{
+                
+            } break;
+            case 'spam':{
+                
+            } break;
+        }
+    }
 }
 
 async function login(){

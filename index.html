@@ -66,43 +66,30 @@
       else{ls.setItem('theme', 'light'); themeaton();}
     }
     themeaton();
-
+    
     {
-    function cfd(){
-      const querst = window.location.search.indexOf('thread=');
-      const quersp = window.location.search.indexOf('project=');
-      if(querst != -1){
-        if(window.location.search.indexOf('&&') == -1){
-          //to get threadID from the url's get form data
-          const tid = window.location.search.slice(querst+7);
+      function cfd(){
+        const getParameters = URL => JSON.parse(`{"${decodeURI(URL.split("?")[1]).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"')}"}`);
+        const parameters = getParameters(window.location.href);
+        if(parameters['thread'] != undefined){
+          if(parameters['thread'].match(/^[A-Za-z0-9]*$/)){
+            loadthread()
+          }
         }
-        else{
-          const tidx =  window.location.search.slice(querst+7);
-          const tid = tidx.slice(0, tidx.indexOf("&&"));
+        if(parameters['project'] != undefined){
+          if(parameters['project'].match(/^[A-Za-z0-9]*$/)){
+            loadproject()
+          }
         }
-        //now we validate the info to avoid potential hacking exploit
-        if(tid.match(/^[A-Za-z0-9]*$/)){
-          loadthread()
-        }
-      }
-      else if(quersp != -1){
-        if(window.location.search.indexOf('&&') == -1){
-          //to get threadID from the url's get form data
-          const pid = window.location.search.slice(quersp+8);
-        }
-        else{
-          const pidx =  window.location.search.slice(quersp+8)
-          const pid = pidx.slice(0, pidx.indexOf("&&"));
-        }
-        //now validation.
-        if(pid.match(/^[A-Za-z0-9]*$/)){
-          loadproject()
+        if(parameters['user'] != undefined){
+          if(parameters['user'].match(/^[A-Za-z0-9]*$/)){
+            loadprofile()
+          }
         }
       }
+      cfd()
     }
-    cfd()
-  }
-
+    
   </script>
   <link rel="preload" href="img/logo.svg" as="image"/>
   <link rel="icon" href="img/logo.svg" sizes="any">
@@ -113,9 +100,10 @@
   
   
   <link rel="preload" href="css/style.css" as="style"/>
-  <link rel="preload" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" as="style"/>
+  <link rel="preload" href="la/css/line-awesome.css" as="style"/>
   
-  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"/>
+  
+  <link rel="stylesheet" href="la/css/line-awesome.css"/>
   <link rel="stylesheet" href="css/style.css">
   
   <!-- Theme included stylesheets -->
@@ -135,6 +123,7 @@
   <div id="column1-2" class="gjs-row">
     <div id="row1-2" class="gjs-cell rblocks">
       <div class="samewidther sparent"><form style="width: 100%;" onsubmit="return search()"><input id="sany" placeholder="I'm searching... " spellcheck="false" type="text" name="search-anything" data-title="search stuffs" class="slicki"/><button class="gtext" style="align-self: end;"><i class="la la-search"></i></button></form></div>
+      <div id="searchbox"><div id="searchtop"></div><div id="searchbody"></div></div>
       <div id="iqkf-2" class="gjs-row samewidther square">
         <div id="ixcvh-2" onclick="profile()" class="gjs-cell square innerboxes">
           <div id="iosnd" class="square">
@@ -250,7 +239,7 @@
 <div class="rblocks vdivider"><span style="background-image: linear-gradient(315deg, var(--color2), var(--color1));"></span></div>
 <!--LAST TAB... WILL BE USED TO SHOW PROJECTS. THUS, ILL MAKE THIS A LITTLE BIGGER.. also, maybe the projects will be the hashtags, while underscore can refer to the users-->
 <div id="iht7k" class="gjs-cell rblocks">
-  <div style="width: 100%;"><div id="titlep" class="gradient-text">Projects</div>
+  <div style="width: 100%;"><div id="titlep" onclick="opendialog('fullprojects')" class="gradient-text">Projects</div>
   <div id="pfilter">
     <button class="pfilterb active" onclick="filterprojects(this)">Popular</button>
     <button class="pfilterb" onclick="filterprojects(this)">Latest</button>
@@ -322,7 +311,7 @@
         </div>
       </div>
       <div style="width: 100%; height:52px; display:flex; flex-flow:row wrap; align-items:center; justify-content:flex-end">
-      <input type="submit" class="specialb" style="border-radius: 0; box-shadow: 0 0 10px 1px var(--shadow);" value="Create Project">
+        <input type="submit" class="specialb" style="border-radius: 0; box-shadow: 0 0 10px 1px var(--shadow);" value="Create Project">
       </div>
     </form>
   </div>
