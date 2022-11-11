@@ -1,12 +1,12 @@
 # Impera
 DeFi, SocialFi project for Moralis x Google 2022 Hackathon.
-
+https://github.com/Prodyads/Impera/blob/main/README.md#using-the-app
 ## Quick links
-- [Quick Introduction](https://github.com/victorlawrencw/Impera#introduction)
-- [Using the app](https://github.com/victorlawrencw/Impera#using-the-app)
-- [Extended Introduction](https://github.com/victorlawrencw/Impera#extended-introduction)
-- [Team](https://github.com/victorlawrencw/Impera#team)
-- [Development Journal](https://github.com/victorlawrencw/Impera#development-journal)
+- [Quick Introduction](https://github.com/Prodyads/Impera#introduction)
+- [Using the app](https://github.com/Prodyads/Impera#using-the-app)
+- [Extended Introduction](https://github.com/Prodyads/Impera#extended-introduction)
+- [Team](https://github.com/Prodyads/Impera#team)
+- [Development Journal](https://github.com/Prodyads/Imperaa#development-journal)
 
 ### Quick Introduction
 Impera.io is a social crowdfunding web project made using Moralis.js SDK for the 2022 Moralis x Google Hackathon. This web app combines the connectivity of a typical social media application like Facebook and a crowdfunding aspect of a website like Kickstarter.
