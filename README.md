@@ -2,8 +2,9 @@
 DeFi, SocialFi project for Moralis x Google 2022 Hackathon.
 
 ## Quick links
-- [Introduction](https://github.com/victorlawrencw/Impera#introduction)
+- [Quick Introduction](https://github.com/victorlawrencw/Impera#introduction)
 - [Using the app](https://github.com/victorlawrencw/Impera#using-the-app)
+- [Extended Introduction](https://github.com/victorlawrencw/Impera#extended-introduction)
 - [Team](https://github.com/victorlawrencw/Impera#team)
 - [Development Journal](https://github.com/victorlawrencw/Impera#development-journal)
 
@@ -16,13 +17,13 @@ Impera.io is a social crowdfunding web project made using Moralis.js SDK for the
 3. QuillJs (A rich content editor), for writing projects' description.
 
 ### Using the app.
-1. Sign up on the [homepage](https://victorlawrencw.github.io/Impera). A wallet is required to authenticate users on the platform, therefore its an essential part of the application. Use Metamask or Trustwallet (all fields, except 'about me' are required).
-2. After the sign up, you'll be taken to another page where you will select the branch you want to follow. (Currently, This cannot be changed by the user but will be implemented later after the hackathon, so you dont have to stress over it).
+1. Sign up on the [homepage](https://prodyads.github.io/landingpage). A wallet is required to authenticate users on the platform, therefore it is an essential part of the application. Use Metamask or Trustwallet and accept the sign in messages (all fields, except 'about me' are required).
+2. After the sign up, you'll be taken to another page where you will select the branches you want to follow. (Currently, This cannot be changed by the user but will be implemented later after the hackathon, so you dont have to stress over it).
 3.Once signup is complete, the page will load, and you will be asked to choose a theme between two themes, the default theme is Dark mode(Trendy night), which I personally prefer.
 4. Your profile can be seen on the first tab.
 
-###EXTENDED INTRODUCTION
-Using Polygon technology as its main track for transactions, Impera.io saves the you from high gas fee(transfer cost), which is mainly the issues with crowdfunding websites. Transfers as low as $1 are allowed on the app. Picture this, you have thousands of followers on Twitter, and each of them show interest in a project you recently pitched to them, not everyone of them would have as much freedom to give more to see said project come to fruition. This could lead to failure to meet the deadline, despite the number of backers you could've gained. And that is where Impera comes in, the app is built to take in transactions as low as a dollar while charging lesser fees than other crowdfunding websites. PLUS YOU GET TO HAVE A COOL PROJECT TAG you can show-off to your followers.
+### Extended Introduction
+Using Polygon technology as its main track for transactions, Impera.io saves the you from high gas fee(transfer cost), which is mainly the issues with crowdfunding websites, Transfers as low as $1 are allowed on the app. Picture this, you have thousands of followers on Twitter, and each of them are interested in a project you recently pitched to them, not everyone of them would have as much freedom to give more to see said project come to fruition. This could lead to failure to meet the deadline, despite the number of backers you could've gained. And that is where Impera comes in, the app is built to take in transactions as low as a dollar while charging lesser fees than other crowdfunding websites. PLUS YOU GET TO HAVE A COOL PROJECT TAG you can show-off to your followers.
 
 NOW REMAKE THE SITUATION - Your followers visit your project crowdfunding page, they go through a simple stressless signup process, get redirected to to your project and input the transaction amount of their choice, let's say one hundred out of that thousands sent $5, you'll end up with $500 more, since they can only afford that high. IT'S DONE! ITS THAT SIMPLE. opened your project its design go easy on the eyes. and they each contribute a single dollar
 Users can follow and connect with their favorite creators more easily, while they keep tabs on the projects that interests them. and the creators can easily gather a crowd on a single platform.
@@ -36,4 +37,4 @@ We did both the Frontend and Backend hand-in-hand. While Eniola(@code-kami) focu
 ### Development journal
 We divided our schedule by weeks. The first week is for frontend, the following three weeks is for backend(since we still have so much to test on the app) and the remaining days for deployment and documentation.
 
-Things were harder than expected and ended spending more than a week for front. THE SCHEDULE wasn't followed at all.
+Things were harder than expected and ended spending more than a week for frontend. THE SCHEDULE wasn't followed at all.
