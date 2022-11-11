@@ -3,6 +3,7 @@ DeFi, SocialFi project for Moralis x Google 2022 Hackathon.
 https://github.com/Prodyads/Impera/blob/main/README.md#using-the-app
 ## Quick links
 - [Quick Introduction](https://github.com/Prodyads/Impera#introduction)
+- [Technologies Used]((https://github.com/Prodyads/Impera#Technologies-Used)
 - [Using the app](https://github.com/Prodyads/Impera#using-the-app)
 - [Create your first web3 Crowdfunding project](https://github.com/Prodyads/Impera#create-your-first-web3-project)
 - [Extended Introduction](https://github.com/Prodyads/Impera#extended-introduction)
@@ -30,7 +31,7 @@ Impera.io is a social crowdfunding web project made using Moralis.js SDK for the
 3. The server loads for a few seconds after the 'create project' button has been clicked. Another view comes in, but this time its not asking for something, it is giving you something. For Test Case only, We decided to show that each projects created has a wallet where the funds are stored. When the app becomes live, the Wallet's Private Key and Recovery Phrase will not be given to the user until the deadline.
 4. And that's you create a project! hassle-free, right?
 
-###POINTS TO NOTE WHEN USING THE APP.
+### POINTS TO NOTE WHEN USING THE APP.
 As stated its the first Social crowdfunding website to ever exist, and as such you wouldn't only be able to hold Campaigns(Projects) on it, you'll also be able to update users who follow your project. You can also tag a project too(using its ID, often written double dollar sign at its back), to maybe ask a question or just have some fun with other project creators.
 
 ### Extended Introduction
