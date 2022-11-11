@@ -4,6 +4,7 @@ https://github.com/Prodyads/Impera/blob/main/README.md#using-the-app
 ## Quick links
 - [Quick Introduction](https://github.com/Prodyads/Impera#introduction)
 - [Using the app](https://github.com/Prodyads/Impera#using-the-app)
+- [Create your first web3 Crowdfunding project](https://github.com/Prodyads/Impera#create-your-first-web3-project)
 - [Extended Introduction](https://github.com/Prodyads/Impera#extended-introduction)
 - [Team](https://github.com/Prodyads/Impera#team)
 - [Development Journal](https://github.com/Prodyads/Imperaa#development-journal)
@@ -23,7 +24,7 @@ Impera.io is a social crowdfunding web project made using Moralis.js SDK for the
 4. Your profile can be seen on the first tab, Post on the second and Projects on the third.
 
 
-### Create your first web3 project
+### Create your first web3 Crowdfunding project
 1. Click on the button on the top right corner of the page in the 'Projects' section. The button has a plus sign on it and a gradient background.
 2. A dialog will pop up and you will be required to put input on the fields asked. NOTE: THE DEADLINE IS THE NUMBER OF MONTHS YOUR PROJECT WILL RECEIVE FUNDING, your PROJECTS CAN NEVER BE DELETED as it holds transactions that can be viewed overtime(EthTransactions).
 3. The server loads for a few seconds after the 'create project' button has been clicked. Another view comes in, but this time its not asking for something, it is giving you something. For Test Case only, We decided to show that each projects created has a wallet where the funds are stored. When the app becomes live, the Wallet's Private Key and Recovery Phrase will not be given to the user until the deadline.
