@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no, maximum-scale=1">
+    <meta name="keywords" content="Impera, social kickstarter, social crowdfunding, impera by Novics">
+    <meta name="description" content="Impera.io - Join a community of enthusiasts and help fund world-changing projects to reality">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Impera.io">
+    <meta name="twitter:description" content="A community of enthusiasts and startups, connecting ideas and making them a reality">
+    <meta name="twitter:site" content="@CSS">
+    <meta name="twitter:creator" content="@oruko_mi">
+    <meta name="twitter:image" content="https://impera.onrender.com/img/im.svg">
+    
+    <title>Introduction to Impera</title>
+    
+    <link rel="preload" href="https://impera.onrender.com/img/im.svg" as="image"/>
+    <link rel="icon" href="https://impera.onrender.com/img/im.svg" sizes="any">  
+    
+    <link rel="stylesheet" href="https://impera.onrender.com/css/dark.css"/>
+    
+    <link rel="preload" href="https://impera.onrender.com/css/dark.css" as="style">
+    
+    <link rel="preload" href="https://impera.onrender.com/Fonts/CaviarDreams.ttf" as="font"/>
+    <link rel="preload" href="https://impera.onrender.com/Fonts/sofiapro-light.otf" as="font"/>
+    <link rel="preload" href="https://impera.onrender.com/Fonts/Neou-Bold.ttf" as="font"/>
+    
+    <link rel="preload" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" as="style"/>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <style>
+        @font-face {
+            font-family: caviar;
+            src: url("https://impera.onrender.com/Fonts/CaviarDreams.ttf");
+        }
+        @font-face {
+            font-family: norm;
+            src: url("https://impera.onrender.com/Fonts/Neou-Bold.ttf");
+        }
+        @font-face {
+            font-family: unz;
+            src: url("https://impera.onrender.com/Fonts/sofiapro-light.otf");
+        }
+        @font-face {
+            font-family: uns;
+            src: url("https://impera.onrender.com/Fonts/Inconsolata-Regular.ttf");
+        }
+        *{
+            font-family: unz;
+            box-sizing: border-box;
+            color: var(--sec);
+        }
+        :root{
+            --gray5:#111111
+        }
+        body{
+            background-color: var(--pri);
+        }
+        ::-webkit-scrollbar{
+            width: 10px;
+            height: 10px;
+            background-color: var(--PRI);
+        }
+        ::-webkit-scrollbar-thumb{
+            border-radius: 5px;
+            background: var(--thread);
+        }
+        button{
+            outline: none;
+            border: none;
+            min-height: 40px;
+            min-width: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .acol1:hover{color: var(--color1); background-color: var(--thread)}
+        .acol1.lq{ color: var(--color2)}
+        .acol1:active{background-color: rgba(var(--col2), 0.2); color: var(--color2)}
+        
+        .acol2:hover{color: var(--color2); background-color: var(--thread)}
+        .acol2.lq{ color: var(--color1)}
+        .acol2:active{background-color: rgba(var(--col1), 0.2); color: var(--color1)}
+        
+        .acol3:hover{color: var(--color3); background-color: var(--thread)}
+        .acol3.lq{ color: var(--color1)}
+        .acol3:active{background-color: rgba(var(--col2), 0.2); color: var(--color1)}
+        
+        .acol4:hover{color: var(--color2); background-color: var(--thread)}
+        .acol4.lq{ color: var(--color2)}
+        .acol4:active{background-color: rgba(var(--col1), 0.2); color: var(--color2)}
+        
+        .acol5:hover{color: var(--color1); background-color: var(--thread)}
+        .acol5:active{background-color: rgba(var(--col1), 0.2); color: var(--color1)}
+        
+        .acol6:hover{color: var(--color3); background-color: var(--thread)}
+        .acol6:active{background-color: rgba(var(--col3), 0.2); color: var(--color3)}
+        
+        .acol7:hover{color: #1EB040; background-color: var(--thread)}
+        .acol7.lq{color: #1EB040}
+        .acol7:active{background-color: rgba(30, 176, 64, 0.2); color: #1EB040}
+        a{
+            text-decoration: none;
+        }
+        .actions{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            font-size: 15px;
+            background: transparent;
+            border-radius: 100%;
+            transition: font-size 0.1s, background-color 0.2s, color 0.2s;
+        }
+        nav{
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 4;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            background: var(--custom);
+            padding: 5px;
+        }
+        #fiy{
+            background-color: var(--thread);
+            display: flex;
+            border-radius: 40px;
+            padding: 10px;
+        }
+        main{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        .secs{
+            display: flex;
+            width: 100%;
+            max-width: 1000px;
+        }
+        img{
+            user-select: none;
+        }
+        #sec1{
+            width: 100%;
+            display: flex;
+            position: relative;
+            flex-flow: column wrap;
+            align-content: center;
+            gap: 30px;
+        }
+        #sec2{
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            gap: 20px;
+        }
+        .gtext, #fiy button:hover .las.la-power-off, .hetx:hover{
+            font-weight: bold;
+            color: rgba(var(--col2), 0.9);
+            background-color: var(--color1);
+            background-image: var(--grad3);
+            background-size: 100%;
+            background-repeat: repeat;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color:transparent;
+            -moz-text-fill-color:transparent;
+        }
+        .invertio{
+            color: rgb(var(--primary), 1);
+            background-color: var(--color1);
+            border-radius: 25px;
+            font-weight: normal;
+            transition: color 0.2s, background-color 0.2s, background-color 0.2s, backdrop-filter 0.2s;
+        }
+        .invertio p{
+            color: rgb(var(--primary), 1);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 10px;
+        }
+        .malf{
+            padding: 3px;
+            background: var(--color1);
+            border-radius: 27px;
+            transition: 1s;
+        }
+        .malf:hover{
+            background: var(--color1);
+        }
+        .invertio:hover{
+            background-color: var(--pri);
+            backdrop-filter: blur(10px);
+        }
+        
+        .invertio2:hover{
+            color: rgb(var(--primary), 1);
+            background-color: var(--color2);
+        }
+        .invertio2 p{
+            color: var(--sec);
+            padding: 0 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;         
+        }
+        .invertio2:hover p{
+            font-weight: normal;
+            color: var(--sec);
+            background-image: unset;
+            background-clip: unset;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color:unset;
+            -moz-text-fill-color:unset;
+            background-color: transparent;
+        }
+        .malf2{
+            padding: 3px;
+            background: var(--color2);
+            border-radius: 27px;
+            transition: 0.4s;
+        }
+        .malf2:hover{
+            background: var(--color2);
+        }
+        .invertio2{
+            border-radius: 25px;
+            font-weight: normal;
+            transition: color 0.2s, background-color 0.2s, background-color 0.2s, backdrop-filter 0.2s;
+            background-color: var(--pri);
+        }
+        
+        #sec2 .child{
+            display: flex;
+            flex-flow: row wrap;
+            position: relative;
+            transition: 0.5s;
+        }
+        #sec2 .child:hover{
+            
+        }
+        .child div{
+            flex-grow: 2;
+            min-width: 300px;
+            width: 50%;
+        }
+        .txtb{
+            padding: 20px;
+            padding-top: 0px;
+        }
+        .txtb p{
+            font-size: 15px;
+        }
+        .imgx img{
+            width: calc(100% - 30px);
+            border-radius: 10px;
+            box-shadow: none;
+            outline: none;
+            border: none;
+            transition: 0.2s;
+        }
+        .imgx img:hover{
+            box-shadow: 10px 10px 0px 0px var(--thread);
+            transform: translate(-10px, -10px) rotate(-1deg);
+        }
+        .row{
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        .column{
+            display: flex;
+            flex-direction: column;
+        }
+        .center{
+            align-items: center;
+            justify-content: center;
+        }
+        .logo{
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .logo.large{
+            width: 300px;
+        }
+        .logo:active{
+            filter: blur(5px);
+        }
+        .bots{
+            max-width: 800px;
+            padding-bottom: 20px;
+            padding-top: 250px;
+            align-items: center;
+        }
+        .bottom{
+            width: 100%;
+            margin-top: 20px;
+            position: relative;
+        }
+        .bottom .actions{
+            font-size: 17px;
+            width: 50px;
+            height: 50px;
+        }
+        .smallpops{
+            display: flex;
+            padding: 20px 10px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: var(--gray5);
+            flex-flow: row wrap;
+            gap: 5px;
+        }
+        a{cursor: pointer;}
+        #stt{
+            position: absolute;
+            z-index: 2;
+            right: 10%;
+            top: 10px;
+        }
+        .hclass{
+            overflow: hidden;
+            gap: 5px;
+            background-color: var(--thread);
+            border-radius: 35px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .hclass i{width: 0px; font-size: 19px; overflow: hidden; transition: 0.1s;}
+        .hclass:hover i{
+            width: 50px;
+        }
+        .title{
+            max-width: 300px;
+            position: relative;
+        }
+        .title h2{
+            position: relative;
+            padding-left: 10px;
+            width: fit-content;
+            margin: 10px 0px;
+        }
+        .title h2::before{
+            content: '';
+            position: absolute;
+            left: 9px;
+            bottom: -3px;
+            height: 5px;
+            width: 100%;
+            background: var(--grad3);
+            z-index: -1;
+            border-radius: 5px;
+        }
+        .blue{
+            color: var(--color1);
+        }
+        .bblue{
+            background-color: var(--color1);
+        }
+        .red{
+            color: var(--color2);
+        }
+        .bred{
+            background-color: var(--color2);
+        }
+        .title:hover .linkie {
+            display: flex;
+        }
+        #sec3{
+            gap: 20px;
+        }
+        .wrap{
+            flex-wrap: wrap;
+        }
+        .lca{
+            position: relative;
+            background-color: var(--thread);
+            border-radius: 25px;
+            gap: 5px;
+            padding: 10px 20px;
+            min-width: 200px;
+            min-height: 300px;
+        }
+        .lca::before{
+            position: absolute;
+            content: '';
+            width: calc(100% + 6px);
+            height: calc(100% + 6px);
+            border-radius: 28px;
+            z-index: -1;
+            transition: background-color 0.2s, background-image 0.2s;
+            left: -3px;
+            top: -3px;
+            background-color: var(--gray4);
+        }
+        .lca:hover::before{
+            background-image: var(--grad3);
+        }
+        .lca .icon{
+            width: 150px;
+        }
+        .lca .text{
+            max-width: 200px;
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+        }
+        .linkie{
+            display: none;
+            position: absolute;
+            left: -40px;
+            top: 5px;
+        }
+        .thescroller{
+            width: 100%;
+            overflow: scroll;
+            padding-right: 10px;
+        }
+        .thescroller::-webkit-scrollbar{
+            display: none;
+        }
+        .slideshow {
+        }
+        .images {
+        }
+        @keyframes slideshow {
+            0%    { left: 0; }
+            100%  { left: -100%; }
+        }
+        .autoscroller{
+            scrollbar-width: 0px;
+            padding: 30px 10px;
+            gap: 10px;
+            flex-wrap: nowrap;
+        }
+        .autoscroller .iol{
+            width: 200px;
+            gap: 5px;
+            background-color: var(--thread);
+            border-radius: 20px;
+            z-index: 1;
+            transition: 0.2s;
+            padding: 20px 0px 0px 0px;
+        }
+        .iol img{
+            width: 170px;
+            height: 170px;
+        }
+        .autoscroller .iol:hover{
+            background-color: var(--gray4);
+            z-index: 2;
+            transform: scale(1.2);
+        }
+        .snapbp{
+            justify-content: end;
+        }
+        .snapb{
+            background-color: var(--thread);
+            border-radius: 25px;
+            padding: 5px 10px;
+            height: 50px;
+            z-index: 2;
+            float: right;
+            position: relative;
+        }
+        .snapb::before{
+            content: '';
+            width: calc(100% + 6px);
+            height: calc(100% + 6px);
+            background-color: var(--gray4);
+            border-radius: 28px;
+            top: -3px;
+            left: -3px;
+            position: absolute;
+            z-index: 1;
+        }
+        .snapb::after{
+            position: absolute;
+            content: '';
+            background-color: var(--thread);
+            border-radius: 25px;
+            height: 100%;
+            z-index: 2;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+        .snapb:hover::before{
+            background: var(--grad3);
+        }
+        .snapb span{
+            z-index: 3;
+            position: inherit;
+        }
+        .backpics{
+            position: absolute;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            top: 20px;
+            align-items: center;
+        }
+        .ltx{
+            user-select: none;
+            font-size: 3em;
+            margin: 5px 0px;
+            text-shadow: 0 0 10px var(--shadow);
+        }
+        #description{
+            text-align: center;
+            height: 50px;
+        }
+
+        .logo.large{
+            filter: brightness(0.8) blur(20px);
+        }
+        .txtb h3{
+            text-transform: uppercase;
+        }
+        /***MOBILE**/
+        @media screen and (min-device-width: 200px) and (max-device-width: 600px)
+        and (orientation: portrait) {
+            #description{
+                padding: 0px 10px;
+                height: 80px;
+            }
+            .logo{
+                transition: 0.3s;
+            }
+            .logo.large{
+                width: 200px;
+            }
+            .snapbp{
+                justify-content: center;
+            }
+            .imgx{
+                order: 0;
+            }
+            .linkie{
+                left: unset;
+                right: 10px;
+            }
+            .swaprow{
+                flex-direction: column;
+            }
+            .ltx{
+                font-size: 2em;
+            }
+            .txtb{
+                order: 1;
+            }
+            #stt{
+                top: unset;
+                right: 5px;
+                bottom: 130px;
+            }
+        }
+        @media screen and (min-device-width: 200px) and (max-device-width: 400px)
+        and (orientation: portrait) {
+            .title{
+                max-width: 100%;
+            }
+        }
+    </style>
+    <!--link rel="stylesheet" href="css/background.css"-->
+</head>
+<body>
+    <nav>
+        <img width="40px" class="logo" src="https://impera.onrender.com/img/im.svg"/>
+        <div id="fiy" style="flex-direction: row; gap: 10px; padding: 5px;">
+            <!--div class="malf bblue"><button href="https://impera.onrender.com/auth" class="invertio"><p class="blue las la-power-off" style="font-size: 25px; margin: 0; line-height: 42px;"></p></button></div-->
+            <button onclick="window.open('https://impera.onrender.com/auth')" class="snapb row center"><span style="font-size: 30px;" class="las la-power-off"></span><span style="margin-right: 5px;">Sign In</span></button>
+        </div>
+    </nav>
+
+    <main>
+        <div id="sec1" class="secs">
+            <div class="column bots">
+                <h1 class="ltx">IMPERA</h1>
+                <p id="description">
+                    Join a community of creative individuals, share ideas, organize events and raise funds for your projects, on Impera, the first social crowdfunding website
+                </p>
+            </div>
+            <div class="backpics">
+                <img class="logo large" src="https://impera.onrender.com/img/im.svg"/>
+            </div>
+        </div>
+        <div class="row center">
+            <button onclick="window.open('https://github.com/3novix/Impera', '_blank')" class="hclass row center"><img height="50px" src="img/GitHub-Mark-Light-64px.png"/>View on Github<i class="la la-arrow-right"></i></button>
+        </div>
+        
+        <div id="sec2" class="secs" style="position: relative;">
+            <div class="container">
+                <div class="blob-c">
+                <div class="shape-blob"></div>
+                <div class="shape-blob one"></div>
+                <div class="shape-blob two"></div>
+                <div class="shape-blob three"></div>
+                <div class="shape-blob four"></div>
+                <div class="shape-blob five"></div>
+                <div class="shape-blob six"></div>
+                </div>
+            </div>
+
+
+            <div id="t1" class="title"><a onclick="copylink('t1')" class="linkie actions acol1 la la-link"></a><h2>For Supporters</h2></div>
+            <!--FOR SUPPORTERS OR BACKERS-->
+            <div class="child">
+                <div class="row center imgx"><img src="https://impera.onrender.com/static/Abstract_present_by_Icons8.gif"/></div>
+                <div class="txtb"><h3>FUND PROMISING PROJECTS</h3><p>
+                    <span class="gtext">Fund projects</span> made by talented artists, musicians, content creators, and entrepreneurs on the Polygon or Fantom network for lower fees.
+                </p></div>
+            </div>
+            <div class="child">
+                <div class="txtb"><h3>STAY UP TO DATE</h3><p>
+                    Get timely updates from your favourite projects by adding them to your <span class="gtext">Watchlist</span>
+                </p></div>
+                <div class="row center imgx"><img src="https://impera.onrender.com/static/Abstract_track_statistic_by_Icons8.gif"/></div>
+            </div>
+            <div class="child">
+                <div class="row center imgx"><img src="https://impera.onrender.com/static/Abstract_working_remotely_by_Icons8.gif"/></div>
+                <div class="txtb"><h3>ATTEND EVENTS</h3><p>
+                    Enter the Metaverse to attend events crucial to the projects you follow, the event can be a meeting, discussion, interview or get-together.(Coming soon)
+                </p></div>
+            </div>
+            <div class="child">
+                <div class="txtb"><h3>TAG PROJECTS</h3><p>
+                    You can tag projects in your posts by writing the <span class="gtext">project's ID($$)</span> in your post
+                </p></div>
+                <div class="row center imgx"><img style="background: var(--grad3)" src="https://impera.onrender.com/static/hug.gif"/></div>
+            </div>
+            
+            <div class="row snapbp"><button class="snapb" onclick="window.open('https://impera.onrender.com/auth')"><span>Become a supporter</span></button></div>
+            
+            <div id="t2" class="title"><a onclick="copylink('t2')" class="linkie actions acol1 la la-link"></a><h2>For Creators</h2></div>
+            <!--FOR CREATORS-->
+            <div class="child">
+                <div class="row center imgx"><img src="https://impera.onrender.com/static/Abstract_easy_money_by_Icons8.gif"/></div>
+                <div class="txtb"><h3>GET FUNDED</h3><p>
+                    Create Projects that come with a web3 enabled wallets and receive funds from your awesome supporters who value your projects. You have full control over the wallet created for your project
+                </p></div>
+            </div>
+
+            <div class="child">
+                <div class="txtb"><h3>UPDATE YOUR SUPPORTERS</h3><p>
+                    You can notify your supporters by writing your <span class="gtext">project's ID($$)</span> in your posts.
+                </p></div>
+                <div class="row center imgx"><img style="background: var(--grad3)" src="https://impera.onrender.com/static/Abstract-9.gif"/></div>
+            </div>
+
+            <div class="child">
+                <div class="row center imgx"><img src="https://impera.onrender.com/static/Abstract_working_remotely_by_Icons8.gif"/></div>
+                <div class="txtb"><h3>ORGANIZE EVENTS</h3><p>
+                    Host events that take place on the metaverse(Rantaverse). This could you get closer to your supporters
+                </p></div>
+            </div>
+
+            <div class="row snapbp"><button class="snapb" onclick="window.open('https://impera.onrender.com/auth')"><span>Become a Creator</span></button></div>
+        </div>
+        <h1 style="margin-bottom: -20px; padding-left: 5px;">Whatever you're intrested in</h1>
+        <div class="thescroller">
+            <div id="autoscroller" class="secs row autoscroller">
+                <div class="column center iol"><img src="https://impera.onrender.com/static/taxi-art-supplies.png"/><p>Art</p></div>
+                <div class="column center iol"><img src="https://impera.onrender.com/static/taxi-gaming.png"/><p>Gaming</p></div>
+                <div class="column center iol"><img src="https://impera.onrender.com/static/taxi-headphones.png"/><p>Music</p></div>
+                <div class="column center iol"><img src="https://impera.onrender.com/static/taxi-soft-development.png"/><p>Design & Tech</p></div>
+                <div class="column center iol"><img src="https://impera.onrender.com/static/taxi-healthy-food.png"/><p>Food & Farms</p></div>
+                <div class="column center iol"><img src="https://impera.onrender.com/static/taxi-photographer-1.png"/><p>Film</p></div>
+                <div class="column center iol"><img src="https://impera.onrender.com/static/taxi-stack-of-books-3.png"/><p>Books</p></div>
+                <div class="column center iol"><img src="https://impera.onrender.com/static/taxi-ai-cyber-security.png"/><p>Programming</p></div>
+                <div class="column center iol"><img src="https://impera.onrender.com/static/taxi-road-racing-cyclist.png"/><p>Sports</p></div>
+                <div style="min-width: 10px;"></div>
+            </div>
+        </div>
+        <div id="sec3" class="secs column center">
+            <!--TECHNOLOGIES USED-->
+            <p>Technologies used</p>
+            <div class="row center wrap swaprow" style="gap: 20px;">
+                <a href="https://moralis.io/" target="_blank" class="column center lca">
+                    <img class="icon" src="img/moralis.svg"/>
+                    <p class="text">Moralis</p>
+                    <p class="text">
+                        Moralis is the Firebase of Crypto, offering the best Web3 API for developers, and clean documentation to boot
+                    </p>
+                    <span class="hetx" style="text-decoration: none;">Visit website</span>
+                </a>
+                <div class="row center" style="width: 50px; height: 50px;"><img height="30px" style="filter: invert();" src="img/plus-solid.svg"/></div>
+                <a href="https://polygon.technology/" target="_blank" class="column center lca">
+                    <img class="icon" src="img/Polygon_blockchain_logo2.png"/>
+                    <p class="text">Polygon</p>
+                    <p class="text">
+                        Polygon is a decentralised Ethereum scaling platform that enables low transaction fees without ever sacrificing on security.
+                    </p>
+                </a>
+                <div class="row center" style="width: 50px; height: 50px;"><img height="30px" style="filter: invert();" src="img/plus-solid.svg"/></div>
+                <a href="https://fantom.foundation/" target="_blank" class="column center lca">
+                    <img class="icon" src="img/fantom-logo-white.svg"/>
+                    <p class="text">Fantom</p>
+                    <p class="text">
+                        Fantom is a fast, high-throughput open-source smart contract platform for digital assets and dApps.</p>
+                    </a>
+                </div>
+            </div>
+        </main>
+        <div class="column center bottom">
+            <div id="smalinks" class="smallpops">
+                <a title="share to twitter" href="https://twitter.com/intent/tweet?text=https://impera.onrender.com/introduction.html" target="_blank" class="actions acol5 la la-twitter"></a>
+                <a title="facebook share" href="https://facebook.com/sharer.php?u=https://impera.onrender.com/introduction.html" target="_blank" class="actions acol5 la la-facebook" style="border-radius: 5px"></a>
+                <a title="github" href="https://github.com/3novix/impera" target="_blank" onclick="sharepost('github')" class="actions lab la-github"></a>
+                <a title="copy link" onclick="navigator.clipboard.writeText(`https://impera.onrender.com/introduction.html`)" class="actions acol4 las la-link"></a>
+            </div>
+            <button id="stt" onclick="scol()" class="actions acol3 la la-arrow-up"></button>
+            <div>Made by two weirdos who enjoy doing nothing :)</div>
+            <div>
+                <p>Illustrations from <a style="text-decoration: none; color: #1EB040;" href="https://icons8.com/illustrations">icons8</a></p>
+            </div>
+        </div>
+        <script>
+            let times = 0;
+            const textlist = [
+                'Join a community of creative individuals, share ideas, organize events and raise funds for your projects, on Impera, the first social crowdfunding website',
+                'Enjoy the most of your support by attending exclusive events of projects you watch, and receive timely updates from your favorite creators when they post',
+                `The first Social Crowdfunding platform designed on the best web3 tools to save transaction cost compared to popular services`,
+                `A connection between the creators and the supporters is <h3><span class="gtext">Impera</span>tive to your success of a project</h3>`
+            ]
+            function offscreen(el){
+                const obj = (document.getElementById(el).getBoundingClientRect());
+                const top = obj.top;
+                const height = obj.height;
+                
+                if(top<0) return true
+                else return false
+            }
+
+
+            function scol(){window.scrollTo({top:0, behavior:"smooth"})}
+            window.onscroll = function(psc){
+                /*
+                if(offscreen('fiua')){
+                    document.getElementById('fiy').style.display = 'flex'
+                }
+                else{document.getElementById('fiy').style.display = 'none'}
+                */
+            } 
+            
+            //some little transition code for the text
+            setInterval(() => {
+                times++;
+                if(times == 4) times = 0
+                document.getElementById('description').innerHTML = textlist[times];
+            }, 10000);            
+        </script>
+    </body>
+    </html>

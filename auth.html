@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preload" href="https://impera.onrender.com/img/im.svg" as="image"/>
+  <link rel="icon" href="https://impera.onrender.com/img/im.svg" sizes="any">
+  <link rel="preload" href="https://impera.onrender.com/css/dark.css" as="style"/>
+  <link rel="preload" href="https://impera.onrender.com/cssl/style.css" as="style"/>
+  
+  <link rel="preload" href="https://impera.onrender.com/Fonts/CaviarDreams.ttf" as="font"/>
+  <link rel="preload" href="https://impera.onrender.com/Fonts/sofiapro-light.otf" as="font"/>
+  <link rel="preload" href="https://impera.onrender.com/Fonts/Neou-Bold.ttf" as="font"/>
+
+  <link rel="stylesheet" href="https://impera.onrender.com/css/dark.css"/>
+  <link rel="stylesheet" href="https://impera.onrender.com/cssl/style.css"/>
+
+  <link rel="preload" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" as="style"/>
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+  <link rel="stylesheet" href="https://impera.onrender.com/cssl/croppie.css">
+  <link rel="stylesheet" href="https://impera.onrender.com/cssl/auth.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script src="https://unpkg.com/moralis-v1@1.12.0/dist/moralis.js"></script>
+  <title>Impera - SignUp or LogIn</title>
+  <script>
+    //FOR INPUT!
+    function pfocused(xele){
+    if(xele.tagName.toLowerCase() != 'textarea') xele.parentElement.parentElement.className = 'input-box active';
+    else xele.parentElement.className = 'input-box active';
+
+    if(xele.id == 'usernamel'){
+        document.getElementById('passins').style.display = 'none';
+        document.getElementById('userins').style.display = 'block';
+    }
+    else{
+        document.getElementById('userins').style.display = 'none';
+        document.getElementById('passins').style.display = 'block'
+    }
+}
+function offfocused(xele){
+  if(xele.tagName.toLowerCase() != 'textarea') xele.parentElement.parentElement.className = 'input-box';
+    else xele.parentElement.className = 'input-box';
+}
+  </script>
+</head>
+<body onload="setInterval(changeText, 3000);">
+  <div id="cropperx">
+    <button id="destroyer" class="actions acol3 la la-times"></button>
+    <div id="inna"></div>
+    <div id="controls"><button id="rotatel" class="actions acol2 las la-undo-alt"></button><button id="rotater" class="actions acol2 las la-redo-alt"></button><button id="crop-done" class="specialb"><p>Crop</p></button></div>
+  </div>
+  <div id="container">
+    <div class="blur first"></div>
+  <div id="shadow">
+    <div class="blur second"></div>
+  <div id="left">
+        <img class="llogo" src="https://impera.onrender.com/img/imfull.svg">
+        <span class="wordone gword" id="wordone">WELCOME TO IMPERA</span>
+        <span class="wordtwo gword" id="wordtwo">where seemingly im-possibe ideas become possible</span>
+  </div>
+       <!--CONNECT WALLET-->
+<div id="right">
+  <img class="logo" src="https://impera.onrender.com/img/im.svg">
+  <div><p>Use <span class="gtext" style="cursor: pointer;" onclick="document.getElementById('usernamel').focus()">email</span></p></div>
+  <div id="switcher">
+    <div id="loginx" class="swi">
+      <div id="simpleinputs" style="padding: 0px 10px;">
+        <div class="input-box">
+          <div class="ibins">
+          <label for="usernamel">Email</label>
+          <input onblur="offfocused(this)" autocomplete="off" onfocus="pfocused(this)" type="text" placeholder="Email or Username" name="un_name" id="usernamel" maxlength="30" spellcheck="false" required autofocus>
+          <span class="beauts"><div id="avail"></div></span>
+          </div>
+        </div>
+        <div class="input-box">
+          <div class="ibins">
+          <label for="passwordx">Password</label>
+          <input onblur="offfocused(this)" autocomplete="off" onfocus="pfocused(this)" type="password" placeholder="Password" name="passw" id="passwordx" maxlength="16" minlength="3" required>
+          <span class="beauts la la-hashtag"></span>
+          </div>
+        </div>
+        </div>
+        <div class="instructions">
+          <ul id="userins">
+          <li>Sign up with a valid email e.g name@email.com</li>
+          <li>Username must include only letters and numbers</li>
+          </ul>
+          <ul id="passins" style="display: none;">
+          <li>Passwords must contain more than 5 characters</li>
+          <li>Passwords are encrypted with blockchain cryptograph</li>
+          </ul>
+        </div>      
+        <div style="display: flex; flex-direction: row; gap: 30px; align-items: center; justify-content: center; transition: 0.2s;">
+          <button class="specialb" onclick="plogIn()"><p>Log In</p></button>
+          <button class="specialb" onclick="psignUp()"><p>Sign Up</p></button>
+        </div>
+    </div>
+  </div>
+  <div class="splitter"> 
+    <span class="cls"></span>
+    <div>Or</div>
+    <span class="cls"></span>
+  </div>
+  <div style="line-height: 40px;">Connect with <span class="gtext">wallet</span></div>
+  <div id="wallets">
+     <div class="col" style="row-gap:10px; align-items: center;">
+        <!--Terms-and-conditions-->
+        <div class="ring hring" onclick="loginmeta()" id="meta">
+          <button class="btn row" style="padding:8px;">
+            <span>
+              <img src="https://impera.onrender.com/img\MetaMask_Fox.svg.png" class="lfw">
+              MetaMask
+            </span>
+           </button>  
+        </div>
+        <span style="opacity: 0.7;">*Recommended</span>
+      </div>
+    </div>
+</div>
+     <!--UPLOAD-->
+     <div id="upload" class="col">
+
+      <img class="logo" src="https://impera.onrender.com/img/im.svg">
+        <label for="p_image_input" id="lfimg">
+          <img id="replacer" style="display: block;" src="https://impera.onrender.com/img/profile2.jpg">
+        <input style="display: none;" type="file" name="p_image" id="p_image_input" accept=".png, .jpeg, .bmp, .jpg" spellcheck="false" required>
+      </label>
+
+      <div id="simpleinputs">
+        <div class="input-box">
+          <div class="ibins">
+          <label style="line-height: 39px; display: block;" class="gtext" for="username">@</label>
+          <input onblur="offfocused(this)" autocomplete="off" onchange="checkpra(this)" onfocus="pfocused(this)" type="text" placeholder="Username_x" name="un_name" id="username" maxlength="30" spellcheck="false" required>
+          <span class="beauts"><div id="avail"></div></span>
+          </div>
+        </div>
+ 
+        <div class="input-box">
+          <div class="ibins">
+          <label for="usernamel">Name</label>
+          <input onblur="offfocused(this)" autocomplete="off" onfocus="pfocused(this)" type="text" placeholder="Name" name="name" id="displayname" maxlength="30" spellcheck="false" required>
+          <span class="beauts las la-user-circle"></span>
+          </div>
+        </div>
+
+        <div id="summstuffs">
+          <div class="input-box" style="display: flex; flex-direction:column; overflow: hidden;">
+            <label for="sumitup" style="z-index: 2; display: block; width: 100%;">About<sup style="opacity: 0.7;"> optional</sup></label>
+            <span class="hdiv"></span>
+            <textarea oninput="document.getElementById('textcount').innerHTML = (document.getElementById('sumitup').value.length).toString()+'/100';" onblur="offfocused(this)" onfocus="pfocused(this)" id="sumitup" style="height: 100px" maxlength="100"></textarea>
+            <span class="hdiv"></span>
+            <span style="z-index: 2; width: 100%;" id="textcount"></span>
+          </div>
+        </div>
+
+        </div>
+
+        <div class="btncont row">
+          <button class="specialb" id="upbtn" onclick="changeToNi()"><p>Next</p></button>
+        </div>
+    </div>
+      <!--NICHE-->
+      <div id="niche" class="col">
+        <img class="logo" src="https://impera.onrender.com/img/im.svg">
+          <label class="gtext">
+              What fields are you intrested in?<small>This will help show only what you like</small>
+          </label>
+        <div class="tags-holder" style="margin-left: 9px;">
+        <!--max tags allowed should 4-->
+        <div class="ring" onclick="niche(this); return false;" id="art"><span>Art</span></div>
+        <div class="ring" onclick="niche(this); return false;" id="books"><span>Books</span></div>
+        <div class="ring" onclick="niche(this); return false;" id="gaming"><span>Gaming</span></div>
+        <div class="ring" onclick="niche(this); return false;" id="music"><span>Music</span></div>
+        <div class="ring" onclick="niche(this); return false;" id="design and tech"><span>Design and Tech</span></div>
+        <div class="ring" onclick="niche(this); return false;" id="food and farms"><span>Food and farms</span></div>
+        <div class="ring" onclick="niche(this); return false;" id="film"><span>Film</span></div>
+        <div class="ring" onclick="niche(this); return false;" id="sports"><span>Sports</span></div>
+      </div>
+
+        <div class="btncont row" style="justify-content: space-between; margin-left: 3px;">
+          <button class="specialb" onclick="changeToUp()"><p>Back</p></button>
+          <button class="specialb" onclick="newuser()"><p>Save Profile</p></button>
+       </div>
+      <!--END-->
+    </div>
+  </div>
+  </div>
+  <script src="https://impera.onrender.com/tools/web3-provider.min.js"></script>
+  <script src="https://impera.onrender.com/tools/conversion.js"></script>
+  <script src="https://impera.onrender.com/tools/croppie.js"></script>
+  <script src="function.js"></script>
+</body>
+</html>
