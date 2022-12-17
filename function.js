@@ -288,8 +288,8 @@ async function checkemail(ert){
     chqq.equalTo('ethAddress', ert);
     const chqqq = await chqq.first();
     
-    if(chqqq!=undefined){document.getElementById('avail').style.background = 'red'; showToast('Email is already registered'); return false} //email registered
-    else{document.getElementById('avail').style.background = '#1EB040'; return true}
+    if(chqqq!=undefined){document.getElementById('availe').style.background = 'red'; showToast('Email is already registered'); return false} //email registered
+    else{document.getElementById('availe').style.background = '#1EB040'; return true}
 }
 
 async function psignUp(){

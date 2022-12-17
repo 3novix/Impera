@@ -43,7 +43,7 @@ function offfocused(xele){
 let times = 0;
   </script>
 </head>
-<body onload="setInterval(changeText, 3000);">
+<body onload="setInterval(changeText, 8000);">
   <div id="cropperx">
     <button id="destroyer" class="actions acol3 la la-times"></button>
     <div id="inna"></div>
@@ -55,8 +55,8 @@ let times = 0;
     <div class="blur second"></div>
   <div id="left">
         <img class="llogo" src="https://impera.onrender.com/img/im.svg">
-        <div style="position:absolute; z-index: -1; filter: blur(20px) brightness(0.7); left: calc(100% - 150px); top: calc(100% - 150px);">
-          <img class="logo" style="width: 300px;" src="https://impera.onrender.com/img/bgxx.png">
+        <div style="position:absolute; z-index: -1; overflow: hidden; filter: blur(20px) brightness(0.7); width: 100%; height: 100%; left: 0; top: 0;">
+          <img class="logo" style="width: 100%; display: block; position: static;" src="https://impera.onrender.com/img/bgxx.png">
         </div>
         <h1 class="wordone" id="wordone">WELCOME TO IMPERA</h1>
         <span class="wordtwo" id="wordtwo">where seemingly im-possibe ideas become possible</span>
@@ -72,7 +72,7 @@ let times = 0;
           <div class="ibins">
           <label for="usernamel">Email</label>
           <input onblur="offfocused(this)" autocomplete="off" onfocus="pfocused(this)" type="text" placeholder="Email or Username" name="un_name" id="usernamel" maxlength="30" spellcheck="false" required autofocus>
-          <span class="beauts"><div id="avail"></div></span>
+          <span class="beauts"><div id="availe"></div></span>
           </div>
         </div>
         <div class="input-box">

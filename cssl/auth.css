@@ -28,7 +28,7 @@
     --secondary:0, 0, 0;
     --color1:rgb(var(--col1));
     --color2:rgb(var(--col2));
-    --color3:rgb(var(--col3));
+    --color3:rgb(191, 0, 255);
     --gray1:rgba(107, 107, 107, 0.41);
     --shadow:rgba(0,0,0,0.4);
     --gray2:rgba(113, 113, 113, 0.462);
@@ -256,8 +256,8 @@ margin: 45% 0px 0px 75%;
     height: 100%;
     display: flex;
 }
-#avail{
-    background-color: var(--shadow);
+#avail, #availe{
+    background-color: var(--thread);
     border-radius: 100%;
     height: 15px;
     width: 15px;
@@ -317,6 +317,8 @@ margin: 45% 0px 0px 75%;
     width: 30px;
 }
 .logo, .llogo{
+    cursor: pointer;
+    user-select: none;
     font-size: 14px;
     left: 10px;
     position: absolute;
@@ -836,6 +838,7 @@ margin: 45% 0px 0px 75%;
     z-index: 2;
     float: right;
     position: relative;
+    min-width: 70px;
 }
 .snapb::before{
     content: '';
@@ -865,6 +868,7 @@ margin: 45% 0px 0px 75%;
 .snapb span{
     z-index: 3;
     position: inherit;
+    color: var(--sec);
 }
 #wordthree, #wordfour{
     display: none;
@@ -918,7 +922,7 @@ margin: 45% 0px 0px 75%;
 }
 #lfimg{
     font-size: 20px;
-    background: var(--black);
+    background: var(--gray2);
     /* padding: 10px 8px; */
     border-radius: 50%;
     width: 153px;
@@ -928,7 +932,7 @@ margin: 45% 0px 0px 75%;
     justify-content: center;
 }
 #lfimg:hover{
-    background: var(--gradi2);
+    background: var(--grad3);
 }
 #replacer{
     display: block;
