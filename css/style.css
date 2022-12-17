@@ -1,24 +1,3 @@
-@font-face {
-  font-family: caviar;
-  src: url("../Fonts/CaviarDreams.ttf");
-}
-@font-face {
-  font-family: cl;
-  src: url("../Fonts/Champagne & Limousines.ttf");
-}
-@font-face {
-  font-family: norm;
-  src: url("../Fonts/Neou-Bold.ttf");
-}
-@font-face {
-  font-family: uns;
-  src: url("../Fonts/sofiapro-light.otf");
-}
-*{
-  font-family: uns;
-  box-sizing: border-box;
-}
-
 ::-webkit-scrollbar{
   display: none;
   width: 5px;
@@ -2430,14 +2409,21 @@ input:-webkit-autofill{
   transition: opacity 0.2s;
   position: relative;
 }
+#allmsk{
+  cursor: progress;
+  position: absolute;
+  bottom: 20px;
+  left: calc(50% - 25px);
+  z-index: 2;
+}
+.logo{
+  cursor: pointer;
+  transition: 0.2s;
+}
 #logo{
+  cursor: auto;
   width: 60px;
   height: 60px;
-  animation: fio 2s infinite alternate-reverse;
-}
-@keyframes fio {
-  from{filter: blur(0px);}
-  to{filter: blur(5px);}
 }
 #techused{
   width: 100%;
@@ -2450,7 +2436,9 @@ input:-webkit-autofill{
 }
 #techused svg{
   height: 70px;
-  
+}
+.logo:active, #logo:active{
+    filter: blur(5px);
 }
 .dialogs{
   position: fixed;

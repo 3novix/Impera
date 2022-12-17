@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preload" href="https://impera.onrender.com/img/im.svg" as="image"/>
   <link rel="icon" href="https://impera.onrender.com/img/im.svg" sizes="any">
-  <link rel="preload" href="https://impera.onrender.com/css/dark.css" as="style"/>
   <link rel="preload" href="https://impera.onrender.com/cssl/style.css" as="style"/>
   
   <link rel="preload" href="https://impera.onrender.com/Fonts/CaviarDreams.ttf" as="font"/>
   <link rel="preload" href="https://impera.onrender.com/Fonts/sofiapro-light.otf" as="font"/>
   <link rel="preload" href="https://impera.onrender.com/Fonts/Neou-Bold.ttf" as="font"/>
 
-  <link rel="stylesheet" href="https://impera.onrender.com/css/dark.css"/>
   <link rel="stylesheet" href="https://impera.onrender.com/cssl/style.css"/>
 
   <link rel="preload" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" as="style"/>
@@ -42,6 +40,7 @@ function offfocused(xele){
   if(xele.tagName.toLowerCase() != 'textarea') xele.parentElement.parentElement.className = 'input-box';
     else xele.parentElement.className = 'input-box';
 }
+let times = 0;
   </script>
 </head>
 <body onload="setInterval(changeText, 3000);">
@@ -55,9 +54,12 @@ function offfocused(xele){
   <div id="shadow">
     <div class="blur second"></div>
   <div id="left">
-        <img class="llogo" src="https://impera.onrender.com/img/imfull.svg">
-        <span class="wordone gword" id="wordone">WELCOME TO IMPERA</span>
-        <span class="wordtwo gword" id="wordtwo">where seemingly im-possibe ideas become possible</span>
+        <img class="llogo" src="https://impera.onrender.com/img/im.svg">
+        <div style="position:absolute; z-index: -1; filter: blur(20px) brightness(0.7); left: calc(100% - 150px); top: calc(100% - 150px);">
+          <img class="logo" style="width: 300px;" src="https://impera.onrender.com/img/bgxx.png">
+        </div>
+        <h1 class="wordone" id="wordone">WELCOME TO IMPERA</h1>
+        <span class="wordtwo" id="wordtwo">where seemingly im-possibe ideas become possible</span>
   </div>
        <!--CONNECT WALLET-->
 <div id="right">
@@ -92,7 +94,7 @@ function offfocused(xele){
           </ul>
         </div>      
         <div style="display: flex; flex-direction: row; gap: 30px; align-items: center; justify-content: center; transition: 0.2s;">
-          <button class="specialb" onclick="plogIn()"><p>Log In</p></button>
+          <button class="snapb" onclick="plogIn()"><span>Log In</span></button>
           <button class="specialb" onclick="psignUp()"><p>Sign Up</p></button>
         </div>
     </div>
@@ -119,7 +121,7 @@ function offfocused(xele){
     </div>
 </div>
      <!--UPLOAD-->
-     <div id="upload" class="col">
+     <div id="upload" class="col" style="padding: 30px 0px 10px 0px;">
 
       <img class="logo" src="https://impera.onrender.com/img/im.svg">
         <label for="p_image_input" id="lfimg">
@@ -127,7 +129,7 @@ function offfocused(xele){
         <input style="display: none;" type="file" name="p_image" id="p_image_input" accept=".png, .jpeg, .bmp, .jpg" spellcheck="false" required>
       </label>
 
-      <div id="simpleinputs">
+      <div id="simpleinputs" style="margin-top: 10px">
         <div class="input-box">
           <div class="ibins">
           <label style="line-height: 39px; display: block;" class="gtext" for="username">@</label>
@@ -163,9 +165,10 @@ function offfocused(xele){
       <!--NICHE-->
       <div id="niche" class="col">
         <img class="logo" src="https://impera.onrender.com/img/im.svg">
-          <label class="gtext">
-              What fields are you intrested in?<small>This will help show only what you like</small>
-          </label>
+          <h4 id="efdc" style="padding: 0px 10px;">
+              What fields are you intrested in? <small>This will help show only what you like</small>
+          </h4>
+          <div style="display: flex; justify-content: start; align-items: flex-start; flex-grow: 2;">
         <div class="tags-holder" style="margin-left: 9px;">
         <!--max tags allowed should 4-->
         <div class="ring" onclick="niche(this); return false;" id="art"><span>Art</span></div>
@@ -177,9 +180,10 @@ function offfocused(xele){
         <div class="ring" onclick="niche(this); return false;" id="film"><span>Film</span></div>
         <div class="ring" onclick="niche(this); return false;" id="sports"><span>Sports</span></div>
       </div>
+    </div>
 
         <div class="btncont row" style="justify-content: space-between; margin-left: 3px;">
-          <button class="specialb" onclick="changeToUp()"><p>Back</p></button>
+          <button class="snapb" onclick="changeToUp()"><span>Back</span></button>
           <button class="specialb" onclick="newuser()"><p>Save Profile</p></button>
        </div>
       <!--END-->

@@ -7,6 +7,13 @@ const list = Object.freeze({
     'polygon':[80001, 'Mumbai Testnet', 'MATIC', 'MATIC', 'https://rpc-mumbai.maticvigil.com/', 'https://polygonscan.com', '0x13881']
 })
 
+const textlist = [
+    'Join a community of creative individuals, share ideas, organize events and raise funds for your projects, on Impera, the first social crowdfunding website',
+    'Enjoy the most of your support by attending exclusive events of projects you watch, and receive timely updates from your favorite creators when they post',
+    `The first Social Crowdfunding platform designed on the best web3 tools to save transaction cost compared to popular services`,
+    `Establish an unshakable connection between you and followers`
+]
+
 //select niche
 let nichelist = [];
 
@@ -34,94 +41,88 @@ if(Moralis != undefined){
 Moralis.onAccountChanged(async function(account){
     const confirmed = confirm('Do you want to switch accounts?');
     if(confirmed){
-    await Moralis.link(account).then(async ()=>{
-        showToast('Wallet Switched!', 1, 5000);
-        const getchain = Moralis.chainId;
-        if(getchain != 137 && getchain != '0x89' && getchain != 250){
-          await addNetwork('polygon')
-        }
-      })
+        await Moralis.link(account).then(async ()=>{
+            showToast('Wallet Switched!', 1, 5000);
+            const getchain = Moralis.chainId;
+            if(getchain != 137 && getchain != '0x89' && getchain != 250){
+                await addNetwork('polygon')
+            }
+        })
     }
-  });
+});
 
-  async function switchNetwork(network){
+async function switchNetwork(network){
     const list = {'polygon':137, 'bnb':56, 'fantom':250}
     await Moralis.switchNetwork(list[network.toLowerCase()])
-  }
-  async function addNetwork(network){
+}
+async function addNetwork(network){
     const selected = list[network.toLowerCase()];
-
+    
     const chain = selected[0];
     const chainname = selected[1];
     const currname = selected[2]
     const currencys = selected[3];
     const rpcUrl = selected[4];
     const blockExUrl = selected[5];
-
+    
     await Moralis.addNetwork(chain, chainname, currname, currencys, rpcUrl, blockExUrl).then(()=>{
-      showToast('Connected to '+network+"!");
+        showToast('Connected to '+network+"!");
     })
-  }
+}
 
 const ethers = Moralis.web3Library;
 
 async function handleAuth(provider){
     await Moralis.enableWeb3({
-      throwOnError: true,
-      provider,
+        throwOnError: true,
+        provider,
     });
-
+    
     const { account, chainId } = Moralis;
     
     if (!account) {
-      throw new Error("Connecting to chain failed, as no connected account was found");
+        throw new Error("Connecting to chain failed, as no connected account was found");
     }
     if (!chainId) {
-      throw new Error("Connecting to chain failed, as no connected chain was found");
+        throw new Error("Connecting to chain failed, as no connected chain was found");
     }
     
     const { message } = await Moralis.Cloud.run("requestMessage", {
-      address: account,
-      chain: parseInt(chainId, 16),
-      network: "evm",
+        address: account,
+        chain: parseInt(chainId, 16),
+        network: "evm",
     });
     
     await Moralis.authenticate({
-      signingMessage: message,
-      throwOnError: true,
+        signingMessage: message,
+        throwOnError: true,
     }).then(async(user) => {
-      console.log(user);
-      const chainID = await Moralis.chainId;
-      if(chainID != 137 && chainID != '0x89'){
-        await addNetwork('polygon testnet');
-      }
+        console.log(user);
+        const chainID = await Moralis.chainId;
+        if(chainID != 137 && chainID != '0x89'){
+            await addNetwork('polygon testnet');
+        }
     });
-  }
+}
 
 // declare variables
-let wordone = document.getElementById("wordone");
 let wordtwo = document.getElementById("wordtwo");
 
 //we'll keep toggling values
 function changeText(){
-    if(wordone.innerHTML.includes("WELCOME TO IMPERA") == true){
-        wordone.innerHTML = "JOIN A COMMUNITY OF ENTHUSIASTS";
-        wordtwo.innerHTML = "and help fund world-changing projects to reality"
-    }
-    else{
-        wordone.innerHTML = "WELCOME TO IMPERA";
-        wordtwo.innerHTML = "where seemingly im-possibe ideas become possible"
-    }
+    times++;
+    if(times == 4) times = 0
+    document.getElementById('wordtwo').innerHTML = textlist[times];
 }
 
 async function profiled(proid) {
     const query = new Moralis.Query('users');
-        query.equalTo('user', proid);
-        const results = await query.find();
-        
-        if(results.length == 0) changeToUp();
-        else if(location.search != '') location.assign(location.search.slice(10)); 
-        else location.assign('https://impera.onrender.com');
+    query.equalTo('user', proid);
+    const results = await query.find();
+    
+    if(results.length == 0) changeToUp();
+    else if(location.search != '') location.assign(location.search.slice(10)); 
+    else location.assign('https://impera.onrender.com');
 }
 
 async function loginmeta(){
@@ -200,15 +201,15 @@ let casbtn = document.getElementById("casbtn");
 
 async function showcropper(img){
     showToast('Crop your Avatar', 3, 10000);
-
+    
     document.getElementById('cropperx').style.display = 'flex';
-
+    
     const holder = document.getElementById('inna');
     const x = holder.clientWidth;
     const y = holder.clientHeight;
     
     holder.style.background = `center / cover no-repeat url('${img}')`;
-
+    
     let crp = new Croppie(holder, {
         enableExif:true,
         viewport: {width: x-20, height: y-20, type:'circle'},
@@ -227,18 +228,18 @@ async function showcropper(img){
             
             currimg = ress;
             //unprocessed = blob;
-        
+            
             replacer.src = currimg;
-
+            
             document.getElementById('destroyer').click()
         })
     }
-
+    
     document.getElementById('destroyer').onclick = function(){
         crp.destroy();
         document.getElementById('cropperx').style.display = 'none';
     }
-
+    
     document.getElementById('rotatel').onclick = function(){
         crp.rotate(90);
     }
@@ -345,7 +346,7 @@ async function loginWithUsername(username, password){
     try {
         const user = await Moralis.User.logIn(username, password, { usePost: true });
         showToast('Welcome back');
-
+        
         const query = new Moralis.Query('users');
         query.equalTo('user', user.id);
         const results = await query.find();
@@ -380,15 +381,15 @@ async function newuser(){
     let geth= '';
     if(userox.get('ethAddress') != '' && userox.get('ethAddress') != undefined){
         geth = userox.get('ethAddress');
-
-}
+        
+    }
     else{
         const newWallet = await ethers.Wallet.createRandom();
         //connect directly to the wallet
         Moralis.enableWeb3({privateKey:newWallet.privateKey});
         geth = newWallet.address;
     }
-
+    
     const tags = nichelist;
     const about = document.getElementById('sumitup').value;
     
@@ -399,7 +400,7 @@ async function newuser(){
         }
         
         let iol = showToast(`Saving <object width="50px" type="image/svg+xml" data="img/loading.svg"></object>`, 20000);
-
+        
         const options = {
             abi: [
                 {
@@ -474,7 +475,7 @@ async function newuser(){
 function showToast(message, mtype, dtime, callback){
     //SET DEFAULTS
     const ftime = dtime ?? 3000;
-
+    
     let toasty= document.createElement('div');
     document.body.appendChild(toasty);
     toasty.className = "toast";
