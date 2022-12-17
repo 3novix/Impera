@@ -1,0 +1,23 @@
+.ql-toolbar.ql-snow{
+    border: none;
+    border-bottom: 2px solid var(--gray3);
+    background: var(--pri);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+.ql-editor::selection{
+    color: var(--pri);
+    background-color: var(--sec);
+  }
+.ql-container.ql-snow{
+    border: none;
+}
+#omnus{
+    border-radius: 25px;
+    overflow: scroll;
+    border: 2px solid var(--gray3);
+}
+#overview .ql-toolbar.ql-snow{
+    display: none;
+}

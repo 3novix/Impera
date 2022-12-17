@@ -1,0 +1,36 @@
+:root{
+  --col1:29, 155, 240;
+  --col2:255, 77, 181;
+  --col3:179, 29, 236;
+  --primary:255, 255, 255;
+  --secondary:0, 0, 0;
+  --color1:rgb(var(--col1));
+  --color2:rgb(var(--col2));
+  --color3:rgb(var(--col3));
+  --gray1:rgba(250, 250, 250, 0.41);
+  --shadow:rgba(128,128,128,0.2);
+  --gray2:rgba(255, 255, 255, 0.677);
+  --gray3:#ebebeb;
+  --gray4:#f9f9f9;
+  --darkg:#fbfbfb;
+  --thread:rgb(253, 253, 253);
+  --pri:rgb(var(--primary));
+  --sec:rgb(var(--secondary));
+  --pri9:rgba(0, 0, 0, 0.8);
+  --gradi: linear-gradient(135deg, var(--color1), var(--color3), var(--color2));
+  --grad3: linear-gradient(45deg, var(--color2), var(--color3), var(--color1));
+  --grad4: linear-gradient(225deg, var(--color2), var(--color3), var(--color1));
+  --bwe:10px 0px;
+  --custom: rgba(255, 255, 255, 0.677);
+}
+.actions{color: var(--sec);}
+.divc, #toppert, #fundbox, .loader .sonl{
+  background: #ffffff;
+}
+#searchbox{
+  background: var(--pri);
+}
+
+#gitme{
+  background-image: url('../img/GitHub-Mark-64px.png');
+}
