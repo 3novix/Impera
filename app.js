@@ -210,7 +210,6 @@ async function done(){
         }
     }
     
-    
     const provider = 'metamask';
     
     //if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
@@ -222,24 +221,24 @@ async function done(){
     
     const locval = location.pathname;
     
-    if(locval.indexOf('/project/') > 1){
+    if(locval.includes('/project/')){
         const lino = locval.split('/')[2];
         await openproject(lino)
     }
-    else if(locval.indexOf('/me/') > 1){
+    else if(locval.includes('/me/')){
         const lino = locval.split('/')[2];
         await openuser(lino)
     }
-    else if(locval.indexOf('/post/') > 1){
+    else if(locval.includes('/post/')){
         const lino = locval.split('/')[2];
         await openpost(lino)
     }
-    else if(locval.indexOf('/home/') > 1){
+    else if(locval.includes('/home/')){
         await initialize(); //this will load home screen... that is without much.
     }
-    else if(locval.indexOf('/posts')){
+    else if(locval.includes('/posts')){
         //format {user}, if empty, then it loads posts around alone
-        if(locval.indexOf('/me/')){
+        if(locval.includes('/me/')){
             const lino = locval.split('/')[2];
             await initialize({user:lino, type:'posts'})
         }
@@ -1513,7 +1512,7 @@ async function openuser(usernid, son){
                 }
                 if(response.length < 10){/***LOADED ALL THE PROJECTS***/ge('lh2').innerHTML = `<p style="width:100%; text-align:center">No more projects</p>`}
                 else{
-                    ge('lh2').innerHTML = `<div onclick="await more_projects(${params})" class="malf"><button class="invertio"><p>Load More</p></button></div>`
+                    ge('lh2').innerHTML = `<div onclick="await more_projects(${JSON.stringify(params)})" class="malf"><button class="invertio"><p>Load More</p></button></div>`
                 }
                 nlo.remove();
                 
@@ -1538,7 +1537,7 @@ async function openuser(usernid, son){
                 const message = error.message;
                 nlo.remove();
                 showToast('click to reload', 3, 5000, function(){
-                    allprojectsload()
+                    allprojectsload(params)
                 });
                 return false
             }
@@ -3444,7 +3443,7 @@ async function openuser(usernid, son){
                                 
                                 if(response.length < 10){/***LOADED ALL THE POSTS***/ge('lh1').innerHTML = `<p style="width:100%; text-align:center">No more posts</p>`}
                                 else{
-                                    ge('lh1').innerHTML = `<div onclick="await more_posts(${new_params})" class="malf"><button class="invertio"><p>Load More</p></button></div>`
+                                    ge('lh1').innerHTML = `<div onclick="await more_posts(${JSON.stringify(new_params)})" class="malf"><button class="invertio"><p>Load More</p></button></div>`
                                 }
                                 
                                 if(ge('recentz').innerHTML == ''){
@@ -3468,7 +3467,7 @@ async function openuser(usernid, son){
                                 const message = error.message;
                                 console.log(message);
                                 //if(current_user != '')
-                                ge('lh1').innerHTML = `<div onclick="await loadPosts(${new_params})" class="malf"><button class="invertio"><p><i style="margin-right: 5px; font-size:18px" class="las la-redo-alt"></i>Reload</p></button></div>`;
+                                ge('lh1').innerHTML = `<div onclick="await loadPosts(${JSON.stringify(new_params)})" class="malf"><button class="invertio"><p><i style="margin-right: 5px; font-size:18px" class="las la-redo-alt"></i>Reload</p></button></div>`;
                                 return false
                             }
                         }

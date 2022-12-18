@@ -85,7 +85,6 @@
   font-size: 14px;
   color: var(--sec);
   font-family: uns;
-  height: 16px;
   transition: 0.2s;
   user-select: none;
 }
@@ -1640,7 +1639,7 @@ box-shadow: 0 5px 10px 2px var(--shadow);
   font-size: 20px;
   min-width: 40px;
   min-height: 40px;
-  /*background: var(--gray1);*/
+  background: var(--gray1);
   color: var(--sec);
   transition: background-color 0.5s;
 }
@@ -1727,6 +1726,9 @@ input:-webkit-autofill{
 }
 .malf:hover{
   background: var(--grad3);
+}
+.loaderholder .malf{
+  min-height: 47px;
 }
 .invertio:hover{
   background: none;
