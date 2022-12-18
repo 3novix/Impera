@@ -135,7 +135,7 @@ window.onmouseover = function(evt){
         vel.setAttribute('titlex', gA);
         vel.removeAttribute('title');
     }
-    if(vel.className.includes('la-') || vel.getAttribute('titlex') != null){
+    if((vel.className.includes('la-') || vel.getAttribute('titlex') != null) && vel.getAttribute('titlex') != ''){
         currt = setTimeout(()=>{
             let ttip = document.getElementById('ttpos');
             document.getElementById('tooltip').innerHTML = vel.getAttribute('titlex');
@@ -246,8 +246,8 @@ async function done(){
             await initialize({user:'', type:'posts'})
         }
     }
-    else if(locval.indexOf('/projects')){
-        if(locval.indexOf('/me/')){
+    else if(locval.includes('/projects')){
+        if(locval.includes('/me/')){
             const lino = locval.split('/')[2];
             await initialize({user:lino, type:'projects'})
         }
@@ -313,6 +313,7 @@ async function initialize(specifics){
         const tagsu = Moralis.User.current().get('tags');
         const tpppr = {tags:tagsu, start:0, me:globalid};
         
+        opentab('home');
         await sethome(tpppr);
     }
     else{
@@ -325,7 +326,7 @@ async function initialize(specifics){
             }break;
             case 'projects':{
                 opentab('iht7k');
-                await loadProjects(tpppr)
+                await allprojectsload(tpppr)
             }break;
         }
         //specifics is a object
@@ -1928,7 +1929,7 @@ async function openuser(usernid, son){
                         tags: user.get('tags'),
                         start: ge('projectsin').childElementCount//its 0
                     };
-                    loadProjects(params);
+                    allprojectsload(params);
                     
                     // Show the current tab, and add an "active" class to the button that opened the tab
                     ent.className += " active";
@@ -2473,7 +2474,7 @@ async function openuser(usernid, son){
             }
             function openmenu(){
                 if(screen() == 'ls' || screen() == 'tablet'){
-                    window.open('index.html?home');
+                    window.open('index.html/home', '_self');
                 }
                 else if(screen() == 'mobile'){
                     if(ge('suui').style.display == 'none' || ge('suui').style.display == '') ge('suui').style.display = 'flex';

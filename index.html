@@ -28,22 +28,27 @@
   <link rel="preload" href="Fonts/Neou-Bold.ttf" as="font"/>
   
   <style>
-    @font-face {
-      font-family: caviar;
-      src: url("https://impera.onrender.com/Fonts/CaviarDreams.ttf");
-    }
-    @font-face {
-      font-family: norm;
-      src: url("https://impera.onrender.com/Fonts/Neou-Bold.ttf");
-    }
-    @font-face {
-      font-family: unz;
-      src: url("https://impera.onrender.com/Fonts/sofiapro-light.otf");
-    }
-    @font-face {
-      font-family: uns;
-      src: url("https://impera.onrender.com/Fonts/Inconsolata-Regular.ttf");
-    }
+        @font-face {
+            font-family: caviar;
+            src: url("https://impera.onrender.com/Fonts/CaviarDreams.ttf");
+        }
+        @font-face {
+            font-family: norm;
+            src: url("https://impera.onrender.com/Fonts/Neou-Bold.ttf");
+        }
+        @font-face {
+            font-family: unz;
+            src: url("https://impera.onrender.com/Fonts/sofiapro-light.otf");
+        }
+        @font-face {
+            font-family: uns;
+            src: url("https://impera.onrender.com/Fonts/Inconsolata-Regular.ttf");
+        }
+        *{
+            font-family: unz;
+            box-sizing: border-box;
+            color: var(--sec);
+        }
   </style>
   
   <link rel="preload" href="https://impera.onrender.com/css/style.css" as="style"/>
@@ -135,7 +140,7 @@
       
       <!--div class="ersd acol4"><button class="acolg las la-magic"></button><p class="gtext b2text">Surprise Me!</p></div-->
       
-      <div class="ersd acol1" onclick="logout()"><button class="acol1"><i class="las la-power-off"></i></button><p class="acol1 b2text">Logout</p></div>
+      <div class="ersd acol8" onclick="logout()"><button class="acol8"><i class="las la-power-off"></i></button><p class="acol8 b2text">Logout</p></div>
     </div>
     <a id="gitme" href="https://github.com/3novix" style="width: 40px; height: 40px; min-height: 40px; background-size: 40px 40px;" target="_blank"></a>
   </div>

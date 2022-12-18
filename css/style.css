@@ -1,3 +1,6 @@
+*{
+  box-sizing:border-box;
+}
 ::-webkit-scrollbar{
   display: none;
   width: 5px;
@@ -57,6 +60,10 @@
 .acol7.lq{color: #1EB040}
 .acol7:active{background-color: rgba(30, 176, 64, 0.2); color: #1EB040}
 
+.acol8:hover{color: #ff0000; background-color: var(--thread)}
+.acol8.lq{color: #ff0000}
+.acol8:active{background-color: rgba(255, 0, 0, 0.2); color: #ff0000}
+
 /**STYLE FOR LARGE BUTTONS**/
 .tcol1{color: var(--color1);}
 .tcol1:active{color: var(--pri); background-color: var(--color1);}
@@ -84,7 +91,7 @@
 .b2text{
   font-size: 14px;
   color: var(--sec);
-  font-family: uns;
+  font-family: unz;
   transition: 0.2s;
   user-select: none;
 }
@@ -105,9 +112,7 @@ a:hover{
 a:active{
   color: var(--color2);
 }
-*{
-  box-sizing:border-box;
-}
+
 p::selection{
   background-color: var(--color2);
   color: var(--sec);
@@ -1315,7 +1320,10 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   min-height: 100px;
   border-radius: 20px;
   background-color: var(--thread);
+  box-shadow: 0px 0px var(--bwe) var(--shadow);
   max-width: 350px;
+  margin: 0px 5px 10px 5px;
+  user-select: none;
 }
 .recentz{
   display: flex;
@@ -2348,6 +2356,17 @@ input:-webkit-autofill{
   background-color: var(--pri);
   font-size: 20px;
 }
+.tabb.active{
+  font-weight: bold;
+  color: rgba(var(--col2), 0.9);
+  background: var(--grad3);
+  background-size: 100%;
+  background-repeat: repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color:transparent;
+  -moz-text-fill-color:transparent;
+}
 #miniprofile{
   display: none;
   width: 200px;
@@ -3001,9 +3020,10 @@ and (orientation: portrait) {
     justify-content: start;
     align-items: stretch;
     overflow: scroll;
+    overflow-x: hidden;
   }
   .innerblock::-webkit-scrollbar{
-    display: block;
+    display: none;
     width: 3px;
     border-radius: 5px;
     background-color: #222222;
@@ -3142,6 +3162,7 @@ font-size: 14px;
   }
   .topin{
     min-height: 50px;
+    padding-left: 5px;
   }
   #neso{
     justify-content: stretch;
