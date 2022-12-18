@@ -20,7 +20,7 @@
   --grad3: linear-gradient(45deg, var(--color2), var(--color3), var(--color1));
   --grad4: linear-gradient(225deg, var(--color2), var(--color3), var(--color1));
   --bwe:10px 0px;
-  --custom: rgba(0,0,0,0.4);
+  --custom: rgba(0,0,0,0.8);
 }
 .actions{color: rgb(var(--primary));}
 #gitme{

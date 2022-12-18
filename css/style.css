@@ -247,7 +247,7 @@ p{
   align-items: stretch;
   padding: 0px 10px;
   justify-content: stretch;
-  gap: 10px;
+  gap: 5px;
   width: 100%;
 }
 .rlborderx{
@@ -257,7 +257,9 @@ p{
 }
 .innbb{
   display: flex;
-  flex-grow: 2;
+  width: 100%;
+  flex-flow: column nowrap;
+  padding-top: 5px;
   overflow: scroll;
 }
 .innbb::-webkit-scrollbar{
@@ -280,7 +282,6 @@ p{
   padding: 5px;
 }
 #ibczo-2{
-  max-width: 500px;
   align-self:auto;
   flex-flow: column nowrap;
   justify-content: start;
@@ -299,7 +300,8 @@ p{
   flex-flow: column nowrap;
   position: relative;
   width: 100%;
-  height: calc(100% - 120px);
+  height: 100%;
+  overflow: scroll;
   transition: height 0.2s;
 }
 .rounded{
@@ -658,9 +660,7 @@ p.gtext::selection {
   border-radius: 10px;
 }
 #titlep{
-  height: 50px;
   cursor: pointer;
-  line-height: 60px;
   /* padding-left: 10px; */
   padding: 0 10px;
   display: inline-block;
@@ -701,7 +701,7 @@ p.gtext::selection {
   height: 50px;
 }
 #lfimg2{
-  width: 100px;
+  width: 150px;
   height: 45px;
   line-height: 45px;
 }
@@ -836,7 +836,7 @@ p.gtext::selection {
 }
 .topin{
   box-shadow: 0 0px 0px 0 var(--shadow);
-  min-height:50px;
+  min-height:60px;
   order:0;
   display: flex;
   flex-flow: row nowrap;
@@ -849,17 +849,21 @@ p.gtext::selection {
   backdrop-filter: blur(10px);
   background: var(--custom);
   z-index: 5;
-  position: sticky;
   top: 0;
   left: 0;
 }
-#relpro{
+.pro-tabs{
+  display: none;
+  width: 100%;
+}
+.relpro{
   background-color: var(--thread);
   color: var(--sec);
   border-radius: 10px;
   transition: 0.2s;
+  padding: 5px 10px;
 }
-#relpro:hover{
+.relpro:hover{
   background-color: var(--gray4);
 }
 #large_img img:hover{
@@ -934,6 +938,7 @@ p.gtext::selection {
   align-items: center;
   justify-content: stretch;
   border-bottom: 2px solid var(--gray3);
+  background-color: var(--pri);
   padding: 5px 5px;
   gap: 5px;
 }
@@ -1205,7 +1210,7 @@ p.gtext::selection {
 input[type='text']:disabled{
   filter:brightness(0.7)
 }
-#sumitup, #writecontent{
+#sumitup, #writecontent, #allaboutme, #messing{
   width: 100%;
   border: none;
   outline: none;
@@ -1216,16 +1221,33 @@ input[type='text']:disabled{
   background: var(--pri);
   color: var(--sec);
 }
-#sumitup{
+#sumitup, #allaboutme, #messing{
   height: 100px;
 }
 .row{
   display: flex;
   flex-direction: row;
 }
+.section-title, .section-title h1{
+  margin: 10px 0px;
+}
+.section-title h1{
+  padding-left: 10px;
+}
+.column{
+  display: flex;
+  flex-direction: column;
+}
 .center{
   justify-content: center;
   align-items: center;
+}
+#rentposts{
+  width: 100%;
+  overflow: scroll;
+}
+#rentposts::-webkit-scrollbar{
+  display: none;
 }
 #emojiparent{
   overflow: scroll;
@@ -1288,19 +1310,23 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .recentzh{
   display: flex;
   flex-direction: column;
-  flex-flow: row wrap;
   gap: 5px;
   width: calc(100% - 10px);
-  align-items: center;
   padding: 10px;
   min-height: 100px;
   border-radius: 20px;
   background-color: var(--thread);
+  max-width: 350px;
 }
 .recentz{
   display: flex;
   flex-flow: row wrap;
   gap: 5px;
+}
+#messagingmenu h3{
+  width: 100%;
+  padding-left: 10px;
+  margin: 5px 0px;
 }
 .loaders{
   display: none;
@@ -1559,6 +1585,7 @@ box-shadow: 0 5px 10px 2px var(--shadow);
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-between;
+  overflow: scroll;
   gap: 20px;
   height: 100%;
   min-width: 70px;
@@ -1584,10 +1611,9 @@ box-shadow: 0 5px 10px 2px var(--shadow);
   display: flex;
   flex-flow: column nowrap;
   gap: 10px;
-  height: 400px;
   overflow: hidden;
   /* align-items: center; */
-  width: calc(100% - 10px);
+  width: calc(100% - 20px);
   max-width: 200px;
 }
 #largexx .ersd{
@@ -1596,6 +1622,7 @@ box-shadow: 0 5px 10px 2px var(--shadow);
   overflow: hidden;
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
   gap: 5px;
   cursor: pointer;
   border-radius: 30px;
@@ -1623,12 +1650,14 @@ box-shadow: 0 5px 10px 2px var(--shadow);
 .ersd .b2text{
   width: 0;
   padding: 5px 10px;
-  line-height: 40px;
+  background: transparent;
   text-overflow: ellipsis;
   text-align: center;
   border-radius: 25px;
-  height: 40px;
   transition: width 0.1s linear 0.2s;
+}
+.b2text:hover{
+  background-color: transparent;
 }
 input:autofill{
   color: var(--pri);
@@ -1648,7 +1677,16 @@ input:-webkit-autofill{
   padding: 0;
   left: 0;
 }
-
+#chatview{
+  width: 100%;
+  height: 100%;
+}
+.chatboxes{
+  margin:5px;
+  border-radius: 20px;
+  background-color: var(--thread);
+  padding: 5px 10px;
+}
 #usersstuffs{
   width: 100%;
   padding-top: 20px;
@@ -1695,12 +1733,12 @@ input:-webkit-autofill{
   background-color: var(--pri);
   backdrop-filter: blur(10px);
 }
-#userstop .underp{
+#userstop .underp, #edlksao .underp, #hppah .underp{
   width: 156px;
   height: 156px;
   border-radius: 100%;
 }
-#userstop .underp::before{
+#userstop .underp::before, #edlksao .underp::before, #hppah .underp::before{
   content: '';
   background-image: var(--grad3);
   position: absolute;
@@ -1709,7 +1747,7 @@ input:-webkit-autofill{
   width: inherit;
   height: inherit;
 }
-#userstop .underp img{
+#userstop .underp img, #edlksao .underp img, #hppah .underp img{
   width: 150px;
   height: 150px;
   border-radius: 100%;
@@ -1775,7 +1813,7 @@ input:-webkit-autofill{
   position: absolute;
   border-radius: 5px;
   z-index: 2;
-  right: -5px;
+  right: -6px;
   top: 0;
   background: var(--gradi);
 }
@@ -2319,7 +2357,7 @@ input:-webkit-autofill{
   border-radius: 100%;
   position: absolute;
   font-size: 23px;
-  margin-right: 10px;
+  right: 10px;
   align-self: flex-end;
   background: var(--gradi);
   color: rgb(var(--primary));
@@ -2340,7 +2378,7 @@ input:-webkit-autofill{
 .classf:nth-of-type(2){
   top: 5px;
 }
-#filler{
+.filler{
   display: none;
   width: 100%;
   min-height: 50px;
@@ -2407,7 +2445,6 @@ input:-webkit-autofill{
   left: 0;
   background-color: var(--pri);
   transition: opacity 0.2s;
-  position: relative;
 }
 #allmsk{
   cursor: progress;
@@ -2871,6 +2908,7 @@ object{
   padding: 5px 10px;
   height: 50px;
   z-index: 2;
+  min-width: 80px;
   float: right;
   position: relative;
 }
@@ -2955,6 +2993,8 @@ and (orientation: portrait) {
     display: none;
   }
   .innerblock{
+    position: absolute;
+    padding-top: 60px;
     flex-flow: column nowrap;
     justify-content: start;
     align-items: stretch;
@@ -2982,7 +3022,6 @@ font-size: 14px;
   .rblocks{
     display: none;
   }
-  #ibczo-2{display: none;}
   #filler{display: block;}
   #row1-2{display: flex; max-width: 100%;}
   #nav{
@@ -3099,6 +3138,12 @@ font-size: 14px;
   #selfpro{
     display: none;
   }
+  .topin{
+    min-height: 50px;
+  }
+  #neso{
+    justify-content: stretch;
+  }
 }
 
 /**FOR SMALL LAPTOP SCREENS**/
@@ -3116,7 +3161,6 @@ font-size: 14px;
   #filler{
     display: none;
   }
-  .rblocks{display: flex;}
   #nav{display: none;}
   #top-mobile{
     display: none;

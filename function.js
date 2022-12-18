@@ -299,7 +299,7 @@ async function psignUp(){
     if(email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) && password.length > 5){
         const response = await checkemail(email);
         if(response == true) signUp(email, password);
-        else document.getElementById('username1').focus()
+        else document.getElementById('usernamel').focus()
     }
     else if(!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
         showToast('Invalid Email');

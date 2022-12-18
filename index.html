@@ -57,18 +57,18 @@
     (async function(){
       const cusver = await Moralis.User.current();
       if(!cusver){
-        location.assign('auth.html?redirect='+location.href);
+        location.assign('auth?redirect='+location.href);
       }
       else{
         const query = new Moralis.Query('users');
         query.equalTo('user', cusver.id);
         const results = await query.first();
         
-        if(!results) location.assign('auth.html?redirect='+location.href)
+        if(!results) location.assign('auth?redirect='+location.href)
       }
     })()
     
-    function changetheme(params) {
+    function changeTheme(params){
       if(ls.getItem('theme') == 'light'){ls.setItem('theme', 'dark'); themeaton()}
       else{ls.setItem('theme', 'light'); themeaton()}
     }
@@ -111,10 +111,10 @@
       <div class="ersd acol3 mol" onclick="opentab('ibczo-2')"><button class="acol3"><i class="la la-feather"></i></button><p class="acol3 b2text">Posts</p></div>
       <div class="ersd acol3 mol" onclick="opendialog('iht7k')"><button class="acol3"><i class="la la-hashtag"></i></button><p class="acol5 b2text">Projects</p></div>
       <div class="ersd acol3" onclick="opendialog('events')"><button class="acol3"><i class="la la-calendar-alt"></i></button><p class="acol4 b2text">Events</p></div>
-      <div class="ersd acol3 mol" onclick="opendialog('messaging')"><button class="acol3"><i class="la la-calendar-alt"></i></button><p class="acol7 b2text">Messages</p></div>
+      <div class="ersd acol3 mol" onclick="opentab('messaging')"><button class="acol7"><i class="las la-comments"></i></button><p class="acol7 b2text">Messages</p></div>
       <div class="ersd acol1" onclick="opendialog('notifs')"><button class="acol1"><i class="la la-bell"></i></button><p class="acol1 b2text">Notifications</p></div>
 
-      <div class="ersd acol4"><button class="acolg las la-magic"></button><p class="gtext b2text">Surprise Me!</p></div>
+      <!--div class="ersd acol4"><button class="acolg las la-magic"></button><p class="gtext b2text">Surprise Me!</p></div-->
 
       <div class="ersd acol1" onclick="logout()"><button class="acol1"><i class="las la-power-off"></i></button><p class="acol1 b2text">Logout</p></div>
     </div>
@@ -129,6 +129,15 @@
       <object width="50px" type="image/svg+xml" data="https://impera.onrender.com/img/loading.svg"></object>
     </div>
     <div id="homestuffs" class="column" style="display:none; width: 100%; height: 100%;">
+
+      <div id="hppah" class="column center" style="gap: 20px;">
+        <div class="underp"><img id="hppa" src="https://impera.onrender.com/img/profile2.jpg" titlex="My profile pic" alt="My profile pic"></div>
+        <div class="row" style="gap: 10px;">
+          <span id="hmyname"></span>
+          <button onclick="cperlink()" titlex="Copy my link" class="snapb"><span id="hmyusername"></span></button>
+        </div>
+      </div>
+
       <div class="section-title"><h1>New Users</h1></div>
       <div class="row" style="gap: 20px; width: 100%; overflow: scroll;">
         <div id="newerusers" class="row" style="width: 100%; padding: 10px 10px; width: 100%;"></div>
@@ -144,16 +153,16 @@
 
 
   <div id="usertab" class="gjs-cell rblocks">
-    <div id="top-mobile">
-      <img alt="impera logo" width="30px" style="z-index: 3;" onclick="openmenu()" src="https://impera.onrender.com/img/im.svg">
-    </div>
     <div class="innerblock">
       <div class="innbb">
         <!--Contains stuffs related to tabs opened-->
       </div>
       <div class="innbb rlborder">
+    <div id="top-mobile">
+      <img alt="impera logo" width="30px" style="z-index: 3;" onclick="openmenu()" src="https://impera.onrender.com/img/im.svg">
+    </div>
     <div id="usersstuffs">
-      <div id="editbtn" class="row" style="justify-content: end; height: 50px;"><button onclick="editme()" class="actions acol3 la la-pen"></button></div>
+      <div id="editbtn" class="row" style="justify-content: end; height: 50px; display: none;"><button onclick="editme()" title="edit profile" class="actions acol7 las la-pen-alt"></button></div>
       <div id="userstop">
         <div class="underp"><img id="profiimg" class="pfplarge" titlex="View image" src="https://impera.onrender.com/img/profile2.jpg" alt="placeholder"/></div>
         <div style="width: 100%; display:flex; flex-direction: row; justify-content: space-evenly;"><p id="usersname"></p><p id="usersusername" style="cursor: pointer; outline: none; border:none" class="gtext"></p></div>
@@ -202,8 +211,8 @@
     </div>
     
     <div id="editme">
-      <div class="column center" style="gap: 10px;">
-        <div class="underp"><img src="https://impera.onrender.com/img/profile2.jpg"/></div>
+      <div id="edlksao" class="column center" style="gap: 10px;">
+        <div class="underp"><img alt="My image" titlex="My Profile Image" src="https://impera.onrender.com/img/profile2.jpg"/></div>
 
         <div id="special2" class="special-box">
         <label id="lfimg2" class="uploaders" title="Upload avatar" titlex="Upload Avatar" for="newimageuploader">Upload Image
@@ -226,7 +235,7 @@
 
         <div id="aboutmeh">
           <div class="input-box" style="display: flex; flex-direction:column; overflow: hidden;">
-            <label for="sumitup" style="z-index: 2;">About<sup style="opacity: 0.7;"></sup></label>
+            <label for="allaboutme" style="z-index: 2;">About</label>
             <textarea oninput="ge('textcountme').innerHTML = (ge('allaboutme').value.length).toString()+'/100';" onblur="offfocused(this)" onfocus="pfocused(this)" id="allaboutme" style="height: 200px" maxlength="100"></textarea>
             <span style="z-index: 2;" id="textcountme"></span>
           </div>
@@ -235,7 +244,10 @@
       </div>
       <button class="snapb" onclick="savenewprofile()"><span>Save</span></button>
     </div>
-    <span id="filler"></span>
+      <span class="filler"></span>
+    </div>
+    <div class="innbb">
+
     </div>
     </div>
   </div>
@@ -247,9 +259,10 @@
       <p id="cups" class="gtext largeps" style="height: 40px; line-height: 40px;">Posts</p>
     </div>
     <div class="innerblock">
-      <div class="innbb">
+      <div class="innbb" style="align-items: center; max-width: 350px;">
         <!--CONTAINS STUFFS RELATED TO THE POSTS-->
-        <div id="recentzh"><p>Recent posts by:</p>
+        <div class="recentzh">
+          <p>Recent posts by:</p>
           <div id="recentuser" class="recentz"></div>
         </div>
       </div>
@@ -300,7 +313,7 @@
       </div>
       
       <!--floating button for sth related to the tab-->
-      <button title="new post" class="classf la la-feather-alt" onclick="opendialog('writepost')"></button>
+      <button id="newposter" title="new post" class="classf la la-feather-alt" onclick="opendialog('writepost')"></button>
     </div>
     <div class="innbb"></div>
   </div>
@@ -314,8 +327,9 @@
       </div>
 
       <div class="innerblock">
-      <div class="innbb" style="max-width: 300px;">
-        <div id="recentzh" class="recentzh"><p>Recent Creators:</p>
+      <div class="innbb" style="max-width: 350px;">
+        <div class="recentzh">
+          <p>Recent Creators:</p>
           <div id="recentuser" class="recentz"></div>
         </div>
       </div>
@@ -340,8 +354,7 @@
           <div style="display: flex; flex-flow: row wrap; gap: 10px; align-items: center; justify-content: center; min-width: 300px;">
             <div id="large_title" class="gtext largeps">Project X</div><button id="project-id" title="copy id" name="copy id" class="col1">$$unknown</button>
           </div>
-          <div style="text-align: center;"><p>Created by</p></div>
-          
+  
           <div id="fundma">
             <div class="vscx"><div id="fnums" class="col2"></div><span> funded</span></div>
             <div id="plisn">
@@ -353,6 +366,9 @@
               <div class="vscx"><div id="wachs" class="col4"></div><span> watchers</span></div>
             </div>
           </div>
+
+          <div style="text-align: center;"><p>Created by</p></div>
+
           <div id="usipp">
             <div id="ofrb" style="display: flex; flex-grow: 2; flex-direction: column; height: 70px; justify-content: stretch;">
               <p id="namexp">unknown</p>
@@ -369,7 +385,7 @@
       
       <div id="loaa">
         <div id="moreonpr">
-        <button id="relpro">More</button>
+        <button class="relpro">More</button>
         <div id="evern">
           <button onclick="switchviews('pro_content', ['projects-transactions'])"><div>Content</div></button>
           <button id="relpro"><div>Show posts</div></button>
@@ -385,7 +401,7 @@
         </div>
       </div>
       <div id="opwrapper">
-      <div id="pro_content" class="pro-tabs">
+      <div id="pro_content" class="pro-tabs" style="display: flex;">
         <!--Here I wll import the quill object as projects full description, while i read the summary for all other stuffs-->
       </div>
       <div id="projects-transactions" class="pro-tabs">
@@ -408,7 +424,8 @@
       </div>
       <div id="obottom"><!--contains terms and condition shit-->
         <p><strong>*Fund of your own voilition</strong></p>
-        <p>As of this Moment of writing, we do not collect a fee for transactions, all the amount sent will be directly received by the project owner. And therefore we do not ask for you to blame us for any financial regret you may have after supporting this project</p>
+        <p>As of the Moment of writing this, we do not collect a fee for transactions, all the amount sent will be directly received by the project owner. And therefore we do not ask for you to blame us for any financial regret you may have after supporting this project</p>
+        <div style="height: 50px; width: 50px;"></div>
       </div>
     </div>
          </div> 
@@ -419,16 +436,36 @@
   <!--MESSAGING SECTION... COMING SOON-->
   <div id="messaging" class="rblocks">
     <div class="glassy-top topin"><P class="gtext largeps">Messaging</P></div>
-    <div class="innerblock">
-      <div class="innbb">
-        <h2>Chats</h2>
+    <div id="neso" class="innerblock">
+      <div id="messagingmenu" class="innbb">
+        <h3>Chats</h3>
         <div class="column" style="align-items: stretch;">
 
         </div>
       </div>
       <div class="innbb rlborder" style="padding-top: 20px;">
-        <div style="width: calc(100% - 10px); margin:5px; border-radius: 20px;">
-        Comming soon        
+        <div id="chatview">
+        <div class="chatboxes left">
+        Coming soon
+        </div>
+        <div class="chatboxes right">
+          When?
+        </div>
+        <div class="chatboxes left">
+          I dunno, next year?
+        </div>
+      </div>
+      </div>
+      <div class="innbb">
+        <!--A BLANK HTML DIV-->
+        <div class="simpleinputs" style="background-color: var(--thread); border-radius: 20px;">
+          <div id="mesdsc">
+            <div class="input-box" style="display: flex; flex-direction:column; overflow: hidden;">
+              <label for="messing" style="z-index: 2;">Type</label>
+              <textarea onblur="offfocused(this)" onfocus="pfocused(this)" id="messing" style="height: 200px" maxlength="300"></textarea>
+              <span style="z-index: 2;"></span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -448,7 +485,7 @@
               <img class="gtext" height="296px" id="replacer" onclick="removeimg()" src="" style="height:auto; max-height: 300px; width: auto; max-width: 100%;" alt="project image">
             </div>
             <div id="special1" class="special-box">
-              <label for="p_image_input" id="lfimg">Select image<input class="gtext" id="p_image_input" name="p_image" spellcheck="false" title="image for project" type="file" accept=".png, .jpg, .jpeg, .bmp, .mp4" required/>
+              <label for="p_image_input" titlex="Select an Image" id="lfimg">Select image<input class="gtext" id="p_image_input" name="p_image" spellcheck="false" title="image for project" type="file" accept=".png, .jpg, .jpeg, .bmp, .mp4" required/>
               </label>
             </div>
               <div style="position: absolute; bottom:-10px; color:var(--sec); font-size: 15px; opacity: 0.7;">*wide images are recommended</div>

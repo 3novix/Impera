@@ -7,27 +7,27 @@ const ethers = Moralis.web3Library;
 
 //simple emojis. Will add search functions later
 const emojis = Object.freeze([
-'3d-fluency-anxious-face-with-sweat.png',
-'3d-fluency-confetti.png',
-'3d-fluency-exploding-head.png',
-'3d-fluency-eyes.png',
-'3d-fluency-face-holding-back-tears.png',
-'3d-fluency-face-savoring-food.png',
-'3d-fluency-face-with-tears-of-joy.png',
-'3d-fluency-ghost.png',
-'3d-fluency-grinning-face.png',
-'3d-fluency-loudly-crying-face.png',
-'3d-fluency-lying-face.png',
-'3d-fluency-melting-face.png',
-'3d-fluency-pouting-face.png',
-'3d-fluency-saluting-face.png',
-'3d-fluency-smiling-face-with-heart-eyes.png',
-'3d-fluency-smiling-face-with-hearts.png',
-'3d-fluency-smiling-face-with-smiling-eyes.png',
-'3d-fluency-star-struck.png',
-'3d-fluency-thinking-face.png',
-'3d-fluency-winking-face.png',
-'3d-fluency-winking-face-with-tongue.png'
+    '3d-fluency-anxious-face-with-sweat.png',
+    '3d-fluency-confetti.png',
+    '3d-fluency-exploding-head.png',
+    '3d-fluency-eyes.png',
+    '3d-fluency-face-holding-back-tears.png',
+    '3d-fluency-face-savoring-food.png',
+    '3d-fluency-face-with-tears-of-joy.png',
+    '3d-fluency-ghost.png',
+    '3d-fluency-grinning-face.png',
+    '3d-fluency-loudly-crying-face.png',
+    '3d-fluency-lying-face.png',
+    '3d-fluency-melting-face.png',
+    '3d-fluency-pouting-face.png',
+    '3d-fluency-saluting-face.png',
+    '3d-fluency-smiling-face-with-heart-eyes.png',
+    '3d-fluency-smiling-face-with-hearts.png',
+    '3d-fluency-smiling-face-with-smiling-eyes.png',
+    '3d-fluency-star-struck.png',
+    '3d-fluency-thinking-face.png',
+    '3d-fluency-winking-face.png',
+    '3d-fluency-winking-face-with-tongue.png'
 ]);
 
 const prelink = 'https://impera.onrender.com/static/emojis/';
@@ -210,16 +210,16 @@ async function done(){
         }
     }
     
-        
+    
     const provider = 'metamask';
     
     //if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
-        await Moralis.enableWeb3({
-            throwOnError: true,
-            provider,
-        });
+    await Moralis.enableWeb3({
+        throwOnError: true,
+        provider,
+    });
     //}
-
+    
     const locval = location.pathname;
     
     if(locval.indexOf('/project/') > 1){
@@ -266,7 +266,7 @@ async function done(){
     setTimeout(function(){
         ge('startscreen').style.display = "none";
     }, 2000);
-
+    
     //after all things have settled down
     for(let emo in emojis){
         const emoji = prelink+emojis[emo];
@@ -274,7 +274,7 @@ async function done(){
         yur.src=emoji;
         yur.className = 'emojis';
         yur.onclick = function(){addemoji(emoji)};
-
+        
         ge('emojibox').append(yur);
     }
 }
@@ -285,9 +285,9 @@ function toggleemojis(){
 function addemoji(ltoemo){
     fetch(ltoemo).then((res)=>{return res.blob()}).then(async (retu)=>{
         const ress = await imageConversion.filetoDataURL(retu);
-
+        
         ss.setItem('lastImage', ltoemo.slice(ltoemo.lastIndexOf('/')));
-
+        
         ge('images-s').innerHTML = '';
         //if(files.length > 1){}//multiple files
         
@@ -314,7 +314,7 @@ async function initialize(specifics){
         const tagsu = Moralis.User.current().get('tags');
         const tpppr = {tags:tagsu, start:0, me:globalid};
         
-        sethome(tpppr);
+        await sethome(tpppr);
     }
     else{
         const tpppr = {user:specifics.user, start:0, me:globalid};
@@ -333,9 +333,44 @@ async function initialize(specifics){
         const state = {type:specifics.type, data:specifics.user};
         history.replaceState(state, null, location.href);
     }
+    
+    //Tells the user if there is a new post
+    const Qx = new Moralis.Query('Posts');
+    Qx.containedIn('tags', Moralis.User.current().get('tags'));
+    Qx.descending('createdAt');
+    
+    const postsSubscription = await Qx.subscribe();
+    postsSubscription.on('create', async function(newPost){
+        if(wl.indexOf(newPost.get('referred')) > -1){
+            const nq = new Moralis.Query('users');
+            nq.equalTo('username', globalid);
+            const nqr = await nq.find();
+            if((ge('postsholder').getBoundingClientRect()).height != 0 && (ge('ibczo-2').getBoundingClientRect()).height != 0){
+                const wl = nqr.get('watchlist');                                
+                //show a quick notification
+                showToast(`@${newPost.get('idu')} just made a new post`, 1, 5000, async function(){
+                    ge('postsholder').parentElement.scrollTo({top:0, behavior:'smooth'});
+                    const tagsu = Moralis.User.current().get('tags');
+                    const tpppr = {tags:tagsu, start:0, me:globalid};
+                    
+                    await loadPosts(tpppr)
+                });
+            }
+        }
+    });
+}
+async function cperlink(){
+    await navigator.clipboard.writeText('https://impera.onrender.com/me/'+globalid);
+    showToast('Link copied', 1);
 }
 async function sethome(new_params){
     switchviews('keeperx', ['homestuffs']);
+    
+    //hell with first stop
+    const ouruser = await requestUser();
+    ge('hppa').src = ouruser.img;
+    ge('hmyname').innerText = '@'+ouruser.name;
+    ge('hmyusername').innerText = ouruser.username;
     
     //FIRST STOP... New users
     const query = new Moralis.Query('users');
@@ -528,6 +563,11 @@ if(type == 'post'){
     else{
         opentab('ibczo-2');
         switchviews('mainpost', ['postsholder']);
+        
+        ge('newposter').onclick = function(){
+            const optx = {postid:data};
+            opendialog('writepost',optx)
+        }
     }
     ge('backbutton').style.display = 'block';
     
@@ -546,6 +586,10 @@ if(type == 'posts'){
     opentab('ibczo-2');
     switchviews('postsholder', ['mainpost']);
     ge('backbutton').style.display = 'none';
+    
+    ge('newposter').onclick = function() {
+        opendialog('writepost')
+    }
     
     //using session storage for this. probably not
     //document.getElementById('ibczo-2').scrollTo({top:data, left:0, behavior:'auto'})
@@ -877,6 +921,11 @@ async function openuser(usernid, son){
                 createMeta({content:result.get('contents'), attachments:result.get('attachments'), });
                 //once back button is pressed, simply go back and do the thing
                 ge('backbutton').style.display = 'block;'
+                
+                ge('newposter').onclick = function(){
+                    const optx = {postid:result.id};
+                    opendialog('writepost',optx)
+                }
                 
                 const pcontent = await processtext(result.get('contents'));
                 const pattached = result.get('attachments');
@@ -1258,7 +1307,7 @@ async function openuser(usernid, son){
                 if((mex.get('watchlist')).indexOf(response.id)){
                     ge('atwy').className+=' lq'
                 }
-
+                
                 const transactions = response.transactions;
                 if(transactions == []){ge('projects-transactions').innerHTML = `<p style="width:100%; text-align:center; line-height:50px">No transactions yet</p>`}
                 else{
@@ -1466,7 +1515,24 @@ async function openuser(usernid, son){
                 else{
                     ge('lh2').innerHTML = `<div onclick="await more_projects(${params})" class="malf"><button class="invertio"><p>Load More</p></button></div>`
                 }
-                nlo.remove()
+                nlo.remove();
+                
+                
+                if(ge('recentuser').innerHTML == ''){
+                    for(let r = 0; r<response.length; r++){
+                        if(r>4) break;
+                        
+                        const resuser = await getuserdetails(response[r].idu)
+                        
+                        let erid = document.createElement('div');
+                        erid.className = 'underp';
+                        erid.innerHTML = `<img class="posterpic" src="${resuser.image}"/>`;
+                        erid.onclick = function(){
+                            openuser(resuser.username)
+                        }
+                        ge('recentuser').append(erid)
+                    }
+                }
             } catch (error) {
                 const code = error.code;
                 const message = error.message;
@@ -1629,7 +1695,6 @@ async function openuser(usernid, son){
                 //laod his/her data
                 loadevents(); // returns an array of data containing name, start, end, and type and project its linked to
             }
-            
             if(curr == 'wallet'){
                 if(opt == 0){
                     switchviews('mywallet', ['viewedwallet']);
@@ -1827,6 +1892,10 @@ async function openuser(usernid, son){
                     ge(tabn).style.display = "flex";
                     //if(screen() == 'tablet') ge('suui').style.display = 'flex'; gc('')[0]
                     
+                    if(tabn == 'messaging'){
+                        showToast('Coming soon', 1, 7000)
+                    }
+
                     if(ent)ent.className += " gtext";
                     if(tabn == 'ibczo-2' && ge('postsholder').childElementCount<2){
                         const tagsu = Moralis.User.current().get('tags');
@@ -1958,7 +2027,7 @@ async function openuser(usernid, son){
                     let referredto = '';
                     
                     let attachment_name = ((ss.getItem('lastImage')).includes('3d-') ? ss.getItem('lastImage')+random_string() : random_string());
-
+                    
                     if(ge('posyo') != null){
                         const imgx =  ge('posyo').src;
                         const options = {
@@ -1973,7 +2042,7 @@ async function openuser(usernid, son){
                         
                         attachments = path[0].path;
                     }
-
+                    
                     if(texts.indexOf('$$') > -1){
                         console.log('reder')
                         let sliced = texts.slice(texts.indexOf('$$'));
@@ -1985,7 +2054,7 @@ async function openuser(usernid, son){
                             referredto = ''
                         })
                     }
-
+                    
                     if(texts.length > 3){
                         let tyu = showToast(loadicon);
                         
@@ -2029,7 +2098,7 @@ async function openuser(usernid, son){
                     
                     let attachments = '';
                     let attachment_name = ((ss.getItem('lastImage')).includes('3d-') ? ss.getItem('lastImage')+random_string() : random_string());
-
+                    
                     if(ge('posyo') != null){
                         const imgx =  ge('posyo').src;
                         const options = {
@@ -3167,31 +3236,6 @@ async function openuser(usernid, son){
                             ge('allaboutme').value = nqer.get('about');
                         }
                         
-                        //Tells the user if there is a new post
-                        const Qx = new Moralis.Query('Posts');
-                        Qx.containedIn('tags', Moralis.User.current().get('tags'));
-                        Qx.descending('createdAt');
-                        
-                        const postsSubscription = await Qx.subscribe();
-                        postsSubscription.on('create', async function(newPost){
-                            if(wl.indexOf(newPost.get('referred')) > -1){
-                                const nq = new Moralis.Query('users');
-                                nq.equalTo('username', globalid);
-                                const nqr = await nq.find();
-                                if((ge('postsholder').getBoundingClientRect()).height != 0 && (ge('ibczo-2').getBoundingClientRect()).height != 0){
-                                    const wl = nqr.get('watchlist');                                
-                                    //show a quick notification
-                                    showToast(`@${newPost.get('idu')} just made a new post`, 1, 5000, async function(){
-                                        ge('postsholder').parentElement.scrollTo({top:0, behavior:'smooth'});
-                                        const tagsu = Moralis.User.current().get('tags');
-                                        const tpppr = {tags:tagsu, start:0, me:globalid};
-                                        
-                                        await loadPosts(tpppr)
-                                    });
-                                }
-                            }
-                        });
-                        
                         async function savenewprofile() {
                             const getName = ge('myname').value;
                             const getAbout = ge('allaboutme').value;
@@ -3260,7 +3304,9 @@ async function openuser(usernid, son){
                                 if(hs1.length != 0) history.pushState(state, '', location.origin+'/posts');
                                 else{history.replaceState(state, '', location.origin+'/posts')}
                             }
-                            
+                            ge('newposter').onclick = function() {
+                                opendialog('writepost')
+                            }
                             let new_params = params;
                             if(params==undefined){
                                 //Must always be loaded 10 each time
@@ -3395,16 +3441,35 @@ async function openuser(usernid, son){
                                     `;
                                     ge('postsholder').append(cel);
                                 }
+                                
                                 if(response.length < 10){/***LOADED ALL THE POSTS***/ge('lh1').innerHTML = `<p style="width:100%; text-align:center">No more posts</p>`}
                                 else{
                                     ge('lh1').innerHTML = `<div onclick="await more_posts(${new_params})" class="malf"><button class="invertio"><p>Load More</p></button></div>`
                                 }
+                                
+                                if(ge('recentz').innerHTML == ''){
+                                    for(let r = 0; r<response.length; r++){
+                                        if(r>4) break;
+                                        
+                                        const resuser = await getuserdetails(response[r].idu)
+                                        
+                                        let erid = document.createElement('div');
+                                        erid.className = 'underp';
+                                        erid.innerHTML = `<img class="posterpic" src="${resuser.image}"/>`;
+                                        erid.onclick = function(){
+                                            openuser(resuser.username)
+                                        }
+                                        ge('recentz').append(erid)
+                                    }
+                                }
+                                return true
                             } catch (error){
                                 const code = error.code;
                                 const message = error.message;
                                 console.log(message);
                                 //if(current_user != '')
-                                ge('lh1').innerHTML = `<div onclick="await loadPosts(${new_params})" class="malf"><button class="invertio"><p><i style="margin-right: 5px; font-size:18px" class="las la-redo-alt"></i>Reload</p></button></div>`
+                                ge('lh1').innerHTML = `<div onclick="await loadPosts(${new_params})" class="malf"><button class="invertio"><p><i style="margin-right: 5px; font-size:18px" class="las la-redo-alt"></i>Reload</p></button></div>`;
+                                return false
                             }
                         }
                         function optioned(){
