@@ -225,7 +225,8 @@ async function showcropper(img){
         crp.result('blob').then(async function(blob){
             const res = await imageConversion.compressAccurately(blob,150);
             const ress = await imageConversion.filetoDataURL(res);
-            
+            let replacer = document.getElementById("replacer");
+
             currimg = ress;
             //unprocessed = blob;
             

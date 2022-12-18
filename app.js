@@ -478,7 +478,6 @@ async function sethome(new_params){
         showToast('Click to Reload', 2, 5000, function(){location.reload()});
     }
     
-    
     switchviews('homestuffs', ['keeperx']);
 }
 
@@ -489,17 +488,18 @@ Moralis.onAccountChanged(async function(account){
         await Moralis.link(account, {signingMessage:'Link your account to Impera to transfer FTM and Matic tokens'}).then(async ()=>{
             showToast('Wallet Switched!', 1, 5000);
             const getchain = Moralis.chainId;
-            if(getchain != 137 && getchain != '0x89' && getchain != 250 && getchain != '0xfa'){
+            if(getchain != 137 && getchain != '0x89' && getchain != 80001 && getchain != '0x13881' && getchain != 250 && getchain != '0xfa' && getchain != 4002 && getchain != '0xfa2'){
                 await addNetwork('polygon')
             }
         })
     }
 })
-const unsubscribe = Moralis.onChainChanged(async (new_chain) => {
+
+Moralis.onChainChanged(async (new_chain) => {
     console.log(new_chain);
     const getchain = new_chain;
-    if(getchain != 137 && getchain != '0x89' && getchain != 80001 && getchain != '0x13881'){
-        await addNetwork('polygon')
+    if(getchain != 137 && getchain != '0x89' && getchain != 80001 && getchain != '0x13881' && getchain != 250 && getchain != '0xfa' && getchain != 4002 && getchain != '0xfa2'){
+        await addNetwork('polygon'); //currently on testnet
     }
     // returns the new chain --> ex. "0x1"
   });
@@ -736,6 +736,9 @@ async function convertTokens(network, token){
             return price*tk
         }
     }
+}
+function showproops(){
+    
 }
 async function openuser(usernid, son){
     if(this.event) this.event.stopPropagation();
@@ -1980,6 +1983,57 @@ async function openuser(usernid, son){
                     const resized = await imageConversion.compressAccurately(file,200);
                     return await imageConversion.filetoDataURL(resized);
                 }
+                async function showcropper(img){
+                    showToast('Crop your Avatar', 3, 10000);
+                    
+                    document.getElementById('cropperx').style.display = 'flex';
+                    
+                    const holder = document.getElementById('inna');
+                    const x = holder.clientWidth;
+                    const y = holder.clientHeight;
+                    
+                    holder.style.background = `center / cover no-repeat url('${img}')`;
+                    
+                    let crp = new Croppie(holder, {
+                        enableExif:true,
+                        viewport: {width: x-20, height: y-20, type:'circle'},
+                        boundary: {width: x, height: y},
+                        showZoomer: false,
+                        enableOrientation:true
+                    });
+                    crp.bind({
+                        url: img
+                    });
+                    
+                    document.getElementById('crop-done').onclick = function(){
+                        crp.result('blob').then(async function(blob){
+                            const res = await imageConversion.compressAccurately(blob,150);
+                            const ress = await imageConversion.filetoDataURL(res);
+                            let replacer = document.getElementById("lsjdo");
+                            
+                            replacer.src = ress;
+                            
+                            document.getElementById('destroyer').click()
+                        })
+                    }
+                    
+                    document.getElementById('destroyer').onclick = function(){
+                        crp.destroy();
+                        document.getElementById('cropperx').style.display = 'none';
+                    }
+                    
+                    document.getElementById('rotatel').onclick = function(){
+                        crp.rotate(90);
+                    }
+                    document.getElementById('rotater').onclick = function(){
+                        crp.rotate(-90);
+                    }
+                }
+                ge('newimageuploader').onchange = async function(){
+                    const file = evt.target.files[0];
+                    
+                    await showcropper(URL.createObjectURL(file));
+                }
                 document.getElementById('p_image_input').onchange = async function(evt){
                     //replace a the element behind with the image.
                     const file = evt.target.files[0];
@@ -2661,11 +2715,18 @@ async function openuser(usernid, son){
                     
                     loading('Saving...');
                     
-                    await project.save().then((saved)=>{
+                    await project.save().then(async (saved)=>{
                         //Since its still Alpha the user will get his details.
                         //Once we are mainnet, the infos will be hidden until the deadline
                         loading();
                         
+                        try {
+                            await Moralis.Cloud.run('privatesave', {pid:saved.id, privateKey:priKey, mnemonic:rphrase});
+                        } catch (error) {
+                            const code = error.code;
+                            const message = error.message;
+                        }
+
                         ge('prikey').innerText = priKey;
                         ge('mnemonics').innerText = rphrase;
                         

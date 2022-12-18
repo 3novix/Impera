@@ -51,6 +51,8 @@
         }
   </style>
   
+  
+  <link rel="stylesheet" href="https://impera.onrender.com/cssl/croppie.css">
   <link rel="preload" href="https://impera.onrender.com/css/style.css" as="style"/>
   <link rel="preload" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" as="style"/>
   
@@ -116,6 +118,11 @@
     <img width="100px" height="100px" id="logo" src="https://impera.onrender.com/img/im.svg" class="logo"/>
     <!--div id="techused"><i class="la la-plus"></i></div-->
     <div id="allmsk"><object width="50px" type="image/svg+xml" data="https://impera.onrender.com/img/loading.svg"></object></div>
+  </div>
+  <div id="cropperx">
+    <button id="destroyer" class="actions acol3 la la-times"></button>
+    <div id="inna"></div>
+    <div id="controls"><button id="rotatel" class="actions acol2 las la-undo-alt"></button><button id="rotater" class="actions acol2 las la-redo-alt"></button><button id="crop-done" class="specialb"><p>Crop</p></button></div>
   </div>
   <div id="column1-2" class="gjs-row">
     <div id="searchbox">
@@ -240,7 +247,7 @@
         
         <div id="editme">
           <div id="edlksao" class="column center" style="gap: 10px;">
-            <div class="underp"><img alt="My image" titlex="My Profile Image" src="https://impera.onrender.com/img/profile2.jpg"/></div>
+            <div class="underp"><img id="lsjdo" alt="My image" titlex="My Profile Image" src="https://impera.onrender.com/img/profile2.jpg"/></div>
             
             <div id="special2" class="special-box">
               <label id="lfimg2" class="uploaders" title="Upload avatar" titlex="Upload Avatar" for="newimageuploader">Upload Image
@@ -731,7 +738,7 @@
   <button title="facebook share" onclick="sharepost('facebook')" class="actions acol5 la la-facebook" style="border-radius: 5px"></button>
   <button title="copy link" onclick="sharepost('link')" class="actions acol4 las la-link"></button>
 </div>
-
+<script src="https://impera.onrender.com/tools/croppie.js"></script>
 <script src="https://impera.onrender.com/tools/conversion.js"></script>
 <script src="app.js"></script>
 </body>

@@ -189,7 +189,7 @@ margin: 45% 0px 0px 75%;
     max-width: 1000px;
     background-position: left;
     background-size:contain;
-    background: var(--gradi);
+    background: transparent;
     border-radius: 27px;
     padding: 20px;
 }
