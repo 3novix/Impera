@@ -1058,6 +1058,20 @@ p.gtext::selection {
 #wallet{
   max-width: 500px;
 }
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: var(--pri9);
+  background-color: var(--thread);
+  transition: background-color 5000s ease-in-out 0s;
+}
 .simpleinputs{
   display: flex;
   flex-flow: column wrap;
@@ -1237,6 +1251,18 @@ input[type='text']:disabled{
 }
 .section-title h1{
   padding-left: 10px;
+  width: fit-content;
+}
+.section-title h2::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  bottom: -3px;
+  height: 5px;
+  width: 100%;
+  background: var(--grad3);
+  z-index: -1;
+  border-radius: 5px;
 }
 .column{
   display: flex;
@@ -1693,6 +1719,13 @@ input:-webkit-autofill{
   border-radius: 20px;
   background-color: var(--thread);
   padding: 5px 10px;
+  margin: 10px;
+}
+.chatboxes.left{
+  float: left;
+}
+.chatboxes.right{
+  float: right;
 }
 #usersstuffs{
   width: 100%;
@@ -1762,6 +1795,26 @@ input:-webkit-autofill{
   height: 150px;
   border-radius: 100%;
 }
+
+.clxdf .underp{
+  width: 104px;
+  height: 104px;
+  border-radius: 100%;
+}
+.clxdf .underp::before{
+  content: '';
+  background-image: var(--grad3);
+  position: absolute;
+  z-index: 0;
+  transition: rotate 0.3s;
+  width: inherit;
+  height: inherit;
+}
+.clxdf .underp img{
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+}
 #usersmid{
   display: flex;
   flex-flow: column;
@@ -1823,7 +1876,7 @@ input:-webkit-autofill{
   position: absolute;
   border-radius: 5px;
   z-index: 2;
-  right: -6px;
+  right: -7px;
   top: 0;
   background: var(--gradi);
 }
@@ -2315,7 +2368,6 @@ input:-webkit-autofill{
   opacity: 0%;
   backdrop-filter: blur(5px);
   gap: 5px;
-  font-family: uns;
   font-size: 14px;
   padding: 0px 20px 0px 20px;
 }

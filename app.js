@@ -131,11 +131,11 @@ window.onmouseover = function(evt){
     
     const gA = vel.getAttribute('title');
     
-    if(gA != null && vel.className.includes('la-') && vel.id != 'attachb'){
+    if(gA != null && vel.className.includes('la-')){
         vel.setAttribute('titlex', gA);
         vel.removeAttribute('title');
     }
-    if((vel.className.includes('la-') || vel.getAttribute('titlex') != null) && vel.getAttribute('titlex') != ''){
+    if(vel.getAttribute('titlex') != '' && (vel.className.includes('la-') || vel.getAttribute('titlex') != null)){
         currt = setTimeout(()=>{
             let ttip = document.getElementById('ttpos');
             document.getElementById('tooltip').innerHTML = vel.getAttribute('titlex');
@@ -212,12 +212,14 @@ async function done(){
     
     const provider = 'metamask';
     
-    //if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+    if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
     await Moralis.enableWeb3({
         throwOnError: true,
         provider,
-    });
-    //}
+    }).then(()=>{}, ()=>{
+        showToast('Cannot connect to Metamask', 2);
+    })
+    }
     
     const locval = location.pathname;
     
@@ -283,22 +285,10 @@ function toggleemojis(){
 }
 function addemoji(ltoemo){
     fetch(ltoemo).then((res)=>{return res.blob()}).then(async (retu)=>{
-        const ress = await imageConversion.filetoDataURL(retu);
-        
-        ss.setItem('lastImage', ltoemo.slice(ltoemo.lastIndexOf('/')));
-        
-        ge('images-s').innerHTML = '';
-        //if(files.length > 1){}//multiple files
-        
-        const cr = document.createElement('div');
-        cr.className = 'imgs';
-        cr.onclick = function(thi){
-            ge('attachb').value = '';
-            thi.target.remove();
-            if(ge('images-s').innerHTML == '') ge('images-s').style.display = 'none';
-        }
-        cr.innerHTML = `<img id='posyo' class='samples' style="width:150px; height:150px" src="${ress}"/>`;
-        ge('images-s').append(cr);
+        const tis = new File([retu], (ltoemo.slice(ltoemo.lastIndexOf('/')+1)).replace('-', ' '), {type:'image/png'});
+        const dt = new DataTransfer();
+        dt.items.add(tis);
+        ge('attacj').files = dt.files;
     })
 }
 async function initialize(specifics){
@@ -361,7 +351,7 @@ async function initialize(specifics){
 }
 async function cperlink(){
     await navigator.clipboard.writeText('https://impera.onrender.com/me/'+globalid);
-    showToast('Link copied', 1);
+    showToast('Link copied');
 }
 async function sethome(new_params){
     switchviews('keeperx', ['homestuffs']);
@@ -369,8 +359,8 @@ async function sethome(new_params){
     //hell with first stop
     const ouruser = await requestUser();
     ge('hppa').src = ouruser.img;
-    ge('hmyname').innerText = '@'+ouruser.name;
-    ge('hmyusername').innerText = ouruser.username;
+    ge('hmyname').innerText = ouruser.name;
+    ge('hmyusername').innerText = '@'+ouruser.username;
     
     //FIRST STOP... New users
     const query = new Moralis.Query('users');
@@ -386,13 +376,13 @@ async function sethome(new_params){
         
         const nel = document.createElement('div');
         nel.onclick = function(){openuser(usernamex)};
-        nel.className = 'column center';
+        nel.className = 'column center clxdf';
         nel.style.gap = '10px';
         
         const template = `
         <div class="underp"><img src="${pfp}"/></div>
-        <p style="font-size: 17px;">${namex}</p>
-        <p class="gtext">${usernamex}</p>
+        <p style="font-size: 14px;">${namex}</p>
+        <p class="gtext">@${usernamex}</p>
         `;
         nel.innerHTML = template;
         ge('newerusers').append(nel)
@@ -495,6 +485,7 @@ async function sethome(new_params){
 Moralis.onAccountChanged(async function(account){
     const confirmed = confirm('Do you want to switch wallet accounts?');
     if(confirmed){
+        //await Moralis.unlink(Moralis.User.current().get('ethAddress'));
         await Moralis.link(account, {signingMessage:'Link your account to Impera to transfer FTM and Matic tokens'}).then(async ()=>{
             showToast('Wallet Switched!', 1, 5000);
             const getchain = Moralis.chainId;
@@ -504,6 +495,15 @@ Moralis.onAccountChanged(async function(account){
         })
     }
 })
+const unsubscribe = Moralis.onChainChanged(async (new_chain) => {
+    console.log(new_chain);
+    const getchain = new_chain;
+    if(getchain != 137 && getchain != '0x89' && getchain != 80001 && getchain != '0x13881'){
+        await addNetwork('polygon')
+    }
+    // returns the new chain --> ex. "0x1"
+  });
+
 async function switchNetwork(network){
     const list = {'polygon':137, 'bnb':56, 'fantom':250}
     await Moralis.switchNetwork(networklist[network.toLowerCase()][0])
@@ -741,11 +741,14 @@ async function openuser(usernid, son){
     if(this.event) this.event.stopPropagation();
     
     const me = (await requestUser()).username;
+
+    ge('lscreen').style.display = 'flex';
+    switchviews('usersstuffs', ['editme']);
     opentab('usertab');
     
     const userid = usernid;
     //userid is username. the public variable everyone has access to!
-    if(son != undefined){
+    if(!son){
         const state = {type:'me', data:userid};
         if(hs1.length != 0) {history.pushState(state, '', location.origin+'/me/'+userid)}
         else {history.replaceState(state, '', location.origin+'/me/'+userid);}
@@ -758,7 +761,12 @@ async function openuser(usernid, son){
     userq.equalTo('username', userid);
     const resultsq = await userq.first();
     
-    const fuis = resultsq.createdAt.toString();
+    if(resultsq == undefined){
+        showToast(`User with username @${userid} doesn't exist`);
+        return false
+    }
+
+    const fuis = (resultsq.createdAt).toString();
     const nfuis = fuis.slice(fuis.indexOf(' '), fuis.indexOf(':')-3);
     
     if((resultsq.get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
@@ -774,6 +782,8 @@ async function openuser(usernid, son){
                     rs.set('ethAddress', await Moralis.User.current().get('ethAddress'));
                     await rs.save();
                     location.reload()
+                }, (error)=>{
+                    showToast('Error...')
                 })
             }
         }
@@ -811,15 +821,16 @@ async function openuser(usernid, son){
                 user: userid,
                 me:me
             }
-            loadPosts(params, 'all');
+            await loadPosts(params, 'all');
         };
         
         ge('ipl6i2').onclick = async function(){
             const params = {
                 user: userid,
-                me:me
+                me:me,
+                start:0
             }
-            allprojectsload(params, 'all');
+            await allprojectsload(params, 'all');
         };
         
         if(resultsq.get('about') != '') ge('descrip').innerText = resultsq.get('about');
@@ -849,8 +860,11 @@ async function openuser(usernid, son){
         } catch (error) {
             const code = error.code;
             const message = error.message;
+            return false
         }
         //now we load other things associated with the user
+        ge('lscreen').style.display = 'none';
+        return true
     }
     async function loadme(){
         if(screen()=='tablet' || screen()=='ls'){
@@ -1636,9 +1650,10 @@ async function openuser(usernid, son){
                 else return 'fantom'
             }
             else{
-                showToast('Click to change network', 2, 10000, function(){
+                showToast('Click to Change network', 2, 10000, function(){
                     addNetwork('polygon');
-                })
+                });
+
             }
         }
         ge('tokenbal').onclick = async function(){ge('ownedtokens').innerText = await getTokenBalance()}
