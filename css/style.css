@@ -1071,8 +1071,24 @@ p.gtext::selection {
   width: 30px;
   height: 30px;
 }
-#wallet{
+#wallet .divc{
   max-width: 500px;
+}
+.inwall{
+  width: calc(100% - 20px);
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+  align-items: center;
+}
+.eijrmc{
+  padding: 10px;
+  max-width: 300px;
+  background-color: var(--pri);
+}
+.eijrmc p{
+  max-width: 100%;
+  padding: 10px;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -1084,8 +1100,8 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   border: none;
-  -webkit-text-fill-color: var(--pri9);
-  background-color: var(--thread);
+  -webkit-text-fill-color: var(--sec);
+  background-color: var(--gray1);
   transition: background-color 5000s ease-in-out 0s;
 }
 .simpleinputs{
@@ -1138,13 +1154,6 @@ select:-webkit-autofill:focus {
   padding-left: 10px;
   position: relative;
   z-index: 3;
-}
-#tipamountholder, #tipamountholdereq{
-
-}
-#tipamount, #equivalent{
-  width: 100px;
-  max-width: 100px;
 }
 #inkeysb, #dersu{
   max-width: 500px;
@@ -1841,6 +1850,8 @@ input:-webkit-autofill{
   width: 150px;
   height: 150px;
   border-radius: 100%;
+  outline: none;
+  outline: 2px solid var(--pri);
 }
 
 .clxdf .underp{
@@ -1861,6 +1872,8 @@ input:-webkit-autofill{
   width: 100px;
   height: 100px;
   border-radius: 100%;
+  outline: none;
+  outline: 2px solid var(--pri);
 }
 #usersmid{
   display: flex;
@@ -3138,6 +3151,17 @@ object{
   position: absolute;
   z-index: 3;
   background-color: var(--pri);
+}
+.amigs{
+  width: 100%;
+  align-items: center;
+  padding: 0px 5px;
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 /****ALL FORMS OF SCREEN AND WHAT WE DO WITH THEM***/
 @media screen and (min-width: 480px) and (max-width: 1200px){

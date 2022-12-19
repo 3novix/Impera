@@ -59,8 +59,8 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   border: none;
-  -webkit-text-fill-color: var(--pri9);
-  background-color: var(--thread);
+  -webkit-text-fill-color: var(--sec);
+  background-color: var(--gray1);
   transition: background-color 5000s ease-in-out 0s;
 }
 #p_image_input{
@@ -219,6 +219,15 @@ margin: 45% 0px 0px 75%;
     flex-direction:column;
     row-gap:10px;
     background-repeat: no-repeat;
+}
+#left::before {
+    content: '';
+    width: 3px;
+    height: calc(100% - 50px);
+    position: absolute;
+    right: 20px;
+    background: var(--grad3);
+    border-radius: 20px;
 }
 #wordone{
     font-family: 'uns';
@@ -1023,6 +1032,9 @@ margin: 45% 0px 0px 75%;
         font-family: 'uns';
         width: 60%;
     }
+}
+#meta{
+    height: 50px;
 }
 #upbtn{
     height: 44px;

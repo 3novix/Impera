@@ -7,11 +7,13 @@ const list = Object.freeze({
     'polygon':[80001, 'Mumbai Testnet', 'MATIC', 'MATIC', 'https://rpc-mumbai.maticvigil.com/', 'https://polygonscan.com', '0x13881']
 })
 
+let method = '';
+
 const textlist = [
     'Join a community of creative individuals, share ideas, organize events and raise funds for your projects, on Impera, the first social crowdfunding website',
     'Enjoy the most of your support by attending exclusive events of projects you watch, and receive timely updates from your favorite creators when they post',
     `The first Social Crowdfunding platform designed on the best web3 tools to save transaction cost compared to popular services`,
-    `Establish an unshakable connection between you and followers`
+    `Establish an unshakable connection between you and your followers`
 ]
 
 //select niche
@@ -76,6 +78,19 @@ async function handleAuth(provider){
     await Moralis.enableWeb3({
         throwOnError: true,
         provider,
+        chainId:'0x13881',
+        chainConfig:{
+            chainNamespace: "eip155",
+            chainId: "0x13881", // hex of 80001, polygon testnet
+            rpcTarget: "https://rpc.ankr.com/polygon_mumbai",
+            displayName: "Polygon Mainnet",
+            blockExplorer: "https://mumbai.polygonscan.com/",
+            ticker: "MATIC",
+            tickerName: "Matic",
+          },
+          clientId:"BPhIj4b_UpJHLqLT0RO7FSeqJA1al6oQe8mDb25Xi1tTDdmZa8JtTVYsODQ2xdQ1-SdWtRK1VvnwORC6zDz5xX8",
+          appLogo:'https://impera.onrender.com/img/im.svg',
+          loginMethodsOrder:["google", "facebook", "twitter", "email_passwordless"]
     });
     
     const { account, chainId } = Moralis;
@@ -96,12 +111,21 @@ async function handleAuth(provider){
     await Moralis.authenticate({
         signingMessage: message,
         throwOnError: true,
+        provider,
+        chainId:chainId,
+        clientId:"BPhIj4b_UpJHLqLT0RO7FSeqJA1al6oQe8mDb25Xi1tTDdmZa8JtTVYsODQ2xdQ1-SdWtRK1VvnwORC6zDz5xX8",
+        appLogo:'https://impera.onrender.com/img/im.svg',
+        loginMethodsOrder:["google", "facebook", "twitter","email_passwordless"]
     }).then(async(user) => {
-        console.log(user);
-        const chainID = await Moralis.chainId;
+        const chainID = Moralis.chainId;
+        console.log(chainID);
+        method = provider;
+
         if(chainID != 137 && chainID != '0x89'){
             await addNetwork('polygon testnet');
         }
+    }, (reject)=>{
+        showToast('Authentication failed', 2);
     });
 }
 
@@ -115,7 +139,7 @@ function changeText(){
     document.getElementById('wordtwo').innerHTML = textlist[times];
 }
 
-async function profiled(proid) {
+async function profiled(proid){
     const query = new Moralis.Query('users');
     query.equalTo('user', proid);
     const results = await query.find();
@@ -126,7 +150,7 @@ async function profiled(proid) {
 }
 
 async function loginmeta(){
-    let user = Moralis.User.current();
+    let user = await Moralis.User.current();
     if (!user) {
         await handleAuth('metamask').then(function(){
             const user = Moralis.User.current();
@@ -141,9 +165,9 @@ async function loginmeta(){
     }
 }
 async function loginwallet(){
-    let user = Moralis.User.current();
+    let user = await Moralis.User.current();
     if (!user) {
-        await handleAuth('walletconnect').then(()=>{
+        await handleAuth('web3Auth').then(()=>{
             const user = Moralis.User.current();
             profiled(user.id);
         })
@@ -332,6 +356,7 @@ async function signUp(email, password){
     user.set('username', email);
     user.set('email', email);
     user.set('password', password);
+    user.set('method', 'email');
     try {
         await user.signUp();
         changeToUp();
@@ -427,6 +452,7 @@ async function newuser(){
         const user = Moralis.User.current();
         user.set('tags', tags);
         user.set('username', username);
+        user.set('method', method);
         await user.save().then(()=>{
             
             //then store them

@@ -529,13 +529,13 @@
             <div class="input-box"><label for="inppname">Title</label><input onchange="checkpra(this)" onblur="offfocused(this)" onfocus="pfocused(this)" type="text" placeholder="once upon a time" name="p_name" id="inppname" maxlength="20" minlength="3" required autofocus><span class="beauts"><div id="avail"></div></span></div>
             
             <div id="ingib" class="input-box">
-              <label for="ingoaldolls">Goal</label>
+              <label for="ingoaldolls">Goal $</label>
               <input oninput="currcon('ingoal', this, 'dollar')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" placeholder="$3150" name="p_goaldolls" id="ingoaldolls" required>
               <span onclick="return false" title="ethereum" class="lops" style="margin-right: 0px;">usd</span>
             </div>
             <div id="ingib" class="input-box" style="align-self: flex-end; width: 250px;">
               <label>&#126;</label>
-              <input oninput="currcon('ingoaldolls', this, 'erc20')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" placeholder="2 eth" name="p_goal" id="ingoal" required>
+              <input oninput="currcon('ingoaldolls', this, 'erc20')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" placeholder="2 MATIC" name="p_goal" id="ingoal" required>
               <span onclick="return false" title="ethereum" class="lops"><img id="oplas" style="height: 40px;" src="https://impera.onrender.com/img/polygonicon.svg"/></span>
             </div>
             
@@ -565,6 +565,7 @@
         
         <div id="omnus" style="height: calc(100% - 50px);">
           <div id="editor">
+
             <div id="toolbar"></div>
             <h1>My project title...</h1>
             <p>Some <strong>important</strong> information on your project</p>
@@ -592,10 +593,10 @@
       <div style="width: 100%; position: sticky; top: 0; height: 55px; display: flex; flex-direction: row; justify-content: space-between;"><div style="width: 50px; height:50px"></div><p style="height: 50px; line-height:50px;">Project's private details</p><button style="margin-right:10px; justify-self: flex-end;" class="actions acol2 la la-times" onclick="closedialog('privateinfod')"></button></div>
       <div class="quotes xq"><p class="gtext" style="padding-bottom: 0;">Private key:</p><p id="prikey"></p></div>
       <div class="quotes xq"><p class="gtext" style="padding-bottom: 0;">Recovery Phrase:</p><p id="mnemonics"></p></div>
-      <div style="opacity: 0.8; text-align: center; max-width: 1000px;">Remember to keep either of those or both safe, they'll be needed for withdrawal of funds. To learn more on importing wallets, visit <a title="importing wallets" href="https://metamask.zendesk.com/hc/en-us/articles/360015489331-How-to-import-an-account#:~:text=From%20your%20homepage%2C%20tap%20on,supported%20by%20the%20other%20wallet." target="_blank">importing accounts</a></div>
+      <div style="opacity: 0.8; text-align: center; max-width: 1000px;">Remember to keep either of those or both safe, they'll be needed for withdrawal of funds. To learn more on importing wallets, visit <a titlex="importing wallets" href="https://metamask.zendesk.com/hc/en-us/articles/360015489331-How-to-import-an-account#:~:text=From%20your%20homepage%2C%20tap%20on,supported%20by%20the%20other%20wallet." target="_blank">importing accounts</a></div>
       <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center;">
-        <button class="confirms">Close</button>
-        <button class="confirms">Save</button>
+        <button class="snapb"><span>close</span></button>
+        <button class="snapb"><span>save</span></button>
       </div>
     </div>
   </div>
@@ -603,24 +604,33 @@
 
 <div id="wallet" class="dialogs">
   <div class="divc">
-    <div id="whose">Wallet</div>
+    <div id="toppert" class="amigs">
+      <div class="underp"><img id="oilnm" width="50px" height="50px" src="https://impera.onrender.com/img/profile2.jpg"/></div>
+      <p id="whose" style="line-height: 60px; flex-grow: 2;">Wallet</p>
+      <button title="close" style="margin-right:10px; float: right; justify-self: flex-end;" class="actions acol2 la la-times" onclick="closedialog('wallet')"></button>
+    </div>
     <div class="inwall" id="mywallet">
+      <div class="column">
+        <div class="row eijrmc"><p id="myethaddress" class="col1"></p><span onclick="navigator.clipboard.writeText(ge('myethaddress').innerText)" class="actions acol7 las la-copy"></span></div>
+        <div id="orjfn"><a href="https://polygon.tor.us/" target="_blank">Manage Wallet</a><span onclick="howtotorus()" class="actions las la-question-circle" title="You can manage your wallet on Torus"></span></div>
+      </div>
+
       <div class="nnuy" id="tokenbal">
         <p id="ownedtokens" class="numc col2"></p>
         <p id="currencyoftoken" class="ntext"></p>
       </div>
       
       <div>You are on:<span id="current_chain"></span></div>
-      <button id="switcher">Switch to <img id="tokenIcon" class="smallicon"/></button>
+      <button id="switcher" class="snapb"><span>Switch to <img id="tokenIcon" class="smallicon"/></span></button>
     </div>
     
     <div class="inwall" id="viewedwallet">
       <div class="column center">
-        <div style="max-width: 300px;"><p id="hiswalletadd"></p><span class="la la-copy"></span></div>
+        <div class="row eijrmc"><p id="hiswalletadd" class="col1"></p><span class="actions acol7 la la-copy"></span></div>
         <button id="vobc" class="snapb"><span>View On Blockchain</span></button>
       </div>
       <div class="column center">
-        <p>Send Tip</p>
+        <p style="opacity: 0.8; width: 100%; text-align: center;">Send Tip</p>
         <div class="row center" style="gap: 10px;">
           <button onclick="ge('tipamount').value = 1" class="snapb"><span>$1</span></button>
           <button onclick="ge('tipamount').value = 2" class="snapb"><span>$2</span></button>
@@ -628,16 +638,18 @@
           <button onclick="ge('tipamount').value = 5" class="snapb"><span>$5</span></button>
           <button onclick="ge('tipamount').value = 10" class="snapb"><span>$10</span></button>
         </div>
+
         <div class="simpleinputs">
           <div id="tipamountholder" class="input-box">
-            <span onclick="return false" title="dollars" class="actions lab la-dollar-sign"></span>
+            <span onclick="return false" title="dollars" class="lops lab la-dollar-sign"></span>
             <input oninput="equithis(this, 'dollar')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="1" name="p_tip_amount" id="tipamount" value="1" required>
           </div>
-          <div id="tipamountholdereq" class="input-box" style="width: 100px;">
+          <div id="tipamountholdereq" class="input-box" style="width: 250px; align-self: flex-end;">
+            <label>&#126;</label>
             <input oninput="equithis(this, 'erc20')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="1" name="p_tip_equivalent" value="1" id="equivalent" required>
-            <span onclick="return false" title="erc20" class="actions lab la-ethereum" id="lops"></span>
+            <span onclick="return false" title="erc20" class="lab la-ethereum" class="lops"></span>
           </div>
-          <div class="row center"><button class="specialb">Send Tip</button></div>
+          <div class="row center"><button onclick="tip()" class="specialb">Send Tip</button></div>
         </div>
         
       </div>
@@ -647,7 +659,11 @@
 
 <div class="dialogs" id="notifs">
   <div class="divc">
-    <div style="width: 100%; position: sticky; top: 0; height: 55px; display: flex; flex-direction: row; justify-content: space-between;"><div style="width: 50px; height:50px"></div><p style="height: 50px; line-height:50px;">Notifications</p><button style="margin-right:10px; justify-self: flex-end;" class="actions acol2 la la-times" onclick="closedialog('notifs')"></button></div>
+    <div style="width: 100%; position: sticky; top: 0; height: 55px; display: flex; flex-direction: row; justify-content: space-between;">
+      <div style="width: 50px; height:50px"></div>
+      <p style="height: 50px; line-height:50px;">Notifications</p>
+      <button style="margin-right:10px; justify-self: flex-end;" class="actions acol2 la la-times" onclick="closedialog('notifs')"></button>
+    </div>
     <div id="listern" class="lister">
       <div class="listed"></div>
     </div>
@@ -689,7 +705,11 @@
 <!--Dialog for a new post or comment-->
 <div class="dialogs" id="writepost" style="transition: 2s;">
   <div class="divc" style="overflow: scroll;">
-    <div id="toppert" style="width: 100%; align-items: center; padding: 0px 5px; display: flex; flex-direction: row; gap:10px; position: sticky; top: 0; z-index: 2;"><div class="underp"><img id="iasn" width="50px" height="50px" src="https://impera.onrender.com/img/profile2.jpg"/></div><p id="wiww" style="line-height: 60px; flex-grow: 2;">New post</p><button title="close" style="margin-right:10px; float: right; justify-self: flex-end;" class="actions acol2 la la-times" onclick="closedialog('writepost')"></button></div>
+    <div id="toppert" class="amigs">
+      <div class="underp"><img id="iasn" width="50px" height="50px" src="https://impera.onrender.com/img/profile2.jpg"/></div>
+      <p id="wiww" style="line-height: 60px; flex-grow: 2;">New post</p>
+      <button title="close" style="margin-right:10px; float: right; justify-self: flex-end;" class="actions acol2 la la-times" onclick="closedialog('writepost')"></button>
+    </div>
     <div id="summstuffs" style="padding:unset; ;padding-bottom: 5px;">
       <div class="input-box" style="display: flex; width: 95%; flex-direction:column; overflow: hidden;">
         <label for="writecontent" onclick="ge('writecontent').focus()" style="z-index: 2; height: 10px;"></label><textarea oninput="ge('writecount').innerHTML = (ge('writecontent').value.length).toString()+'/200'" onblur="offfocused(this)" onfocus="pfocused(this)" id="writecontent" maxlength="200"></textarea>
@@ -738,6 +758,7 @@
   <button title="facebook share" onclick="sharepost('facebook')" class="actions acol5 la la-facebook" style="border-radius: 5px"></button>
   <button title="copy link" onclick="sharepost('link')" class="actions acol4 las la-link"></button>
 </div>
+<script src="https://unpkg.com/@web3auth/web3auth@latest/dist/web3auth.umd.min.js"></script>
 <script src="https://impera.onrender.com/tools/croppie.js"></script>
 <script src="https://impera.onrender.com/tools/conversion.js"></script>
 <script src="app.js"></script>

@@ -40,17 +40,14 @@ const contractAddress = Object.freeze({
     '250':'0x4E15361FD6b4BB609Fa63C81A2be19d873717870',
     'polygon':'0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0',
     'fantom':'0x4E15361FD6b4BB609Fa63C81A2be19d873717870',
-    '0xfa2':'',
-    '0x13881':'',
-    '80001':'',
-    '4002':'',
+    '0x1':'0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
 });
 
 const networklist = Object.freeze({
-    /*'polygon':[137, 'Polygon', 'MATIC', 'MATIC', 'https://polygon-rpc.com', 'https://polygonscan.com', '0x89'],*/
-    /*'fantom' : [250, 'Fantom', 'FTM', 'FTM' , 'https://rpc.fantom.network', 'https://ftmscan.com/', '0xfa2'],*/
-    'polygon':[80001, 'Mumbai Testnet', 'MATIC', 'MATIC', 'https://rpc-mumbai.maticvigil.com/', 'https://polygonscan.com', '0x13881'],
-    'fantom':[4002, 'Fantom Testnet', 'FTM', 'FTM', 'https://rpc.testnet.fantom.network/', 'https://ftmscan.com/', '0xfa2']
+    //'polygon':[137, 'Polygon', 'MATIC', 'MATIC', 'https://polygon-rpc.com', 'https://polygonscan.com', '0x89'],*/
+    'fantom' : [250, 'Fantom', 'FTM', 'FTM' , 'https://rpc.fantom.network', 'https://ftmscan.com/', '0xfa'],
+    'polygon':[80001, 'Mumbai Testnet', 'MATIC', 'MATIC', 'https://rpc-mumbai.maticvigil.com/', 'https://polygonscan.com', '0x13881']
+    //'fantom':[4002, 'Fantom Testnet', 'FTM', 'FTM', 'https://rpc.testnet.fantom.network/', 'https://ftmscan.com/', '0xfa2']
 })
 
 let currparams = {};
@@ -210,7 +207,7 @@ async function done(){
         }
     }
     
-    const provider = 'metamask';
+    const provider = await Moralis.User.current().get('method');
     
     if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
         await Moralis.enableWeb3({
@@ -501,11 +498,9 @@ Moralis.onChainChanged(async (new_chain) => {
     if(getchain != 137 && getchain != '0x89' && getchain != 80001 && getchain != '0x13881' && getchain != 250 && getchain != '0xfa' && getchain != 4002 && getchain != '0xfa2'){
         await addNetwork('polygon'); //currently on testnet
     }
-    // returns the new chain --> ex. "0x1"
 });
 
 async function switchNetwork(network){
-    const list = {'polygon':137, 'bnb':56, 'fantom':250}
     await Moralis.switchNetwork(networklist[network.toLowerCase()][0])
 }
 async function addNetwork(network){
@@ -526,6 +521,7 @@ async function addNetwork(network){
 
 async function logout(){
     await Moralis.User.logOut().then(()=>{
+        console.log('Logged out')
         //return to homepage.
         location.assign('https://impera.onrender.com/introduction')
     })
@@ -631,14 +627,33 @@ function closeuser(){
 
 async function tip(amount){
     const bal = amount ?? ge('tipamount').value;
+
+    if(bal == null || bal == undefined){showToast("You can't tip $0"); return false}
+
+    const pnal = bal/syncprice();
     const waddress = ge('viewedwallet').getAttribute('wallet');
     
+    // sending 0.5 native currency
+    const options = {
+        type: "native",
+        amount: Moralis.Units.ETH(bal),
+        receiver: waddress,
+    };
+    let transaction = await Moralis.transfer(options);
+
+    await transaction.wait(2).then(()=>{
+        showToast('$'+syncprice(bal)+' tip sent!', 3, 10000);
+    }, ()=>{
+        showToast('Something went wrong', 2, 10000);
+    })
 }
 async function syncprice(value){
     const mul = value ?? 1;
+    let chainx = testchains();
+    if(chainx == undefined){chainx = '0x1'}
     
     const options = {
-        address: contractAddress[testchains()],
+        address: contractAddress[chainx],
         chain: '0x1',
         exchange: 'uniswap-v3',
     };
@@ -1538,19 +1553,19 @@ async function openuser(usernid, son){
                 if(ge('recentcreators').innerHTML == ''){
                     for(let r = 0; r<response.length; r++){
                         if(posterslist.indexOf(resuser.username) == -1){
-                        posterslist.push(response[r].idu);                                        
-                        if(posterslist.length>5) break;
-                        
-                        const resuser = await getuserdetails(response[r].idu)
-
-                        let erid = document.createElement('div');
-                        erid.className = 'underp';
-                        erid.innerHTML = `<img class="posterpic" src="${resuser.image}"/>`;
-                        erid.onclick = function(){
-                            openuser(resuser.username)
+                            posterslist.push(response[r].idu);                                        
+                            if(posterslist.length>5) break;
+                            
+                            const resuser = await getuserdetails(response[r].idu)
+                            
+                            let erid = document.createElement('div');
+                            erid.className = 'underp';
+                            erid.innerHTML = `<img class="posterpic" src="${resuser.image}"/>`;
+                            erid.onclick = function(){
+                                openuser(resuser.username)
+                            }
+                            ge('recentcreators').append(erid)
                         }
-                        ge('recentcreators').append(erid)
-                    }
                     }
                 }
                 
@@ -1660,7 +1675,6 @@ async function openuser(usernid, son){
                 showToast('Click to Change network', 2, 10000, function(){
                     addNetwork('polygon');
                 });
-                
             }
         }
         ge('tokenbal').onclick = async function(){ge('ownedtokens').innerText = await getTokenBalance()}
@@ -1672,7 +1686,10 @@ async function openuser(usernid, son){
             const balances = await Moralis.Web3API.account.getNativeBalance(options);
             return Moralis.Units.FromWei(balances.balance);
         }
-        
+        function howtotorus(){
+            let temp = ``;
+            showToast(temp, undefined, 30000);
+        }
         async function opendialog(curr, opt){
             if(curr == 'newproject'){
                 if(document.querySelector('.ql-toolbar.ql-snow') == null){
@@ -1719,7 +1736,11 @@ async function openuser(usernid, son){
             }
             if(curr == 'wallet'){
                 if(opt == 0){
+                    //when the wallet is mine
+                    ge('myethaddress').innerText = await Moralis.User.current().get('ethAddress');
                     switchviews('mywallet', ['viewedwallet']);
+                    
+                    ge('whose').innerText = 'My Wallet';
                     
                     //Supports both testnet and mainnet
                     if(testchains() == 'polygon'){
@@ -1729,6 +1750,10 @@ async function openuser(usernid, son){
                         ge('ownedtokens').innerText = await getTokenBalance();
                         ge('currencyoftoken').innerText = 'MATIC';
                         ge('tokenIcon').src='https://impera.onrender.com/img/fantom-logo-white.svg';
+                        
+                        const methodUsed = Moralis.User.current().get('method');
+                        if(methodUsed == 'metamask') {ge('switcher').style.display = 'flex'; ge('orjfn').style.display = 'none'}
+                        else if(methodUsed == 'web3Auth') {ge('switcher').style.display = 'none'; ge('orjfn').style.display = 'flex'}
                         ge('switcher').onclick = function(){addNetwork('fantom')}
                     }
                     else if(testchains() == 'fantom'){
@@ -1738,14 +1763,16 @@ async function openuser(usernid, son){
                         ge('ownedtokens').innerText = await getTokenBalance();
                         ge('currencyoftoken').innerText = 'FTM';
                         ge('tokenIcon').src='https://impera.onrender.com/img/Polygon_blockchain_logo2.png';
-                        ge('switcher').onclick = function(){addNetwork('polygon')}
-                    }
-                    else{
                         
+                        const methodUsed = Moralis.User.current().get('method');
+                        if(methodUsed == 'metamask') ge('switcher').style.display = 'flex';
+                        else if(methodUsed == 'web3Auth') ge('switcher').style.display = 'none';
+                        ge('switcher').onclick = function(){addNetwork('polygon')}
                     }
                 }
                 else if(opt.user){
                     switchviews('viewedwallet', ['mywallet']);
+                    ge('whose').innerText = 'Wallet';
                     const bcl = "https://www.blockchain.com/eth/address/"+opt.wallet
                     ge('vobc').href = bcl;
                     
@@ -3315,7 +3342,7 @@ async function openuser(usernid, son){
                         }
                         async function openeditor(){
                             switchviews('editme', ['usersstuffs', 'lscreen']);
-
+                            
                             const nqe = new Moralis.Query('users');
                             nqe.equalTo('username', globalid);
                             const nqer = await nqe.first();
@@ -3540,20 +3567,20 @@ async function openuser(usernid, son){
                                 if(ge('recentuser').innerHTML == ''){
                                     for(let r = 0; r<response.length; r++){
                                         if(posterslist.indexOf(resuser.username) == -1){
-                                        posterslist.push(response[r].idu);                                        
-                                        if(posterslist.length>5) break;
-                                        
-                                        const resuser = await getuserdetails(response[r].idu)
-                                        
-
-                                        let erid = document.createElement('div');
-                                        erid.className = 'underp';
-                                        erid.innerHTML = `<img class="posterpic" src="${resuser.image}"/>`;
-                                        erid.onclick = function(){
-                                            openuser(resuser.username)
+                                            posterslist.push(response[r].idu);                                        
+                                            if(posterslist.length>5) break;
+                                            
+                                            const resuser = await getuserdetails(response[r].idu)
+                                            
+                                            
+                                            let erid = document.createElement('div');
+                                            erid.className = 'underp';
+                                            erid.innerHTML = `<img class="posterpic" src="${resuser.image}"/>`;
+                                            erid.onclick = function(){
+                                                openuser(resuser.username)
+                                            }
+                                            ge('recentuser').append(erid)
                                         }
-                                        ge('recentuser').append(erid)
-                                    }
                                     }
                                 }
                                 return true
@@ -3653,6 +3680,9 @@ async function openuser(usernid, son){
                                 
                                 let transaction = await Moralis.transfer(options);
                                 const result = await transaction.wait(2);
+                                
+                                showToast('Awaiting confirmation...', 1);
+                                
                                 result.then(async()=>{
                                     //const options = {method: 'GET', headers: {accept: 'application/json', 'X-API-Key': 'test'}};
                                     
@@ -3670,7 +3700,7 @@ async function openuser(usernid, son){
                                     const network = testchains();
                                     //Now Cloud code. A simple message for the receiver
                                     //must convert to eth before saving
-                                    await Moralis.Cloud.run('notify', {id:pid, amount:convertTokens('toEth', eth), network:network, receiver:receipent, user:globalid});
+                                    await Moralis.Cloud.run('notify', {id:pid, amount:eth, network:network, receiver:receipent, user:globalid});
                                     
                                     nts.remove();
                                     addtowl(pid);

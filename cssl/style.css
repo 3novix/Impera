@@ -533,7 +533,7 @@ button{
 .slicki::placeholder, #titlep, .gtext, .pfilterb.active{
   color: rgba(var(--col2), 0.9);
   background-color: var(--color1);
-  background-image: var(--gradient3);
+  background-image: var(--grad3);
   background-size: 100%;
   background-repeat: repeat;
   background-clip: text;
