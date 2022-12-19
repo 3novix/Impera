@@ -207,9 +207,9 @@ async function done(){
         }
     }
     
-    //const provider = await Moralis.User.current().get('method');
+    const provider = await Moralis.User.current().get('method');
     
-    /*if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+    if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
         await Moralis.enableWeb3({
             throwOnError: true,
             provider,
@@ -217,7 +217,7 @@ async function done(){
         }).then(()=>{}, ()=>{
             showToast('Cannot connect to Metamask', 2);
         })
-    }*/
+    }
 
     const locval = location.pathname;
     
@@ -1441,7 +1441,6 @@ async function openuser(usernid, son){
         async function allprojectsload(elap, son){
             ge('lh2').innerHTML = loadicon;
             if((ge('iht7k').getBoundingClientRect()).height == 0){ opentab('iht7k'); switchviews('allprojs', ['overview'])}
-            
 
             
             //elap is the element to append them to
@@ -1470,10 +1469,13 @@ async function openuser(usernid, son){
                 const responsex = await Moralis.Cloud.run('projects', params);
                 const response = responsex;
                 
+                
                 switchviews('allprojs', ['overview']);
                 
                 if(response == 'no projects'){ge('lh2').innerHTML = `<p style="width:100%; text-align:center">${response}</p>`; return ''}
                 else{ge('lh2').innerHTML = ''}
+                
+                console.log(response);
                 
                 const mex = new Moralis.Query('users');
                 mex.equalTo('username', globalid);
@@ -1550,7 +1552,6 @@ async function openuser(usernid, son){
                 else{
                     ge('lh2').innerHTML = `<div onclick="await more_projects(${JSON.stringify(params)})" class="malf"><button class="invertio"><p>Load More</p></button></div>`
                 }
-                nlo.remove();
                 
                 const posterslist = [];
                 if(ge('recentcreators').innerHTML == ''){
@@ -1575,7 +1576,6 @@ async function openuser(usernid, son){
             } catch (error) {
                 const code = error.code;
                 const message = error.message;
-                nlo.remove();
                 showToast('click to reload', 3, 5000, function(){
                     allprojectsload(params)
                 });
