@@ -212,15 +212,15 @@ async function done(){
     console.log(provider);
     
     if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+    showToast('Connect to Metamask', 1, 20000, async function() {
         await Moralis.enableWeb3({
             throwOnError: true,
             provider,
-            chainId:'0x13881'
         }).then(()=>{}, ()=>{
             showToast('Cannot connect to Metamask', 2);
         })
+    })
     }
-
     const locval = location.pathname;
     
     console.log(locval);
