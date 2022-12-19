@@ -576,7 +576,7 @@ margin: 45% 0px 0px 75%;
     max-width: 400px;
     height: 60px;
     border-radius: 20px;
-    background-color: var(--pri);
+    background-color: var(--thread);
     gap: 10px;
     display: flex;
     box-shadow: 0 0 var(--bwe) var(--shadow);

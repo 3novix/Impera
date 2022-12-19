@@ -124,10 +124,11 @@ async function handleAuth(provider){
         console.log(user)
         console.log(chainID);
 
-        const userx = Moralis.User.current();
-        profiled(userx.id);
-
+        profiled(user.id);
         method = provider;
+
+        user.set('method', provider);
+        user.save();
 
         if(chainID != 137 && chainID != '0x89'){
             await addNetwork('polygon testnet');
