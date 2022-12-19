@@ -75,10 +75,13 @@ async function addNetwork(network){
 const ethers = Moralis.web3Library;
 
 async function handleAuth(provider){
+    let chain = '0x1';
+    if(provider == 'web3Auth') chain = '0x13881';
+
     await Moralis.enableWeb3({
         throwOnError: true,
         provider,
-        chainId:'0x13881',
+        chainId:chain,
         chainConfig:{
             chainNamespace: "eip155",
             chainId: "0x13881", // hex of 80001, polygon testnet
@@ -118,7 +121,12 @@ async function handleAuth(provider){
         loginMethodsOrder:["google", "facebook", "twitter","email_passwordless"]
     }).then(async(user) => {
         const chainID = Moralis.chainId;
+        console.log(user)
         console.log(chainID);
+
+        const user = Moralis.User.current();
+        profiled(user.id);
+
         method = provider;
 
         if(chainID != 137 && chainID != '0x89'){
@@ -152,13 +160,8 @@ async function profiled(proid){
 async function loginmeta(){
     let user = await Moralis.User.current();
     if (!user) {
-        await handleAuth('metamask').then(function(){
-            const user = Moralis.User.current();
-            profiled(user.id)
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        showToast('Authenticating...', 1);
+        await handleAuth('metamask');
     }
     else{
         profiled(user.id)
@@ -167,13 +170,8 @@ async function loginmeta(){
 async function loginwallet(){
     let user = await Moralis.User.current();
     if (!user) {
-        await handleAuth('web3Auth').then(()=>{
-            const user = Moralis.User.current();
-            profiled(user.id);
-        })
-        .catch(function (error){
-            console.log(error);
-        });
+        showToast('Authenticating...', 1);
+        await handleAuth('web3Auth');
     }
     else{
         profiled(user.id)
@@ -357,6 +355,7 @@ async function signUp(email, password){
     user.set('email', email);
     user.set('password', password);
     user.set('method', 'email');
+    method = 'email';
     try {
         await user.signUp();
         changeToUp();
