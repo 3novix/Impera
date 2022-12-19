@@ -1308,6 +1308,7 @@ input[type='text']:disabled{
 #rentposts{
   width: 100%;
   align-items: flex-start;
+  padding: 0px 10px;
   overflow: scroll;
 }
 #rentposts::-webkit-scrollbar{
@@ -1549,7 +1550,7 @@ button.niche.active:hover::before{
   position: relative;
   border-radius: 30px;
   background-color: var(--thread);
-  box-shadow: 0px 0px 2px 2px var(--shadow);
+  box-shadow:none;
 }
 .posts .actions{
   position: relative;
@@ -3163,6 +3164,10 @@ object{
   top: 0;
   z-index: 2;
 }
+.menubtn{
+  display: none;
+  margin: 0px 10px;
+}
 /****ALL FORMS OF SCREEN AND WHAT WE DO WITH THEM***/
 @media screen and (min-width: 480px) and (max-width: 1200px){
   .mol{
@@ -3200,6 +3205,9 @@ font-size: 14px;
 /***MOBILE**/
 @media screen and (min-device-width: 200px) and (max-device-width: 480px)
 and (orientation: portrait) {
+  .menubtn{
+    display: block;
+  }
   #emojiparent h3{
     display: block;
   }

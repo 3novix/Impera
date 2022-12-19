@@ -199,7 +199,7 @@ async function done(){
             //replace images and profiles with user details
             ge('usicon').src = sudet.img;
             ge('usicon').alt = sudet.name+'(me)';
-            ge('usicon').onclick = function(){openuser()};
+            ge('usicon').onclick = function(){openuser(globalid)};
             ge('iasn').src = sudet.img;
             ge('iasn').alt = sudet.name+'(me)';
             ge('hjkd').src = sudet.img;
@@ -213,13 +213,17 @@ async function done(){
         await Moralis.enableWeb3({
             throwOnError: true,
             provider,
+            chainId:'0x13881'
         }).then(()=>{}, ()=>{
             showToast('Cannot connect to Metamask', 2);
         })
     }
-    
+    console.log(provider);
+
     const locval = location.pathname;
     
+    console.log(locval);
+
     if(locval.includes('/project/')){
         const lino = locval.split('/')[2];
         await openproject(lino)
@@ -232,7 +236,7 @@ async function done(){
         const lino = locval.split('/')[2];
         await openpost(lino)
     }
-    else if(locval.includes('/home/')){
+    else if(locval.includes('/home')){
         await initialize(); //this will load home screen... that is without much.
     }
     else if(locval.includes('/posts')){
@@ -257,7 +261,7 @@ async function done(){
     else if(locval.indexOf('/writepost') > -1) {await initialize(); opendialog('writepost')}
     else if(locval.indexOf('/newproject') > -1) {await initialize(); opendialog('newproject');}
     else if(locval.indexOf('/newevent') > -1) {await initialize(); opendialog('events');}
-    else {await initialize()}
+    else {await initialize(); console.log('its here')}
     
     //close loading screen and set up other stuffs.
     ge('startscreen').style.opacity = 0;
@@ -289,6 +293,7 @@ function addemoji(ltoemo){
     })
 }
 async function initialize(specifics){
+    console.log(specifics)
     //replace the 'no state' to 'home' state to initialize the app
     if(!specifics){
         history.replaceState({type:'home', data:'none'}, '', location.origin+'/home');
@@ -308,11 +313,11 @@ async function initialize(specifics){
         
         switch(specifics.type){
             case 'posts':{
-                opentab('ibczo-2');
+                //opentab('ibczo-2');
                 await loadPosts(tpppr)
             }break;
             case 'projects':{
-                opentab('iht7k');
+                //opentab('iht7k');
                 await allprojectsload(tpppr)
             }break;
         }
@@ -1687,7 +1692,9 @@ async function openuser(usernid, son){
             return Moralis.Units.FromWei(balances.balance);
         }
         function howtotorus(){
-            let temp = ``;
+            let temp = `
+
+            `;
             showToast(temp, undefined, 30000);
         }
         async function opendialog(curr, opt){
@@ -1954,7 +1961,7 @@ async function openuser(usernid, son){
                     else if(tabn == 'iht7k' && ge('projectsin').childElementCount<2){
                         const tagsu = Moralis.User.current().get('tags');
                         const params = {tags:tagsu, start:0, me:globalid};            
-                        await loadPosts(params);
+                        await allprojectsload(params);
                     }
                     else if(tabn == 'home' && ge('newerusers').innerHTML == ''){
                         //we load all things that needs loading here
@@ -3566,7 +3573,7 @@ async function openuser(usernid, son){
                                 const posterslist = [];
                                 if(ge('recentuser').innerHTML == ''){
                                     for(let r = 0; r<response.length; r++){
-                                        if(posterslist.indexOf(resuser.username) == -1){
+                                        if(posterslist.indexOf(response[r].idu) == -1){
                                             posterslist.push(response[r].idu);                                        
                                             if(posterslist.length>5) break;
                                             
