@@ -207,9 +207,9 @@ async function done(){
         }
     }
     
-    const provider = await Moralis.User.current().get('method');
+    //const provider = await Moralis.User.current().get('method');
     
-    if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+    /*if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
         await Moralis.enableWeb3({
             throwOnError: true,
             provider,
@@ -217,8 +217,7 @@ async function done(){
         }).then(()=>{}, ()=>{
             showToast('Cannot connect to Metamask', 2);
         })
-    }
-    console.log(provider);
+    }*/
 
     const locval = location.pathname;
     
@@ -509,7 +508,6 @@ async function switchNetwork(network){
     await Moralis.switchNetwork(networklist[network.toLowerCase()][0])
 }
 async function addNetwork(network){
-    
     const selected = networklist[network.toLowerCase()];
     
     const chain = selected[0];
@@ -528,7 +526,7 @@ async function logout(){
     await Moralis.User.logOut().then(()=>{
         console.log('Logged out')
         //return to homepage.
-        location.assign('https://impera.onrender.com/auth')
+        location.assign('https://impera.onrender.com/auth');
     })
 }
 
@@ -1693,7 +1691,13 @@ async function openuser(usernid, son){
         }
         function howtotorus(){
             let temp = `
-
+            <h3>Instructions</h3>
+            <p>- Click 'Manage Wallet'</p>
+            <p>- Use The same login method you use for our website</p>
+            <p>- And wait for it to finish loading</p>
+            <p>- After a few seconds(depending on your connection speed), It will close the tab and proceed</p>
+            <p>- And Done!</p>
+            <p>You can fund your wallet from</p>
             `;
             showToast(temp, undefined, 30000);
         }
