@@ -903,6 +903,7 @@ margin: 45% 0px 0px 75%;
     background:var(--gradi);
 }
  #replacer{
+    outline: 2px solid var(--pri);
     width:145px;
     height: 145px;
     border-radius: 50%;
