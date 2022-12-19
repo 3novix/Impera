@@ -528,7 +528,7 @@ async function logout(){
     await Moralis.User.logOut().then(()=>{
         console.log('Logged out')
         //return to homepage.
-        location.assign('https://impera.onrender.com/introduction')
+        location.assign('https://impera.onrender.com/auth')
     })
 }
 

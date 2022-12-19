@@ -124,8 +124,8 @@ async function handleAuth(provider){
         console.log(user)
         console.log(chainID);
 
-        const user = Moralis.User.current();
-        profiled(user.id);
+        const userx = Moralis.User.current();
+        profiled(userx.id);
 
         method = provider;
 

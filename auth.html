@@ -43,7 +43,7 @@ function offfocused(xele){
 let times = 0;
   </script>
 </head>
-<body onload="setInterval(changeText, 8000);">
+<body onload="setTimeout(function(){setInterval(changeText, 8000)}, 3000);">
   <div id="cropperx">
     <button id="destroyer" class="actions acol3 la la-times"></button>
     <div id="inna"></div>
