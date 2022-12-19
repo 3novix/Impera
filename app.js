@@ -208,6 +208,8 @@ async function done(){
     }
     
     const provider = await Moralis.User.current().get('method');
+
+    console.log(provider);
     
     if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
         await Moralis.enableWeb3({
@@ -1474,7 +1476,7 @@ async function openuser(usernid, son){
                 
                 if(response == 'no projects'){ge('lh2').innerHTML = `<p style="width:100%; text-align:center">${response}</p>`; return ''}
                 else{ge('lh2').innerHTML = ''}
-                
+
                 console.log(response);
                 
                 const mex = new Moralis.Query('users');
