@@ -2,8 +2,9 @@
 DeFi, SocialFi project for Moralis x Google 2022 Hackathon.
 https://github.com/Prodyads/Impera/blob/main/README.md#using-the-app
 ## Quick links
+- [Homepage](https://impera.onrender.com/introduction)
 - [Quick Introduction](https://github.com/Prodyads/Impera#introduction)
-- [Technologies Used]((https://github.com/Prodyads/Impera#Technologies-Used)
+- [Technologies Used](https://github.com/Prodyads/Impera#Technologies-Used)
 - [Using the app](https://github.com/Prodyads/Impera#using-the-app)
 - [Create your first web3 Crowdfunding project](https://github.com/Prodyads/Impera#create-your-first-web3-project)
 - [Extended Introduction](https://github.com/Prodyads/Impera#extended-introduction)
@@ -19,7 +20,7 @@ Impera.io is a social crowdfunding web project made using Moralis.js SDK for the
 3. QuillJs (A rich content editor), for writing projects' description.
 
 ### Using the app.
-1. Sign up on the [homepage](https://prodyads.github.io/landingpage). A wallet is required to authenticate users on the platform, therefore it is an essential part of the application. Use Metamask or Trustwallet and accept the sign in messages (all fields, except 'about me' are required).
+1. Sign up on the [sign up page](https://impera.onrender.com/auth). A wallet is required to authenticate users on the platform, therefore it is an essential part of the application. Use Metamask or Trustwallet and accept the sign in messages (all fields, except 'about me' are required).
 2. After the Authentication, you'll be taken to another page where you'll input both username and name. Clicking on next will take you to a new view, this is the page where you will select the branches you want to follow. (Currently, This cannot be changed by the user but will be implemented later, so you dont have to stress over it).
 3.Once signup is complete, the page will load and redirect you to the homepage
 4. Your profile can be seen on the first tab, Post on the second and Projects on the third.
