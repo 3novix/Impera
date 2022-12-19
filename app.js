@@ -213,12 +213,12 @@ async function done(){
     const provider = 'metamask';
     
     if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
-    await Moralis.enableWeb3({
-        throwOnError: true,
-        provider,
-    }).then(()=>{}, ()=>{
-        showToast('Cannot connect to Metamask', 2);
-    })
+        await Moralis.enableWeb3({
+            throwOnError: true,
+            provider,
+        }).then(()=>{}, ()=>{
+            showToast('Cannot connect to Metamask', 2);
+        })
     }
     
     const locval = location.pathname;
@@ -502,7 +502,7 @@ Moralis.onChainChanged(async (new_chain) => {
         await addNetwork('polygon'); //currently on testnet
     }
     // returns the new chain --> ex. "0x1"
-  });
+});
 
 async function switchNetwork(network){
     const list = {'polygon':137, 'bnb':56, 'fantom':250}
@@ -744,7 +744,7 @@ async function openuser(usernid, son){
     if(this.event) this.event.stopPropagation();
     
     const me = (await requestUser()).username;
-
+    
     ge('lscreen').style.display = 'flex';
     switchviews('usersstuffs', ['editme']);
     opentab('usertab');
@@ -768,7 +768,7 @@ async function openuser(usernid, son){
         showToast(`User with username @${userid} doesn't exist`);
         return false
     }
-
+    
     const fuis = (resultsq.createdAt).toString();
     const nfuis = fuis.slice(fuis.indexOf(' '), fuis.indexOf(':')-3);
     
@@ -1656,7 +1656,7 @@ async function openuser(usernid, son){
                 showToast('Click to Change network', 2, 10000, function(){
                     addNetwork('polygon');
                 });
-
+                
             }
         }
         ge('tokenbal').onclick = async function(){ge('ownedtokens').innerText = await getTokenBalance()}
@@ -1913,7 +1913,7 @@ async function openuser(usernid, son){
                     if(tabn == 'messaging'){
                         showToast('Coming soon', 1, 7000)
                     }
-
+                    
                     if(ent)ent.className += " gtext";
                     if(tabn == 'ibczo-2' && ge('postsholder').childElementCount<2){
                         const tagsu = Moralis.User.current().get('tags');
@@ -1924,6 +1924,13 @@ async function openuser(usernid, son){
                         const tagsu = Moralis.User.current().get('tags');
                         const params = {tags:tagsu, start:0, me:globalid};            
                         await loadPosts(params);
+                    }
+                    else if(tabn == 'home' && ge('newerusers').innerHTML == ''){
+                        //we load all things that needs loading here
+                        const tagsu = Moralis.User.current().get('tags');
+                        const tpppr = {tags:tagsu, start:0, me:globalid};
+                        
+                        await sethome(tpppr);
                     }
                 }
                 
@@ -2726,7 +2733,7 @@ async function openuser(usernid, son){
                             const code = error.code;
                             const message = error.message;
                         }
-
+                        
                         ge('prikey').innerText = priKey;
                         ge('mnemonics').innerText = rphrase;
                         

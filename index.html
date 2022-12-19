@@ -251,9 +251,8 @@
             <div class="underp"><img id="lsjdo" alt="My image" titlex="My Profile Image" src="https://impera.onrender.com/img/profile2.jpg"/></div>
             
             <div id="special2" class="special-box">
-              <label id="lfimg2" class="uploaders" title="Upload avatar" titlex="Upload Avatar" for="newimageuploader">Upload Image
-                <input type="file" name="upload image" title="" titlex="upload image" id="newimageuploader" accept=".jpeg, .jpg, .png, .bmp"/>
-              </label>
+              <label id="lfimg2" class="uploaders" title="Upload avatar" titlex="Upload Avatar" for="newimageuploader">Upload Image</label>
+              <input type="file" name="upload image" title="" titlex="upload image" id="newimageuploader" accept=".jpeg, .jpg, .png, .bmp"/>
             </div>
             
           </div>
@@ -520,8 +519,8 @@
               <img class="gtext" height="296px" id="replacer" onclick="removeimg()" src="" style="height:auto; max-height: 300px; width: auto; max-width: 100%;" alt="project image">
             </div>
             <div id="special1" class="special-box">
-              <label for="p_image_input" titlex="Select an Image" id="lfimg">Select image<input class="gtext" id="p_image_input" name="p_image" spellcheck="false" title="image for project" type="file" accept=".png, .jpg, .jpeg, .bmp, .mp4" required/>
-              </label>
+              <label for="p_image_input" titlex="Select an Image" id="lfimg">Select image</label>
+              <input class="gtext" id="p_image_input" name="p_image" spellcheck="false" title="image for project" type="file" accept=".png, .jpg, .jpeg, .bmp, .mp4" required/>
             </div>
             <div style="position: absolute; bottom:-10px; color:var(--sec); font-size: 15px; opacity: 0.7;">*wide images are recommended</div>
           </div>
@@ -530,16 +529,17 @@
             <div class="input-box"><label for="inppname">Title</label><input onchange="checkpra(this)" onblur="offfocused(this)" onfocus="pfocused(this)" type="text" placeholder="once upon a time" name="p_name" id="inppname" maxlength="20" minlength="3" required autofocus><span class="beauts"><div id="avail"></div></span></div>
             
             <div id="ingib" class="input-box">
-              <label for="ingoal">Goal</label>
-              <input  oninput="currcon('ingoal', this, 'dollar')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" placeholder="$3150" name="p_goaldolls" id="ingoaldolls" required>
-              <span onclick="return false" title="ethereum" class="actions acol1 lops">usd</span>
+              <label for="ingoaldolls">Goal</label>
+              <input oninput="currcon('ingoal', this, 'dollar')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" placeholder="$3150" name="p_goaldolls" id="ingoaldolls" required>
+              <span onclick="return false" title="ethereum" class="lops" style="margin-right: 0px;">usd</span>
             </div>
-            <div id="ingib" class="input-box">
-              <input style="width: 100px;" oninput="currcon('ingoaldolls', this, 'erc20')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" placeholder="2 eth" name="p_goal" id="ingoal" required>
-              <span onclick="return false" title="ethereum" class="actions acol1 lops"><img id="oplas" style="height: 40px;" src="https://impera.onrender.com/img/polygonicon.svg"/></span>
+            <div id="ingib" class="input-box" style="align-self: flex-end; width: 250px;">
+              <label>&#126;</label>
+              <input oninput="currcon('ingoaldolls', this, 'erc20')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" placeholder="2 eth" name="p_goal" id="ingoal" required>
+              <span onclick="return false" title="ethereum" class="lops"><img id="oplas" style="height: 40px;" src="https://impera.onrender.com/img/polygonicon.svg"/></span>
             </div>
             
-            <p style="margin-top: -15px;">Note:The goal must be reached in Dollars($)</p>
+            <p style="margin-top: -15px; font-size: 15px; opacity: 0.8;">Note:The goal must be reached in Dollars($)</p>
             
             <div class="input-box" style="width: 200px;"><label for="deadline">Deadline</label><input onblur="offfocused(this)" onchange="if(this.value == '0' || this.value == ''){this.value = 1}" onfocus="pfocused(this)" type="number" minlength="1" maxlength="2" oninput="if(Number(this.value)>12){this.value = 12}else if(Number(this.value)<0){this.value = 1}else if(this.value.indexOf('e') == 'number'){this.value = 1}" max="12" min="1" value="1" name="months" id="deadline" style="width:30px; padding: 5px;" required><span style="padding-right:20px; color:var(--sec); opacity: 0.5; font-size: 14px;">months</span></div>
             <div class="tags-holder">

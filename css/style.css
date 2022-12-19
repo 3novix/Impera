@@ -86,7 +86,7 @@
 .lops{
   border-radius: 0px 20px 20px 0px;
   width: 60px;
-  margin-right: -10px;
+  margin-right: -5px;
 }
 .b2text{
   font-size: 14px;
@@ -1195,6 +1195,7 @@ select:-webkit-autofill:focus {
   gap: 5px;
 }
 .input-box span{
+  position: relative;
   text-align: center;
   line-height: 40px;
   min-width: 50px;
