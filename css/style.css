@@ -240,16 +240,12 @@ p{
   display:none;
   flex-flow:column nowrap;
   width:100%;
-  justify-content:center;
-  align-items: stretch;
-  gap:30px;
   background: var(--pri);
 }
 .innerblock{
   display: flex;
   flex-flow: row nowrap;
   align-items: stretch;
-  padding: 0px 10px;
   justify-content: stretch;
   gap: 5px;
   width: 100%;
@@ -268,6 +264,11 @@ p{
 }
 .innbb::-webkit-scrollbar{
   display: none;
+}
+.innbb.fis{
+  position: sticky;
+  top: 60px;
+  left: 0;
 }
 #iht7k{
   padding:0 0 0 0;
@@ -839,6 +840,8 @@ p.gtext::selection {
   overflow: visible;
 }
 .topin{
+  position: sticky;
+  top: 0;
   box-shadow: 0 0px 0px 0 var(--shadow);
   min-height:60px;
   order:0;
@@ -1246,10 +1249,10 @@ input[type='text']:disabled{
   display: flex;
   flex-direction: row;
 }
-.section-title, .section-title h1{
+.section-title, .section-title h2{
   margin: 10px 0px;
 }
-.section-title h1{
+.section-title h2{
   padding-left: 10px;
   width: fit-content;
 }
@@ -1272,8 +1275,13 @@ input[type='text']:disabled{
   justify-content: center;
   align-items: center;
 }
+#home{
+  justify-content: start;
+  align-items: stretch;
+}
 #rentposts{
   width: 100%;
+  align-items: flex-start;
   overflow: scroll;
 }
 #rentposts::-webkit-scrollbar{
@@ -1281,6 +1289,9 @@ input[type='text']:disabled{
 }
 #emojiparent{
   overflow: scroll;
+}
+#emojiparent h2{
+  display: none;
 }
 #emojiparent::-webkit-scrollbar{
   display: none;
@@ -1292,15 +1303,16 @@ input[type='text']:disabled{
   position: fixed;
   width: 100%;
   flex-wrap: nowrap;
+  overflow: scroll;
   gap: 10px;
 }
 #emojibox .emojis{
   max-width: 150px;
   aspect-ratio: 1/1;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 #emojibox .emojis:hover{
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 #writecontent{
   height: auto;
@@ -1395,7 +1407,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 10px 0px;
+  align-items: center;
   height: 60px;
   order: 10000;
 }
@@ -1501,6 +1513,13 @@ button.niche.active:hover::before{
   transition: background-color 0.2s;
   animation: append 0.2s;
 }
+#rentposts .posts{
+  height: fit-content;
+  min-width: 300px;
+}
+.posts .actions{
+  position: relative;
+}
 @keyframes append {
   from{opacity: 0; margin-top: 5px;}
   to{opacity: 1; margin-top: auto;}
@@ -1553,12 +1572,9 @@ button.niche.active:hover::before{
   color: var(--sec);
 }
 #top-mobile{
-  position: sticky;
-  top: 0;
   width: 100%;
   min-height: 50px;
   display: none;
-  z-index: 3;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -1611,6 +1627,9 @@ box-shadow: 0 5px 10px 2px var(--shadow);
   justify-content: center;
 }
 #suui{
+  position: sticky;
+  top: 0;
+  left: 0;
   width: 70px;
   background-color: var(--pri);
   max-width: 70px;
@@ -1769,6 +1788,7 @@ input:-webkit-autofill{
   background: var(--grad3);
 }
 .loaderholder .malf{
+  height: 47px;
   min-height: 47px;
 }
 .invertio:hover{
@@ -2062,7 +2082,6 @@ input:-webkit-autofill{
 }
 .userstalk{
   width: 55px;
-  height: calc(100% - 5px);
   display: flex;
   flex-flow: column wrap;
   align-items: center;
@@ -2341,13 +2360,17 @@ input:-webkit-autofill{
 #pname{
   
 }
+#usercard{
+  position: static;
+
+}
 #toaster{
   position: fixed;
   display: flex;
-  flex-direction: column nowrap;
+  flex-flow: column nowrap;
   gap: 5px;
   bottom: 10px;
-  right: 10px;
+  right: 13px;
   z-index: 200;
 }
 .toast{
@@ -2428,7 +2451,7 @@ input:-webkit-autofill{
   width: 45px;
   height: 45px;
   border-radius: 100%;
-  position: absolute;
+  position: fixed;
   font-size: 23px;
   right: 10px;
   align-self: flex-end;
@@ -2502,7 +2525,7 @@ input:-webkit-autofill{
   font-size: 23px;
   padding-left: 10px;
 }
-#backbutton{
+#backbutton, #backbutton2{
   display: none;
   justify-self: start;
 }
@@ -2971,9 +2994,9 @@ object{
   max-height: 60px;
 }
 .toast object{
-  padding: 5px 0px;
-  height: 50px;
-  width: 50px;
+  margin: 5px 0px;
+  height: 60px;
+  width: 60px;
 }
 .snapb{
   background-color: var(--thread);
@@ -3077,7 +3100,17 @@ object{
   justify-content: center;
   align-items: center;
 }
-
+.postUser .hdivider{
+  display: none;
+}
+#lscreen{
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 3;
+  background-color: var(--pri);
+}
 /****ALL FORMS OF SCREEN AND WHAT WE DO WITH THEM***/
 @media screen and (min-width: 480px) and (max-width: 1200px){
   .mol{
@@ -3126,6 +3159,9 @@ and (orientation: portrait) {
     align-items: stretch;
     overflow: scroll;
     overflow-x: hidden;
+  }
+  #usertab .innerblock{
+    padding-top: 0px;
   }
   .innerblock::-webkit-scrollbar{
     display: none;
@@ -3181,7 +3217,7 @@ font-size: 14px;
   .posts:hover{
     background-color: var(--thread);
   }
-  .hhname{max-width: 60px; overflow: hidden; height: 30px;}
+  .hhname{max-width: 100px; overflow: hidden; height: 30px;}
   .username.col3{max-width: 110px; font-size: 14px; overflow: hidden;}
   .mpost{width: calc(100% - 45px)}
   .userstalk{width: 45px;}
@@ -3224,7 +3260,7 @@ font-size: 14px;
     box-shadow: 0 1px 0px 0px var(--shadow);
   }
   #projectsin{
-    flex-direction: column;
+    flex-flow: column nowrap;
     justify-content: start;
     align-items: center;
   }
@@ -3271,6 +3307,9 @@ font-size: 14px;
   }
   #neso{
     justify-content: stretch;
+  }
+  .innbb.fis{
+    position: static;
   }
 }
 

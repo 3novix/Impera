@@ -135,7 +135,7 @@ window.onmouseover = function(evt){
         vel.setAttribute('titlex', gA);
         vel.removeAttribute('title');
     }
-    if(vel.getAttribute('titlex') != '' && (vel.className.includes('la-') || vel.getAttribute('titlex') != null)){
+    if(vel.getAttribute('titlex') != '' && vel.getAttribute('titlex') != null && (vel.className.includes('la-') || vel.getAttribute('titlex') != null)){
         currt = setTimeout(()=>{
             let ttip = document.getElementById('ttpos');
             document.getElementById('tooltip').innerHTML = vel.getAttribute('titlex');
@@ -3523,7 +3523,7 @@ async function openuser(usernid, son){
                                     ge('lh1').innerHTML = `<div onclick="await more_posts(${JSON.stringify(new_params)})" class="malf"><button class="invertio"><p>Load More</p></button></div>`
                                 }
                                 
-                                if(ge('recentz').innerHTML == ''){
+                                if(ge('recentuser').innerHTML == ''){
                                     for(let r = 0; r<response.length; r++){
                                         if(r>4) break;
                                         
@@ -3535,7 +3535,7 @@ async function openuser(usernid, son){
                                         erid.onclick = function(){
                                             openuser(resuser.username)
                                         }
-                                        ge('recentz').append(erid)
+                                        ge('recentuser').append(erid)
                                     }
                                 }
                                 return true

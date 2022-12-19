@@ -28,27 +28,27 @@
   <link rel="preload" href="Fonts/Neou-Bold.ttf" as="font"/>
   
   <style>
-        @font-face {
-            font-family: caviar;
-            src: url("https://impera.onrender.com/Fonts/CaviarDreams.ttf");
-        }
-        @font-face {
-            font-family: norm;
-            src: url("https://impera.onrender.com/Fonts/Neou-Bold.ttf");
-        }
-        @font-face {
-            font-family: unz;
-            src: url("https://impera.onrender.com/Fonts/sofiapro-light.otf");
-        }
-        @font-face {
-            font-family: uns;
-            src: url("https://impera.onrender.com/Fonts/Inconsolata-Regular.ttf");
-        }
-        *{
-            font-family: unz;
-            box-sizing: border-box;
-            color: var(--sec);
-        }
+    @font-face {
+      font-family: caviar;
+      src: url("https://impera.onrender.com/Fonts/CaviarDreams.ttf");
+    }
+    @font-face {
+      font-family: norm;
+      src: url("https://impera.onrender.com/Fonts/Neou-Bold.ttf");
+    }
+    @font-face {
+      font-family: unz;
+      src: url("https://impera.onrender.com/Fonts/sofiapro-light.otf");
+    }
+    @font-face {
+      font-family: uns;
+      src: url("https://impera.onrender.com/Fonts/Inconsolata-Regular.ttf");
+    }
+    *{
+      font-family: unz;
+      box-sizing: border-box;
+      color: var(--sec);
+    }
   </style>
   
   
@@ -138,7 +138,7 @@
       <div id="sparent2" class="input-box"><input autocomplete="off" maxlength="30" id="sany2" oninput="search()" onfocus="searchfocused('x'); pfocused(this)" onblur="searchblurred('x'); offfocused(this)" placeholder="Search @users and $$projects..." spellcheck="false" type="text" name="search-anything" data-title="search stuffs" class="slicki" style="z-index: 2;"/><button class="gtext la la-search" style="z-index: 2; font-size: 20px;" onclick="preventDefault(this); search(); return false"></button></div>
     </div>
     <div id="largexx">
-      <div class="ersd acol5 mol" onclick="opentab('ibczo-2')"><button class="acol5 la la-feather"></button><p class="acol3 b2text">Home</p></div>
+      <div class="ersd acol5 mol" onclick="opentab('home')"><button class="acol5 la la-home"></button><p class="acol3 b2text">Home</p></div>
       <div class="ersd acol3 mol" onclick="opentab('ibczo-2')"><button class="acol3 la la-feather"></button><p class="acol3 b2text">Posts</p></div>
       <div class="ersd acol4 mol" onclick="opendialog('iht7k')"><button class="acol4 la la-hashtag"></button><p class="acol5 b2text">Projects</p></div>
       <!--div class="ersd acol3" onclick="opendialog('events')"><button class="acol3 la la-calendar-alt"></button><p class="acol4 b2text">Events</p></div-->
@@ -160,14 +160,15 @@
     <div id="keeperx" class="column center" style="width: 100%; height: 100%;">
       <object width="50px" type="image/svg+xml" data="https://impera.onrender.com/img/loading.svg"></object>
     </div>
-    <div id="homestuffs" class="column" style="display:none; width: 100%; height: 100%;">
+    <div id="homestuffs" class="column" style="display:none; width: 100%;">
       
       <div id="hppah" class="column center" style="gap: 20px;">
         <div class="underp"><img id="hppa" src="https://impera.onrender.com/img/profile2.jpg" titlex="My profile pic" alt="My profile pic"></div>
-        <div class="row center" style="gap: 10px;">
+        <div class="row center" style="gap: 5spx;">
           <span id="hmyname"></span>
-          <button onclick="cperlink()" titlex="Copy my link" class="snapb" style="height: 45px;"><span id="hmyusername"></span></button>
+          <span id="hmyusername" class="gtext"></span>
         </div>
+        <button onclick="openuser(globalid)" class="snapb" style="height: 45px;"><span>View profile</span></button>
       </div>
       
       <div class="section-title"><h2>New Users</h2></div>
@@ -190,10 +191,10 @@
         <!--Contains stuffs related to tabs opened-->
       </div>
       <div class="innbb rlborder">
-        <div id="top-mobile">
+        <div id="top-mobile" class="glassy-top">
           <img alt="impera logo" width="30px" style="z-index: 3;" onclick="openmenu()" src="https://impera.onrender.com/img/im.svg">
         </div>
-        <div id="lscreen" class="column center" style="width: 100%; height: 100%;">
+        <div id="lscreen" class="column center">
           <object width="50px" type="image/svg+xml" data="https://impera.onrender.com/img/loading.svg"></object>
         </div>
         <div id="usersstuffs">
@@ -294,7 +295,8 @@
       <p id="cups" class="gtext largeps" style="height: 40px; line-height: 40px;">Posts</p>
     </div>
     <div class="innerblock">
-      <div class="innbb" style="align-items: center; max-width: 350px;">
+      <button id="newposter" title="new post" class="classf la la-feather-alt" onclick="opendialog('writepost')"></button>
+      <div class="innbb fis" style="align-items: center; max-width: 350px;">
         <!--CONTAINS STUFFS RELATED TO THE POSTS-->
         <div class="recentzh">
           <p>Recent posts by:</p>
@@ -346,9 +348,7 @@
               <div id="comments_section" style="display: flex; flex-flow: column nowrap; gap: 5px; align-items: center;"></div>
             </div>
           </div>
-          
-          <!--floating button for sth related to the tab-->
-          <button id="newposter" title="new post" class="classf la la-feather-alt" onclick="opendialog('writepost')"></button>
+          <div class="filler"></div>
         </div>
         <div class="innbb"></div>
       </div>
@@ -362,7 +362,7 @@
       </div>
       
       <div class="innerblock">
-        <div class="innbb" style="max-width: 350px;">
+        <div class="innbb fis" style="max-width: 350px;">
           <div class="recentzh">
             <p>Recent Creators:</p>
             <div id="recentuser" class="recentz"></div>
@@ -420,7 +420,7 @@
           
           <div id="loaa">
             <div id="moreonpr">
-              <button class="relpro">More</button>
+              <button onclick="showproops()" class="relpro">More</button>
               <div id="evern">
                 <button onclick="switchviews('pro_content', ['projects-transactions'])"><div>Content</div></button>
                 <button id="relpro"><div>Show posts</div></button>
@@ -698,7 +698,7 @@
       </div>
     </div>
     <div id="postbottomh">
-      <button onclick="toggleemojis()" title="emoji" class="actions acol2 las la-smile-wink"></button>
+      <button onclick="toggleemojis()" title="emoji" class="actions acol2 las la-smile-wink" style="font-size: 20px;"></button>
       <label for="attacj" id="attachb" titlex="add image.. only images are supported at the moment" class="actions acol4 la la-image">
         <input max="1" title="" type="file" name="attach" id="attacj" accept=".png, .jpg, .jpeg, .bmp, .gif, .mp4"/>
       </label>
