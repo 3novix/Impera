@@ -300,10 +300,6 @@ async function initialize(specifics){
         current_user = '';
         console.log('initalized');
         
-        //we load all things that needs loading here
-        const tagsu = Moralis.User.current().get('tags');
-        const tpppr = {tags:tagsu, start:0, me:globalid};
-        
         opentab('home');
         //await sethome(tpppr);
     }
@@ -313,10 +309,12 @@ async function initialize(specifics){
         switch(specifics.type){
             case 'posts':{
                 //opentab('ibczo-2');
-                await loadPosts(tpppr)
+                console.log('loading posts');
+                await loadPosts(tpppr);
             }break;
             case 'projects':{
                 //opentab('iht7k');
+                console.log('loading projects');
                 await allprojectsload(tpppr)
             }break;
         }
@@ -953,7 +951,6 @@ async function openuser(usernid, son){
         const post = new Moralis.Query('Posts');
         await post.get(postid).then(
             async (result) => {
-                createMeta({content:result.get('contents'), attachments:result.get('attachments'), });
                 //once back button is pressed, simply go back and do the thing
                 ge('backbutton').style.display = 'block;'
                 
@@ -1048,6 +1045,7 @@ async function openuser(usernid, son){
                         nceel.innerHTML = commentiin;
                         ge('comments_section').append(nceel)
                     }
+                    createMeta({pop:'post', content:result.get('contents'), attachments:result.get('attachments'), poster:{name:puser.name, username:puser.username, image:puser.image}});
                 }
                 else if(comments == 'no comments'){
                     ge('comments_section').innerHTML = '<span style="width:100%; line-height:50px; text-align:center; font-size:14px; padding-right:40px">No comments yet.<span>'
@@ -1442,13 +1440,9 @@ async function openuser(usernid, son){
         //perfectly done
         async function allprojectsload(elap, son){
             ge('lh2').innerHTML = loadicon;
-            if((ge('iht7k').getBoundingClientRect()).height == 0) opentab('iht7k'); switchviews('allprojs', ['overview']);
+            if((ge('iht7k').getBoundingClientRect()).height == 0){ opentab('iht7k'); switchviews('allprojs', ['overview'])}
             
-            if(!son){
-                const state = {type:'projects', data:params};
-                if(hs1.length != 0) history.pushState(state, '', location.origin+'/projects');
-                else{history.replaceState(state, '', location.origin+'/projects')}
-            }
+
             
             //elap is the element to append them to
             let c = document.getElementsByClassName('projects').length;
@@ -1456,7 +1450,13 @@ async function openuser(usernid, son){
             let tagsl;
             
             let params = {};
-            
+
+            if(!son){
+                const state = {type:'projects', data:params};
+                if(hs1.length != 0) history.pushState(state, '', location.origin+'/projects');
+                else{history.replaceState(state, '', location.origin+'/projects')}
+            } 
+
             if(globalid) tagsl = await Moralis.User.current().get('tags');
             else tagsl = alltags //All the available tags
             
@@ -1555,7 +1555,7 @@ async function openuser(usernid, son){
                 const posterslist = [];
                 if(ge('recentcreators').innerHTML == ''){
                     for(let r = 0; r<response.length; r++){
-                        if(posterslist.indexOf(resuser.username) == -1){
+                        if(posterslist.indexOf(response[r].idu) == -1){
                             posterslist.push(response[r].idu);                                        
                             if(posterslist.length>5) break;
                             
@@ -3424,7 +3424,7 @@ async function openuser(usernid, son){
                             ge('lh1').innerHTML = loadicon;
                             ge('cups').innerText = 'Posts';
                             ge('backbutton').style.display = 'none';
-                            if((ge('ibczo-2').getBoundingClientRect()) == 0) opentab('ibczo-2'); switchviews('postsholder', ['mainpost']);
+                            if((ge('ibczo-2').getBoundingClientRect()).height == 0){opentab('ibczo-2'); switchviews('postsholder', ['mainpost'])}
                             
                             if(!son){
                                 const state = {type:'posts', data:params};
