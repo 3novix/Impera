@@ -1,7 +1,7 @@
 *{
   box-sizing:border-box;
 }
-::-webkit-scrollbar{
+*::-webkit-scrollbar{
   display: none;
   width: 5px;
   color: var(--color2);
@@ -156,9 +156,9 @@ p{
   transition: color 0.2s;
 }
 .ntext{
-  font-size:16px;
+  font-size:15px;
   font-weight:500;
-  font-family:cl;
+  font-family:unz;
   text-align:center;
 }
 #iqkf-2{
@@ -261,6 +261,7 @@ p{
   flex-flow: column nowrap;
   padding-top: 5px;
   overflow: scroll;
+  height: fit-content;
 }
 .innbb::-webkit-scrollbar{
   display: none;
@@ -529,7 +530,7 @@ p{
   width: calc(100% + 6px);
   height: calc(100% + 6px);
   border-radius: 27px;
-  z-index: -1;
+  z-index: 0;
   transition: background-color 0.2s, background-image 0.2s;
   left: -3px;
   top: -3px;
@@ -539,6 +540,18 @@ p{
   background-image: var(--grad3);
 }
 
+.nnuy::after{
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  z-index: 1;
+  background-color: var(--thread);
+}
+.nnuy p, .nnuy span{
+  z-index: 2;
+}
 #ifr7x{
   width: calc(100% - 60px);
 }
@@ -1257,6 +1270,7 @@ input[type='text']:disabled{
   padding-left: 10px;
   width: fit-content;
 }
+/*
 .section-title h2::before {
   content: '';
   position: absolute;
@@ -1268,6 +1282,7 @@ input[type='text']:disabled{
   z-index: -1;
   border-radius: 5px;
 }
+*/
 .column{
   display: flex;
   flex-direction: column;
@@ -1279,6 +1294,7 @@ input[type='text']:disabled{
 #home{
   justify-content: start;
   align-items: stretch;
+  overflow: scroll;
 }
 #rentposts{
   width: 100%;
@@ -1291,8 +1307,10 @@ input[type='text']:disabled{
 #emojiparent{
   overflow: scroll;
 }
-#emojiparent h2{
+#emojiparent h3{
   display: none;
+  margin: 0;
+  padding-left: 5px;
 }
 #emojiparent::-webkit-scrollbar{
   display: none;
@@ -1300,14 +1318,16 @@ input[type='text']:disabled{
   width: 5px;
 }
 #emojibox{
-  padding: 30px 10px;
+  padding: 20px 10px;
   position: fixed;
   width: 100%;
   flex-wrap: nowrap;
   overflow: scroll;
   gap: 10px;
+  left: 0;
 }
 #emojibox .emojis{
+  cursor: pointer;
   max-width: 150px;
   aspect-ratio: 1/1;
   transition: 0.2s;
@@ -1353,7 +1373,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .recentzh{
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
   width: calc(100% - 10px);
   padding: 10px;
   min-height: 100px;
@@ -1517,6 +1537,7 @@ button.niche.active:hover::before{
 #rentposts .posts{
   height: fit-content;
   min-width: 300px;
+  position: relative;
 }
 .posts .actions{
   position: relative;
@@ -1532,7 +1553,7 @@ button.niche.active:hover::before{
   position: relative;
   height: fit-content;
   overflow: visible;
-  width: calc(100% + 27.5px);
+  width: 100%;
 }
 .inside{
   display: flex;
@@ -3149,6 +3170,13 @@ font-size: 14px;
 /***MOBILE**/
 @media screen and (min-device-width: 200px) and (max-device-width: 480px)
 and (orientation: portrait) {
+  #emojiparent h3{
+    display: block;
+  }
+  #emojibox .emojis{
+    max-width: 100px;
+    aspect-ratio: 1/1;
+  }
   .mol{
     display: none;
   }
@@ -3208,7 +3236,7 @@ font-size: 14px;
     border-radius: 0;
     padding: 3px;
     margin: 0;
-    box-shadow: 0 1px 0 0 var(--shadow);
+    border-bottom: 1px solid var(--gray1);
     background-color: var(--pri);
     transition: background-color 0.2s;
   }
@@ -3303,6 +3331,7 @@ font-size: 14px;
     display: none;
   }
   .topin{
+    position: fixed;
     min-height: 50px;
     padding-left: 5px;
   }

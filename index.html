@@ -190,7 +190,7 @@
       <div class="innbb">
         <!--Contains stuffs related to tabs opened-->
       </div>
-      <div class="innbb rlborder">
+      <div class="innbb rlborder" style="position: relative;">
         <div id="top-mobile" class="glassy-top">
           <img alt="impera logo" width="30px" style="z-index: 3;" onclick="openmenu()" src="https://impera.onrender.com/img/im.svg">
         </div>
@@ -198,7 +198,7 @@
           <object width="50px" type="image/svg+xml" data="https://impera.onrender.com/img/loading.svg"></object>
         </div>
         <div id="usersstuffs">
-          <div id="editbtn" class="row" style="justify-content: end; height: 50px; display: none;"><button onclick="editme()" title="edit profile" class="actions acol7 las la-pen-alt"></button></div>
+          <div id="editbtn" class="row" style="justify-content: end; height: 50px; display: none;"><button onclick="openeditor()" title="edit profile" class="actions acol7 las la-pen-alt"></button></div>
           <div id="userstop">
             <div class="underp"><img id="profiimg" class="pfplarge" titlex="View image" src="https://impera.onrender.com/img/profile2.jpg" alt="placeholder"/></div>
             <div style="width: 100%; display:flex; flex-direction: row; justify-content: space-evenly;"><p id="usersname"></p><p id="usersusername" style="cursor: pointer; outline: none; border:none" class="gtext"></p></div>
@@ -364,7 +364,7 @@
         <div class="innbb fis" style="max-width: 350px;">
           <div class="recentzh">
             <p>Recent Creators:</p>
-            <div id="recentuser" class="recentz"></div>
+            <div id="recentcreators" class="recentz"></div>
           </div>
         </div>
         <div class="innbb rlborder">
@@ -705,7 +705,7 @@
       <div><button id="posterre" class="specialb"><p id="eewi">Post</p></button></div>
     </div>
     <div id="emojiparent" style="display: none;">
-      <h2>Emoji</h2>
+      <h3>Emoji</h3>
       <div id="emojibox" class="row">
         <span style="display:flex; min-width: 10px; height: 10px; order: 1000;"></span>
       </div>

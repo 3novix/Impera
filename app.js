@@ -1534,22 +1534,26 @@ async function openuser(usernid, son){
                 }
                 nlo.remove();
                 
-                
-                if(ge('recentuser').innerHTML == ''){
+                const posterslist = [];
+                if(ge('recentcreators').innerHTML == ''){
                     for(let r = 0; r<response.length; r++){
-                        if(r>4) break;
+                        if(posterslist.indexOf(resuser.username) == -1){
+                        posterslist.push(response[r].idu);                                        
+                        if(posterslist.length>5) break;
                         
                         const resuser = await getuserdetails(response[r].idu)
-                        
+
                         let erid = document.createElement('div');
                         erid.className = 'underp';
                         erid.innerHTML = `<img class="posterpic" src="${resuser.image}"/>`;
                         erid.onclick = function(){
                             openuser(resuser.username)
                         }
-                        ge('recentuser').append(erid)
+                        ge('recentcreators').append(erid)
+                    }
                     }
                 }
+                
             } catch (error) {
                 const code = error.code;
                 const message = error.message;
@@ -3309,7 +3313,9 @@ async function openuser(usernid, son){
                                 }} break;
                             }
                         }
-                        async function openeditor() {
+                        async function openeditor(){
+                            switchviews('editme', ['usersstuffs', 'lscreen']);
+
                             const nqe = new Moralis.Query('users');
                             nqe.equalTo('username', globalid);
                             const nqer = await nqe.first();
@@ -3530,12 +3536,16 @@ async function openuser(usernid, son){
                                     ge('lh1').innerHTML = `<div onclick="await more_posts(${JSON.stringify(new_params)})" class="malf"><button class="invertio"><p>Load More</p></button></div>`
                                 }
                                 
+                                const posterslist = [];
                                 if(ge('recentuser').innerHTML == ''){
                                     for(let r = 0; r<response.length; r++){
-                                        if(r>4) break;
+                                        if(posterslist.indexOf(resuser.username) == -1){
+                                        posterslist.push(response[r].idu);                                        
+                                        if(posterslist.length>5) break;
                                         
                                         const resuser = await getuserdetails(response[r].idu)
                                         
+
                                         let erid = document.createElement('div');
                                         erid.className = 'underp';
                                         erid.innerHTML = `<img class="posterpic" src="${resuser.image}"/>`;
@@ -3543,6 +3553,7 @@ async function openuser(usernid, son){
                                             openuser(resuser.username)
                                         }
                                         ge('recentuser').append(erid)
+                                    }
                                     }
                                 }
                                 return true
