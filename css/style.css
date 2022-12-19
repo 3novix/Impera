@@ -7,6 +7,9 @@
   color: var(--color2);
   background-color: var(--color1);
 }
+*{
+  scrollbar-width: none;
+}
 #ctt{
   position: fixed;
   display: none;
