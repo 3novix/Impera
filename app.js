@@ -304,7 +304,7 @@ async function initialize(specifics){
         const tpppr = {tags:tagsu, start:0, me:globalid};
         
         opentab('home');
-        await sethome(tpppr);
+        //await sethome(tpppr);
     }
     else{
         const tpppr = {user:specifics.user, start:0, me:globalid};
@@ -1907,7 +1907,7 @@ async function openuser(usernid, son){
                     
                     tabb = document.getElementsByClassName("tabb");
                     for (i = 0; i < tabb.length; i++) {
-                        tabb[i].className = tabb[i].className.replace(" gtext", "");
+                        tabb[i].className = tabb[i].className.replace(" active", "");
                     }
                     
                     // Show the current tab, and add an "active" class to the button that opened the tab
@@ -1918,7 +1918,7 @@ async function openuser(usernid, son){
                         showToast('Coming soon', 1, 7000)
                     }
                     
-                    if(ent)ent.className += " gtext";
+                    if(ent)ent.className += " active";
                     if(tabn == 'ibczo-2' && ge('postsholder').childElementCount<2){
                         const tagsu = Moralis.User.current().get('tags');
                         const params = {tags:tagsu, start:0, me:globalid};            

@@ -604,7 +604,7 @@ button{
   font-size: 15px;
 }
 .slicki::selection{color: var(--pri); background-color: var(--color2); background-image: var(--gradi);}
-.slicki::placeholder, .gtext, .tabb:hover, .pfilterb.active, .invertio:hover p, .specialb:hover p, .ersd .acolg{
+.slicki::placeholder, .gtext, .tabb:hover::before, .pfilterb.active, .invertio:hover p, .specialb:hover p, .ersd .acolg{
   font-weight: bold;
   color: rgba(var(--col2), 0.9);
   background-color: var(--color1);
@@ -1538,6 +1538,9 @@ button.niche.active:hover::before{
   height: fit-content;
   min-width: 300px;
   position: relative;
+  border-radius: 30px;
+  background-color: var(--thread);
+  box-shadow: 0px 0px 2px 2px var(--shadow);
 }
 .posts .actions{
   position: relative;
@@ -1715,7 +1718,7 @@ box-shadow: 0 5px 10px 2px var(--shadow);
   min-width: 40px;
   min-height: 40px;
   background: var(--gray1);
-  color: var(--sec);
+  color: inherit;
   transition: background-color 0.5s;
 }
 .ersd:hover button{
@@ -2453,7 +2456,7 @@ input:-webkit-autofill{
   background-color: var(--pri);
   font-size: 20px;
 }
-.tabb.active{
+.tabb.active::before{
   font-weight: bold;
   color: rgba(var(--col2), 0.9);
   background: var(--grad3);
@@ -3327,6 +3330,15 @@ font-size: 14px;
     max-width: 100%;
     min-width: 100%;
   }
+  
+#rentposts .posts{
+  height: fit-content;
+  min-width: 300px;
+  position: relative;
+  border-radius: 30px;
+  background-color: var(--thread);
+  box-shadow: 0px 0px 2px 2px var(--shadow);
+}
   #selfpro{
     display: none;
   }
