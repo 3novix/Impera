@@ -293,6 +293,10 @@ async function addemoji(ltoemo){
         dt.items.add(tis);
         ge('attacj').files = dt.files;
 
+        const files = ge('attacj').files;
+        let ress = files;
+        ress = await compress(files);
+
         ss.setItem('lastImage', tis.name);
         ge('images-s').innerHTML = '';
         
@@ -1891,7 +1895,7 @@ async function openuser(usernid, son){
             window.onclick = function(event) {
                 //Close when user clicks outside the dialog box
                 if (event.target == ge(curr)) {
-                    closedialog(curr)
+                    history.back();
                 }
             }
         }
@@ -2204,7 +2208,7 @@ async function openuser(usernid, son){
                 }
                 
                 
-                document.getElementById('attacj').onchange = async function(evt){
+                ge('attacj').onchange = async function(evt){
                     ge('images-s').style.display = 'flex';
                     
                     const files = evt.target.files[0];
