@@ -1285,19 +1285,19 @@ input[type='text']:disabled{
   padding-left: 10px;
   width: fit-content;
 }
-/*
-.section-title h2::before {
+
+.section-title::before {
   content: '';
   position: absolute;
-  left: 9px;
+  right: 10px;
   bottom: -3px;
   height: 5px;
-  width: 100%;
+  width: 70px;
   background: var(--grad3);
-  z-index: -1;
+  z-index: 1;
   border-radius: 5px;
 }
-*/
+
 .column{
   display: flex;
   flex-direction: column;
@@ -3192,7 +3192,7 @@ font-size: 14px;
   .tcomments, .postContents{
     font-size: 13px;
   }
-  #filler{display: block;}
+  .filler{display: block;}
   #nav{display: flex;}
   .classf:nth-of-type(1){
     bottom: 80px;
@@ -3259,7 +3259,7 @@ font-size: 14px;
   .rblocks{
     display: none;
   }
-  #filler{display: block;}
+  .filler{display: block;}
   #row1-2{display: flex; max-width: 100%;}
   #nav{
     width: 100%;
@@ -3410,7 +3410,7 @@ font-size: 14px;
   .postUser p{
     max-width: 100px;
   }
-  #filler{
+  .filler{
     display: none;
   }
   #nav{display: none;}
