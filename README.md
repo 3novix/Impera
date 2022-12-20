@@ -11,6 +11,10 @@ https://github.com/Prodyads/Impera/blob/main/README.md#using-the-app
 - [Team](https://github.com/Prodyads/Impera#team)
 - [Development Journal](https://github.com/Prodyads/Imperaa#development-journal)
 
+<p align="center">
+  <img width="300" height="300" src="https://user-images.githubusercontent.com/56414342/208578574-3040fb89-606d-454c-b39f-e08e4cc67402.svg">
+</p>
+
 ### Quick Introduction
 Impera.io is a social crowdfunding web project made using Moralis.js SDK for the 2022 Moralis x Google Hackathon. This web app combines the connectivity of a typical social media application like Facebook and a crowdfunding aspect of a website like Kickstarter.
 
