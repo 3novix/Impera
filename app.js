@@ -1927,8 +1927,12 @@ async function openuser(usernid, son){
                 }
                 function closedialog(OPx){
                     const OP = OPx ?? '';
-                    if(hs1.length == 0){history.replaceState({type:'home', data:''}, null, location.origin+'/home');}
-                    else{history.back()}
+                    //history.back()
+                    if(this.event){
+                        if(this.event.type == 'click' && this.event.target.className.includes('la la-times')){
+                            history.back()
+                        }
+                    }
                     
                     for(let q = 0; q<document.getElementsByClassName('dialogs').length; q++){
                         document.getElementsByClassName('dialogs')[q].style.opacity = '0';
@@ -2003,7 +2007,9 @@ async function openuser(usernid, son){
                     }
                     
                     if(this.event){
+                        if(this.event.type == 'click'){
                         console.log(this.event);
+                        
                         if(this.event.target.parentElement.className.includes('ersd') || ent){
                         if(tabn == 'home'){
                             savestate({type:'home', data:0})
@@ -2018,6 +2024,7 @@ async function openuser(usernid, son){
                             savestate({type:'messaging', data:0})
                         }
                     }
+                }
                     }
 
                     if(ent) ent.className += " active";
