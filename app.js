@@ -792,8 +792,8 @@ async function openuser(usernid, son){
     
     const fuis = (resultsq.createdAt).toString();
     const nfuis = fuis.slice(fuis.indexOf(' '), fuis.indexOf(':')-3);
-    
-    if((resultsq.get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+    const frrf = resultsq.get('ethAddress');
+    if(!(frrf.includes('.') && frrf.includes('@'))){
         if(me == userid){
             ge('wareti').innerText = 'Connect Wallet';
             showToast(loadicon);
