@@ -288,7 +288,7 @@ function toggleemojis(){
 }
 function addemoji(ltoemo){
     fetch(ltoemo).then((res)=>{return res.blob()}).then(async (retu)=>{
-        const tis = new File([retu], (ltoemo.slice(ltoemo.lastIndexOf('/')+1)).replace('-', ' '), {type:'image/png'});
+        const tis = new File([retu], (ltoemo.slice(ltoemo.lastIndexOf('/')+1)), {type:'image/png'});
         const dt = new DataTransfer();
         dt.items.add(tis);
         ge('attacj').files = dt.files;
@@ -543,6 +543,8 @@ function render(ns){
     const status = navigator.onLine;
     const type = ns.type;
     const data = ns.data;
+
+    console.log(ns)
     
     if(type != 'dialog'){
         closedialog(); //dialogs doesnt lead to a flat page
@@ -1013,6 +1015,8 @@ async function openuser(usernid, son){
                 ge('pusername').innerHTML = ' @'+puser.username;
                 ge('tsauce').innerHTML = await processdate(pdate);
                 ge('comment-butt').onclick = function(){opendialog('writepost', {postid:postid})};
+                ge('axsxj').firstChild.innerText = result.get('likes').length;
+                ge('osxei').firstChild.innerText = result.get('quotes').length;
                 
                 //load all comments at once
                 const comments = await Moralis.Cloud.run('loadcomments', {post:postid, start:0});
@@ -1070,7 +1074,6 @@ async function openuser(usernid, son){
                 }
                 if(!son){
                     let identifier = random_string();
-                    console.log(ge('mainpost').outerHTML);
                     ss.setItem(identifier, ge('mainpost').outerHTML);
                     history.replaceState({type:'post', data:postid, cached:identifier}, '', location.origin+'/post/'+postid)
                 }
@@ -1281,7 +1284,7 @@ async function openuser(usernid, son){
                 const response = await Moralis.Cloud.run('loadproject', params);
                 switchviews('overview', ['allprojs']);
                 console.log(response);
-                
+
                 const gethp = await convertTokens('polygon'); //matic conversion rate from ftm e.g
                 const gethp2 = await convertTokens('fantom'); //ftm conversion rate from matic
                 const getaup = await syncprice();
@@ -2000,6 +2003,7 @@ async function openuser(usernid, son){
                     }
                     
                     if(this.event){
+                        console.log(this.event);
                         if(this.event.target.parentElement.className.includes('ersd') || ent){
                         if(tabn == 'home'){
                             savestate({type:'home', data:0})
@@ -2173,7 +2177,7 @@ async function openuser(usernid, son){
                 }
                 
                 
-                document.getElementById('attachb').onchange = async function(evt){
+                document.getElementById('attacj').onchange = async function(evt){
                     ge('images-s').style.display = 'flex';
                     
                     const files = evt.target.files[0];
@@ -2272,8 +2276,7 @@ async function openuser(usernid, son){
                     
                     `}
                     //this is perfect
-                    const texts = co
-                    mid+ge('writecontent').value;
+                    const texts = ge('writecontent').value;
                     
                     let attachments = '';
                     let attachment_name = ((ss.getItem('lastImage')).includes('3d-') ? ss.getItem('lastImage')+random_string() : random_string());
@@ -2297,7 +2300,7 @@ async function openuser(usernid, son){
                         const userInfo = await requestUser();
                         const comments = Moralis.Object.extend('Comments');
                         const comment = new comments();
-                        comment.set('contents', await processtext(texts));
+                        comment.set('contents', texts);
                         comment.set('attachments', attachments);
                         comment.set('user', userInfo);
                         comment.set('post', postid);
