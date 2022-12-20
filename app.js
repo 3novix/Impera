@@ -1302,7 +1302,8 @@ async function openuser(usernid, son){
                 const gethp2 = await convertTokens('fantom'); //ftm conversion rate from matic
                 const getaup = await syncprice();
                 const currchain = testchains();
-                
+                console.log('getting conversions');
+
                 let total = 0;
                 if(response.funded != 0){
                     if(currchain == 'polygon') total+=response.funded
@@ -1326,6 +1327,7 @@ async function openuser(usernid, son){
                 else{
                     ge('fundbox').style.display = 'flex'
                 }
+                console.log('percent', percent);
 
                 //test for deadline...
                 const dl = await checkdeadline(response.createdAt, response.get('deadline'));
@@ -1372,9 +1374,9 @@ async function openuser(usernid, son){
                 if(response.summary == '') ge('summarys').innerHTML = '<span style="opacity: 0.7">No summary provided</span>';
                 
                 quill_read.setContents(response.contents);
-                ge('relpro').onclick = function(){
+                ge('relpro').onclick = async function(){
                     ge('postsholder').innerHTML = '';
-                    loadPosts({project:response.id, start:0});
+                    await loadPosts({project:response.id, start:0});
                 }
                 
                 let suffix = ' MATIC';

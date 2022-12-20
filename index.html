@@ -456,11 +456,11 @@
             <div id="dersutop" style="display: none; flex-direction: row; justify-content: center; width: 100%;"><button class="actions acol2 la la-times" onclick="shrinkit()"></button></div>
             <div id="ethfund">
               <div id="dersu" class="input-box" style="display: none;">
-                <input oninput="currcon('fund_tokens', this, 'dollar')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="$2" title="fund amount in dollars" name="fund_amount" id="fundinput" required>
+                <input oninput="currcon('fund_tokens', this, 'dollar')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" step="any" placeholder="$2" title="fund amount in dollars" name="fund_amount" id="fundinput" required>
                 <span title="usd" class="actions acol1 lab la-dollar-sign"></span>
               </div>
               <div id="dersu2" class="input-box" style="display: none;">
-                <input oninput="currcon('fundinput', this, 'erc20')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="2 MATIC" title="fund amount in tokens" name="fund_tokens" id="fundtokens" required>
+                <input oninput="currcon('fundinput', this, 'erc20')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" step="any" placeholder="2 MATIC" title="fund amount in tokens" name="fund_tokens" id="fundtokens" required>
                 <span class="lops"><img id="kdpa" height="30px" alt="Matic"></span>
               </div>
             </div>
@@ -540,12 +540,12 @@
             
             <div id="ingib" class="input-box">
               <label for="ingoaldolls">Goal</label>
-              <input oninput="currcon('ingoal', this, 'dollar')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" placeholder="$3150" name="p_goaldolls" id="ingoaldolls" required>
+              <input oninput="currcon('ingoal', this, 'dollar')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" step="any" placeholder="$3150" name="p_goaldolls" id="ingoaldolls" required>
               <span onclick="return false" title="ethereum" class="lops" style="margin-right: 0px;">usd</span>
             </div>
             <div id="ingib" class="input-box" style="align-self: flex-end; width: 250px;">
               <label>&#126;</label>
-              <input oninput="currcon('ingoaldolls', this, 'erc20')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" placeholder="2 MATIC" name="p_goal" id="ingoal" required>
+              <input oninput="currcon('ingoaldolls', this, 'erc20')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" step="any" placeholder="2 MATIC" name="p_goal" id="ingoal" required>
               <span onclick="return false" title="ethereum" class="lops"><img id="oplas" style="height: 30px;" src="https://impera.onrender.com/img/polygonicon.svg"/></span>
             </div>
             
@@ -652,11 +652,11 @@
         <div class="simpleinputs">
           <div id="tipamountholder" class="input-box">
             <span onclick="return false" title="dollars" class="lops lab la-dollar-sign"></span>
-            <input oninput="currcon('equivalent', this, 'dollar')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="1" name="p_tip_amount" id="tipamount" value="1" required>
+            <input oninput="currcon('equivalent', this, 'dollar')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" step="any" placeholder="1" name="p_tip_amount" id="tipamount" value="1" required>
           </div>
           <div id="tipamountholdereq" class="input-box" style="width: 250px; align-self: flex-end;">
             <label>&#126;</label>
-            <input oninput="currcon('tipamount', this, 'erc20')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="1" name="p_tip_equivalent" value="1" id="equivalent" required>
+            <input oninput="currcon('tipamount', this, 'erc20')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" step="any" placeholder="1" name="p_tip_equivalent" value="1" id="equivalent" required>
             <span class="lops"><img id="oplas3" alt="currency"/></span>
           </div>
           <div class="row center"><button onclick="tip()" class="specialb">Send Tip</button></div>

@@ -672,7 +672,7 @@ p.gtext::selection {
   border-radius: 15px;
   overflow: scroll;
   position: fixed;
-  box-shadow: var(--shadow);
+  box-shadow: 0px 0px 5px 0px var(--shadow);
   background: var(--pri);
   flex-flow: row wrap;
   max-width: 300px;
