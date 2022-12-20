@@ -1292,6 +1292,23 @@ async function openuser(usernid, son){
                 //convert to percentage
                 const percent = ((Number(totald)/Number(response.goal))*100).toString();
                 
+                if(percent > 150){ //150 cuz the value might reduce later
+                    //fund not!
+                    ge('fundbox').style.display = 'none'
+                }
+                else{
+                    ge('fundbox').style.display = 'flex'
+                }
+
+                //test for deadline...
+                const dl = await checkdeadline(response.createdAt, response.get('deadline'));
+                if(dl == 'Concluded'){
+                    ge('fundbox').style.display = 'none'
+                }
+                else{
+                    ge('fundbox').style.display = 'flex'
+                }
+                
                 const isme = new Moralis.Query('users');
                 isme.equalTo('username', globalid);
                 const mex = await isme.first();
@@ -1312,7 +1329,8 @@ async function openuser(usernid, son){
                 ge('atwy').setAttribute('project-id', response.id);
                 ge('loadalltrans').setAttribute('projectId', response.id);
                 
-                ge('ranged').style.width = percent+'%';
+                const range = percent < 101 ? percent : 100;
+                ge('ranged').style.width = range.toString()+'%';
                 
                 let ttexts = '';
                 
