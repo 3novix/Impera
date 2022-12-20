@@ -455,11 +455,11 @@
           <div id="fundbox">
             <div id="dersutop" style="display: none; flex-direction: row; justify-content: center; width: 100%;"><button class="actions acol2 la la-times" onclick="shrinkit()"></button></div>
             <div id="ethfund" class="simpleinputs" style="display: none;">
-              <div id="dersu" class="input-box" style="display: none;">
+              <div id="dersu" class="input-box">
                 <input oninput="currcon('fundtokens', this, 'dollar')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" step="any" placeholder="$2" title="fund amount in dollars" name="fund_amount" id="fundinput" required>
                 <span title="usd" class="lops la la-dollar-sign"></span>
               </div>
-              <div id="dersu2" class="input-box" style="display: none;">
+              <div id="dersu2" class="input-box">
                 <input oninput="currcon('fundinput', this, 'erc20')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" step="any" placeholder="2 MATIC" title="fund amount in tokens" name="fund_tokens" id="fundtokens" required>
                 <span class="lops"><img id="kdpa" height="30px" alt="Matic"></span>
               </div>
@@ -469,7 +469,7 @@
           <div id="obottom" style="font-size: 14px;"><!--contains terms and condition shit-->
             <p><strong>*Fund of your own voilition</strong></p>
             <p>As of the Moment of writing this, we do not collect a fee for transactions, all the amount sent will be directly received into the project's secured wallet, which only the project's creator has access to after the deadline. And therefore we do not ask for you to blame us for any financial regret you may have after your decision.</p>
-            <p style="color: gray;">Impera by <span style="color: var(--sec);">novics</span></p>
+            <p style="color: gray; text-align: center; line-height: 50px;">Impera by <span style="color: var(--sec);">novics</span></p>
             <div style="height: 50px; width: 50px;"></div>
           </div>
         </div>
@@ -533,7 +533,7 @@
               <label for="p_image_input" titlex="Select an Image" id="lfimg" class="uploaders">Select image</label>
               <input class="gtext" id="p_image_input" name="p_image" spellcheck="false" title="image for project" type="file" accept=".png, .jpg, .jpeg, .bmp, .mp4" required/>
             </div>
-            <div style="position: absolute; bottom:-10px; color:var(--sec); font-size: 15px; opacity: 0.7;">*wide images are recommended</div>
+            <div style="position: absolute; bottom:-10px; color:var(--sec); font-size: 15px; opacity: 0.7;">*square images are recommended</div>
           </div>
           <div class="vdivider" style="align-self:stretch; height: auto; max-height: 250px;"><span style="width:2px; background-image: linear-gradient(135deg, var(--color2), var(--color1)); border-radius: 0;"></span></div>
           <div id="simpleinputs" class="simpleinputs">

@@ -1575,7 +1575,6 @@ button.niche.active:hover::before{
   position: relative;
   border-radius: 30px;
   background-color: var(--thread);
-  box-shadow:none;
 }
 .posts .actions{
   position: relative;
