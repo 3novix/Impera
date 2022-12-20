@@ -213,15 +213,13 @@ async function done(){
 
     const getth = Moralis.User.current().get('ethAddress');
     
-    if(getth && getth.length > 10){
-    showToast('Connect to Metamask', 1, 20000, async function() {
+    if(getth != undefined && getth.length > 10){
         await Moralis.enableWeb3({
             throwOnError: true,
             provider,
         }).then(()=>{}, ()=>{
-            showToast('Cannot connect to Metamask', 2);
+            showToast('Cannot Connect provider', 2);
         })
-    })
     }
     
     const locval = location.pathname;
@@ -1478,7 +1476,7 @@ async function openuser(usernid, son){
                 switchviews('allprojs', ['overview']);
                 
                 if(response == 'no projects'){ge('lh2').innerHTML = `<p style="width:100%; text-align:center">${response}</p>`; return ''}
-                else{ge('lh2').innerHTML = ''}
+                else{ge('lh2').innerHTML = loadicon}
 
                 console.log(response);
                 
@@ -1493,7 +1491,7 @@ async function openuser(usernid, son){
                 const currchain = testchains();
                 const watchlist = me.get('watchlist'); //its an array
                 
-                await appendProject(response, opt);
+                //await appendProject(response, opt);
                 
                 for(let r = 0; r<response.length; r++){
                     let cnpe = document.createElement('div');
@@ -1503,6 +1501,7 @@ async function openuser(usernid, son){
                     cnpe.className = 'projects';
                     cnpe.onclick = function(){openproject(res.id)};
                     
+                    console.log('appending...')
                     let total = 0;
                     if(res.funded != 0){
                         if(currchain == 'polygon') total+=res.funded
@@ -1552,7 +1551,9 @@ async function openuser(usernid, son){
                     
                     cnpe.innerHTML = datas;
                     ge('projectsin').append(cnpe);
+                    console.log('appended')
                 }
+                ge('lh2').innerHTML = '';
                 if(response.length < 10){/***LOADED ALL THE PROJECTS***/ge('lh2').innerHTML = `<p style="width:100%; text-align:center">No more projects</p>`}
                 else{
                     ge('lh2').innerHTML = `<div onclick="await more_projects(${JSON.stringify(params)})" class="malf"><button class="invertio"><p>Load More</p></button></div>`
@@ -3465,7 +3466,7 @@ async function openuser(usernid, son){
                                 const response = responsex;
                                 
                                 if(response == 'no posts'){ge('lh1').innerHTML = `<p style="width:100%; text-align:center">${response}</p>`; return ''}
-                                else{ge('lh1').innerHTML = ''}
+                                else{ge('lh1').innerHTML = loadicon}
                                 
                                 for(let r = 0; r<response.length; r++){
                                     const pics = response[r].attachments; //a string
@@ -3575,7 +3576,7 @@ async function openuser(usernid, son){
                                     `;
                                     ge('postsholder').append(cel);
                                 }
-                                
+                                ge('lh1').innerHTML = '';
                                 if(response.length < 10){/***LOADED ALL THE POSTS***/ge('lh1').innerHTML = `<p style="width:100%; text-align:center">No more posts</p>`}
                                 else{
                                     ge('lh1').innerHTML = `<div onclick="await more_posts(${JSON.stringify(new_params)})" class="malf"><button class="invertio"><p>Load More</p></button></div>`
