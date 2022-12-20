@@ -1842,7 +1842,7 @@ input:-webkit-autofill{
 }
 #userstop .underp, #edlksao .underp, #hppah .underp{
   width: 160px;
-  height: 166px;
+  height: 160px;
   border-radius: 100%;
 }
 #userstop .underp::before, #edlksao .underp::before, #hppah .underp::before{
