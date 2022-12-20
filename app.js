@@ -286,12 +286,25 @@ function toggleemojis(){
     if(ge('emojiparent').style.display == 'none') ge('emojiparent').style.display = 'block'
     else ge('emojiparent').style.display = 'none'
 }
-function addemoji(ltoemo){
-    fetch(ltoemo).then((res)=>{return res.blob()}).then(async (retu)=>{
+async function addemoji(ltoemo){
+    await fetch(ltoemo).then((res)=>{return res.blob()}).then(async (retu)=>{
         const tis = new File([retu], (ltoemo.slice(ltoemo.lastIndexOf('/')+1)), {type:'image/png'});
         const dt = new DataTransfer();
         dt.items.add(tis);
         ge('attacj').files = dt.files;
+
+        ss.setItem('lastImage', tis.name);
+        ge('images-s').innerHTML = '';
+        
+        const cr = document.createElement('div');
+        cr.className = 'imgs';
+        cr.onclick = function(thi){
+            ge('attachj').value = '';
+            thi.target.remove();
+            if(ge('images-s').innerHTML == '') ge('images-s').style.display = 'none';
+        }
+        cr.innerHTML = `<img id='posyo' class='samples' src="${ress}"/>`;
+        ge('images-s').append(cr);
     })
 }
 async function initialize(specifics){
@@ -1477,7 +1490,7 @@ async function openuser(usernid, son){
         //perfectly done
         async function allprojectsload(elap, son){
             ge('lh2').innerHTML = loadicon;
-            if((ge('iht7k').getBoundingClientRect()).height == 0){ opentab('iht7k'); switchviews('allprojs', ['overview'])}
+            if((ge('iht7k').getBoundingClientRect()).height == 0){opentab('iht7k'); switchviews('allprojs', ['overview'])}
 
             
             //elap is the element to append them to
@@ -1503,6 +1516,7 @@ async function openuser(usernid, son){
                 params.start = c,
                 params.tags = tagsl //this is an array
             }
+
             try {
                 const responsex = await Moralis.Cloud.run('projects', params);
                 const response = responsex;
@@ -2031,12 +2045,12 @@ async function openuser(usernid, son){
                     if(tabn == 'ibczo-2' && ge('postsholder').childElementCount<2){
                         const tagsu = Moralis.User.current().get('tags');
                         const params = {tags:tagsu, start:0, me:globalid};            
-                        await loadPosts(params);
+                        await loadPosts(params, 1);
                     }
                     else if(tabn == 'iht7k' && ge('projectsin').childElementCount<2){
                         const tagsu = Moralis.User.current().get('tags');
                         const params = {tags:tagsu, start:0, me:globalid};            
-                        await allprojectsload(params);
+                        await allprojectsload(params, 1);
                     }
                     else if(tabn == 'home' && ge('newerusers').innerHTML == ''){
                         //we load all things that needs loading here
@@ -2200,7 +2214,7 @@ async function openuser(usernid, son){
                     const cr = document.createElement('div');
                     cr.className = 'imgs';
                     cr.onclick = function(thi){
-                        ge('attachb').value = '';
+                        ge('attachj').value = '';
                         thi.target.remove();
                         if(ge('images-s').innerHTML == '') ge('images-s').style.display = 'none';
                     }
