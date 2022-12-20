@@ -298,8 +298,9 @@ async function initialize(specifics){
     console.log(specifics)
     //replace the 'no state' to 'home' state to initialize the app
     if(!specifics){
-        history.replaceState({type:'home', data:'none'}, '', location.origin+'/home');
-        hs1.push('home');
+        const state = {type:'home', data:'none'};
+        history.replaceState(state, '', location.origin+'/home');
+        hs1.push(state);
         current_user = '';
         console.log('initalized');
         
@@ -362,6 +363,7 @@ async function sethome(new_params, son){
             const state = {type:'home', data:new_params};
             if(hs1.length != 0) history.pushState(state, '', location.origin+'/home');
             else{history.replaceState(state, '', location.origin+'/home')}
+            hs1.push(state)
     }
 
     //hell with first stop
@@ -624,8 +626,8 @@ window.onpopstate = function(wh){
     }
 }
 function savestate(state){
-    if(hs1.length != 0) {history.pushState(state, '', location.origin+'/me/'+state.data)}
-    else {history.replaceState(state, '', location.origin+'/me/'+state.data)}
+    if(hs1.length != 0){history.pushState(state, '', location.origin+'/'+state.type)}
+    else {history.replaceState(state, '', location.origin+'/'+state.type)}
     hs1.push(state);
 }
 function home(){
@@ -1278,6 +1280,7 @@ async function openuser(usernid, son){
                 console.log(params);
                 const response = await Moralis.Cloud.run('loadproject', params);
                 switchviews('overview', ['allprojs']);
+                console.log(response);
                 
                 const gethp = await convertTokens('polygon'); //matic conversion rate from ftm e.g
                 const gethp2 = await convertTokens('fantom'); //ftm conversion rate from matic
@@ -1528,7 +1531,7 @@ async function openuser(usernid, son){
                     cnpe.id = res.id;
                     const owner = await getuserdetails(res.idu);
                     cnpe.className = 'projects';
-                    cnpe.onclick = function(){openproject(res.id)};
+                    cnpe.onclick = async function(){await openproject(res.id)};
                     
                     console.log('appending...')
                     let total = 0;
@@ -1996,7 +1999,24 @@ async function openuser(usernid, son){
                         showToast('Coming soon', 1, 7000)
                     }
                     
-                    if(ent)ent.className += " active";
+                    if(this.event){
+                        if(this.event.target.parentElement.className.includes('ersd') || ent){
+                        if(tabn == 'home'){
+                            savestate({type:'home', data:0})
+                        }
+                        else if(tabn == 'iht7k'){
+                            savestate({type:'projects', data:0})
+                        }
+                        else if(tabn == 'ibczo-2'){
+                            savestate({type:'posts', data:0})
+                        }
+                        else if(tabn == 'messaging'){
+                            savestate({type:'messaging', data:0})
+                        }
+                    }
+                    }
+
+                    if(ent) ent.className += " active";
                     if(tabn == 'ibczo-2' && ge('postsholder').childElementCount<2){
                         const tagsu = Moralis.User.current().get('tags');
                         const params = {tags:tagsu, start:0, me:globalid};            
@@ -2098,6 +2118,7 @@ async function openuser(usernid, son){
                         crp.result('blob').then(async function(blob){
                             const res = await imageConversion.compressAccurately(blob,150);
                             const ress = await imageConversion.filetoDataURL(res);
+
                             let replacer = document.getElementById("lsjdo");
                             
                             replacer.src = ress;
@@ -2118,7 +2139,7 @@ async function openuser(usernid, son){
                         crp.rotate(-90);
                     }
                 }
-                ge('newimageuploader').onchange = async function(){
+                ge('newimageuploader').onchange = async function(evt){
                     const file = evt.target.files[0];
                     
                     await showcropper(URL.createObjectURL(file));
@@ -3432,6 +3453,9 @@ async function openuser(usernid, son){
                                     showToast('Profile updated!', 1, 5000, function(){
                                         openuser();
                                     })
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 2000);
                                 }, ()=>{})
                             }
                         }

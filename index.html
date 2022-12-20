@@ -255,8 +255,9 @@
         </div>
         
         <div id="editme">
+          <div class="row center" style="width: 100%;"><button onclick="switchviews('usersstuffs', ['editme']);" class="actions acol2 la la-times"></button></div>
           <div id="edlksao" class="column center" style="gap: 10px;">
-            <div class="underp"><img id="lsjdo" alt="My image" titlex="My Profile Image" src="https://impera.onrender.com/img/profile2.jpg"/></div>
+            <div class="underp"><img id="lsjdo" onclick="ge('lfimg2').click()" alt="My image" titlex="My Profile Image" src="https://impera.onrender.com/img/profile2.jpg"/></div>
             
             <div id="special2" class="special-box">
               <label id="lfimg2" class="uploaders" titlex="Upload Avatar" for="newimageuploader">Upload Image</label>
@@ -273,19 +274,20 @@
             
             <div class="input-box">
               <label for="myname">Name</label>
-              <input onblur="offfocused(this)" onfocus="pfocused(this)" type="text" placeholder="Alicra" name="my_name" id="myname" maxlength="20" minlength="3" required>
+              <input onblur="offfocused(this)" onfocus="pfocused(this)" type="text" placeholder="Alicra" name="my_name" id="myname" maxlength="20" minlength="3" spellcheck="false" required>
             </div>
             
             <div id="aboutmeh">
               <div class="input-box" style="display: flex; flex-direction:column; overflow: hidden;">
                 <label for="allaboutme" style="z-index: 2;">About</label>
-                <textarea oninput="ge('textcountme').innerHTML = (ge('allaboutme').value.length).toString()+'/100';" onblur="offfocused(this)" onfocus="pfocused(this)" id="allaboutme" style="height: 200px" maxlength="100"></textarea>
+                <textarea oninput="ge('textcountme').innerHTML = (ge('allaboutme').value.length).toString()+'/100';" onblur="offfocused(this)" onfocus="pfocused(this)" id="allaboutme" style="height: 100px" maxlength="100"></textarea>
                 <span style="z-index: 2;" id="textcountme"></span>
               </div>
             </div>
             
           </div>
           <button class="snapb" onclick="savenewprofile()"><span>Save</span></button>
+          <div style="min-height: 30px; height: 30px; width: 10px;"></div>
         </div>
         <span class="filler"></span>
       </div>
@@ -753,7 +755,7 @@
 <!--SECTION OF FLOATERS-->
 <!--TABS FOR NAVIGATING ON Mobile-->
 <div id="nav">
-  <button title="home" class="tabb la la-home" onclick="opentab('usertab', this)"></button>    
+  <button title="home" class="tabb la la-home" onclick="opentab('home', this)"></button>    
   <button title="posts" class="tabb la la-feather" onclick="opentab('ibczo-2', this)"></button>
   <button title="projects" class="tabb la la-hashtag" onclick="opentab('iht7k', this)"></button>
   <button title="messages" class="tabb las la-comments" onclick="opentab('messaging', this)"></button>

@@ -376,7 +376,7 @@ p{
   border-radius: 23px 23px 10px 10px;
   width: 100%;
   box-shadow: none;
-  transition: transform 0.1s linear 2s, box-shadow 0.1s linear 2s, border-radius 0.1s linear 2s;
+  transition: transform 0.1s linear 1s, box-shadow 0.1s linear 1s, border-radius 0.1s linear 1s;
 }
 .imgc img:hover{
   transform: scale(1.05) translateY(5px);
@@ -551,6 +551,8 @@ p{
   position: absolute;
   content: '';
   width: 100%;
+  top: 0;
+  left: 0;
   height: 100%;
   border-radius: 25px;
   z-index: 1;
@@ -728,6 +730,7 @@ p.gtext::selection {
   width: 150px;
   height: 45px;
   line-height: 45px;
+  font-size: 15px;
 }
 #lfimg:hover, #lfimg2:hover{
   opacity: 0.5;
@@ -1278,6 +1281,9 @@ input[type='text']:disabled{
   display: flex;
   flex-direction: row;
 }
+.section-title{
+  position: relative;
+}
 .section-title, .section-title h2{
   margin: 10px 0px;
 }
@@ -1728,6 +1734,9 @@ box-shadow: 0 5px 10px 2px var(--shadow);
 }
 .ersd:hover{
   background-color: var(--gray1);
+}
+.ersd:active{
+  background-color: transparent;
 }
 .ersd button{
   width: 40px;
