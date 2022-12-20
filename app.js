@@ -355,9 +355,15 @@ async function cperlink(){
     await navigator.clipboard.writeText('https://impera.onrender.com/me/'+globalid);
     showToast('Link copied');
 }
-async function sethome(new_params){
+async function sethome(new_params, son){
     switchviews('keeperx', ['homestuffs']);
     
+    if(!son){
+            const state = {type:'home', data:new_params};
+            if(hs1.length != 0) history.pushState(state, '', location.origin+'/home');
+            else{history.replaceState(state, '', location.origin+'/home')}
+    }
+
     //hell with first stop
     const ouruser = await requestUser();
     ge('hppa').src = ouruser.img;
@@ -662,6 +668,8 @@ async function syncprice(value){
         exchange: 'uniswap-v3',
     };
     const price = await Moralis.Web3API.token.getTokenPrice(options);
+    
+    if(chainx == '0x1') return 1/price.usdPrice;
     
     return price.usdPrice*mul
 }
@@ -1308,7 +1316,7 @@ async function openuser(usernid, son){
                 else{
                     ge('fundbox').style.display = 'flex'
                 }
-                
+
                 const isme = new Moralis.Query('users');
                 isme.equalTo('username', globalid);
                 const mex = await isme.first();
@@ -1390,6 +1398,8 @@ async function openuser(usernid, son){
                         ge('projects-transactions').append(ner);
                     }
                 }
+                ge('kdpa').src = 'https://impera.onrender.com/img/polygonicon.svg';
+                if(testchains() == 'fantom') ge('kdpa').src = 'https://impera.onrender.com/img/fantomicon.svg';
                 
             } catch (error) {
                 if(navigator.onLine == true){
@@ -1473,8 +1483,9 @@ async function openuser(usernid, son){
 
             if(!son){
                 const state = {type:'projects', data:params};
-                if(hs1.length != 0) history.pushState(state, '', location.origin+'/projects');
+                if(hs1.length != 0){history.pushState(state, '', location.origin+'/projects')}
                 else{history.replaceState(state, '', location.origin+'/projects')}
+                hs1.push(state)
             } 
 
             if(globalid) tagsl = await Moralis.User.current().get('tags');
@@ -1815,6 +1826,9 @@ async function openuser(usernid, son){
                     
                     ge('hiswalletadd').innerText = opt.wallet;
                     ge('viewedwallet').setAttribute('wallet', opt.wallet);
+
+                    ge('oplas3').src = 'https://impera.onrender.com/img/polygonicon.svg';
+                    if(testchains() == 'fantom') ge('oplas3').src = 'https://impera.onrender.com/img/fantomicon.svg';    
                 }
                 else if(opt.project){
                     switchviews('viewedwallet', ['mywallet']);
@@ -2515,11 +2529,11 @@ async function openuser(usernid, son){
                             const ima = wefound[c].get('image');
                             const name = wefound[c].get('title');
                             const username = 'by @'+wefound[c].get('username');
-                            const sume = wefound[c].get('summary');
+                            const sume = wefound[c].get('summary') == '' ? 'No summary for this project.' : wefound[c].get('summary');
                             
                             const seael = document.createElement('div');
                             seael.className = 'searchresults';
-                            seael.innerHTML = `<div class="searchimg" style="border-radius:5px"><img style="border-radius:5px" src="${ima}"/></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3">@${username}</p></div><div class="sebot"><p>${sume}</p></div></div>`
+                            seael.innerHTML = `<div onclick="await openproject('${wefound[c].id}')" class="searchimg" style="border-radius:5px"><img style="border-radius:5px" src="${ima}"/></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3">@${username}</p></div><div class="sebot"><p>${sume}</p></div></div>`
                             
                             ge('searchbody').append(seael)
                         }
@@ -2539,11 +2553,11 @@ async function openuser(usernid, son){
                             const ima = wefound[c].get('image');
                             const name = wefound[c].get('name');
                             const username = wefound[c].get('username');
-                            const about = wefound[c].get('about');
+                            const about = wefound[c].get('about')  == '' ? 'I wrote nothing about myself ;)' : wefound[c].get('about');
                             
                             const seael = document.createElement('div');
                             seael.className = 'searchresults';
-                            seael.innerHTML = `<div class="searchimg" style="border-radius:100%"><img style="border-radius:100%" src="${ima}"/></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3"> @${username}</p></div><div class="sebot"><p>${about}</p></div></div>`
+                            seael.innerHTML = `<div onclick="await openuser('${wefound[c].id}')" class="searchimg" style="border-radius:100%"><img style="border-radius:100%" src="${ima}"/></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3"> @${username}</p></div><div class="sebot"><p>${about}</p></div></div>`
                             
                             ge('searchbody').append(seael)
                         }
@@ -2580,11 +2594,11 @@ async function openuser(usernid, son){
                                 const ima = usersfound[c].get('image');
                                 const name = usersfound[c].get('name');
                                 const username = usersfound[c].get('username');
-                                const about = usersfound[c].get('about');
+                                const about = usersfound[c].get('about')  == '' ? 'I wrote nothing about myself ;)' : usersfound[c].get('about');
                                 
                                 const seael = document.createElement('div');
                                 seael.className = 'searchresults';
-                                seael.innerHTML = `<div class="searchimg" style="border-radius:100%"><div class="underp siba"><img style="border-radius:100%" src="${ima}"/></div></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3"> @${username}</p></div><div class="sebot"><p>${about}</p></div></div>`
+                                seael.innerHTML = `<div onclick="await openuser('${wefound[c].id}')" class="searchimg" style="border-radius:100%"><div class="underp siba"><img style="border-radius:100%" src="${ima}"/></div></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3"> @${username}</p></div><div class="sebot"><p>${about}</p></div></div>`
                                 
                                 ge('searchbody').prepend(seael)
                             }
@@ -2595,11 +2609,11 @@ async function openuser(usernid, son){
                                 const ima = projfound[c].get('image');
                                 const name = projfound[c].get('title');
                                 const username = 'by @'+projfound[c].get('username');
-                                const sume = projfound[c].get('summary');
+                                const sume = projfound[c].get('summary') == '' ? 'No summary for this project.' : projfound[c].get('summary');
                                 
                                 const seael = document.createElement('div');
                                 seael.className = 'searchresults';
-                                seael.innerHTML = `<div class="searchimg" style="border-radius:none"><img style="border-radius:none" src="${ima}"/></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3">${username}</p></div><div class="sebot"><p>${sume}</p></div></div>`
+                                seael.innerHTML = `<div onclick="await openproject('${wefound[c].id}')" class="searchimg" style="border-radius:none"><img style="border-radius:none" src="${ima}"/></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3">${username}</p></div><div class="sebot"><p>${sume}</p></div></div>`
                                 
                                 ge('searchbody').prepend(seael)
                             }
@@ -3454,8 +3468,9 @@ async function openuser(usernid, son){
                             
                             if(!son){
                                 const state = {type:'posts', data:params};
-                                if(hs1.length != 0) history.pushState(state, '', location.origin+'/posts');
+                                if(hs1.length != 0){history.pushState(state, '', location.origin+'/posts')}
                                 else{history.replaceState(state, '', location.origin+'/posts')}
+                                hs1.push(state)
                             }
                             ge('newposter').onclick = function() {
                                 opendialog('writepost')
@@ -3636,13 +3651,13 @@ async function openuser(usernid, son){
                         
                         async function currcon(elx, obj, conve){
                             if(conve == 'dollar'){
-                                //for converting to erc20
-                                const con = await syncprice(obj.value);
-                                ge(elx).value = String(con)
+                               //converting from dollar
+                                const con = obj.value/await syncprice();
+                                ge(elx).value = String(con)                                
                             }
                             else{
-                                //converting to dollar
-                                const con = obj.value/await syncprice();
+                               //for converting from other chains
+                                const con = await syncprice(obj.value);
                                 ge(elx).value = String(con)
                             }
                         }

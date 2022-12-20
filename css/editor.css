@@ -13,6 +13,13 @@
 .ql-container.ql-snow{
     border: none;
 }
+.ql-toolbar.ql-snow .ql-picker-options {
+    background-color: var(--pri);
+    outline: none;
+}
+ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+    background-color: var(--thread);
+}
 #omnus{
     border-radius: 25px;
     overflow: scroll;

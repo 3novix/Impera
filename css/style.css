@@ -87,6 +87,9 @@
   background-image: var(--gradi);
 }
 .lops{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 0px 20px 20px 0px;
   width: 60px;
   margin-right: -5px;
@@ -288,7 +291,7 @@ p{
   display: flex;
   gap: 10px;
   flex-flow: row wrap;
-  padding: 5px;
+  padding: 20px;
 }
 #ibczo-2{
   align-self:auto;
@@ -339,6 +342,7 @@ p{
   border-radius: 25px;
   overflow: visible;
   transition: box-shadow 0.1s, transform 0.1s;
+  height: fit-content;
 }
 .projects:hover{
   transform: scale(1.05) translateY(-10px);
@@ -1442,6 +1446,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   justify-content: center;
   align-items: center;
   height: 60px;
+  width: 100%;
   order: 10000;
 }
 .tags{
@@ -3375,6 +3380,7 @@ font-size: 14px;
   border-radius: 30px;
   background-color: var(--thread);
   box-shadow: 0px 0px 2px 2px var(--shadow);
+  border-bottom: none;
 }
   #selfpro{
     display: none;

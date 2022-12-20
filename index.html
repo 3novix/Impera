@@ -17,7 +17,7 @@
   
   <title>Impera.io</title>
   
-  <script type="text/javascript" src="theme.js"></script>
+  <script type="text/javascript" src="https://impera.onrender.com/theme.js"></script>
   
   <link rel="preload" href="https://impera.onrender.com/img/loading.svg" as="image">
   <link rel="preload" href="https://impera.onrender.com/img/im.svg" as="image"/>
@@ -158,14 +158,14 @@
   
   <div id="home" class="rblocks">
     <div class="glassy-top topin">
-      <div><img class="menubtn" height="40px" src="https://impera.onrender.com/img/im.svg"></div>
+      <div><img class="menubtn" onclick="openmenu()" height="30px" src="https://impera.onrender.com/img/im.svg"></div>
       <p class="gtext largeps" style="height: 40px; line-height: 40px;">Home</p>
     </div>
     <div id="keeperx" class="column center" style="width: 100%; height: 100%;">
       <object width="50px" type="image/svg+xml" data="https://impera.onrender.com/img/loading.svg"></object>
     </div>
     <div id="homestuffs" class="column" style="display:none; width: 100%;">
-      
+      <div class="filler"></div>
       <div id="hppah" class="column center" style="gap: 20px;">
         <div class="underp"><img id="hppa" src="https://impera.onrender.com/img/profile2.jpg" titlex="My profile pic" alt="My profile pic"></div>
         <div class="row center" style="gap: 5px;">
@@ -255,7 +255,7 @@
             <div class="underp"><img id="lsjdo" alt="My image" titlex="My Profile Image" src="https://impera.onrender.com/img/profile2.jpg"/></div>
             
             <div id="special2" class="special-box">
-              <label id="lfimg2" class="uploaders" title="Upload avatar" titlex="Upload Avatar" for="newimageuploader">Upload Image</label>
+              <label id="lfimg2" class="uploaders" titlex="Upload Avatar" for="newimageuploader">Upload Image</label>
               <input type="file" name="upload image" title="" titlex="upload image" id="newimageuploader" accept=".jpeg, .jpg, .png, .bmp"/>
             </div>
             
@@ -264,7 +264,7 @@
           <div class="simpleinputs">
             <div class="input-box">
               <label for="myusername">@</label>
-              <input type="text" placeholder="Alicra" name="my_username" id="myusername" maxlength="12" minlength="3" style="width: 100px;" disabled>
+              <input type="text" title="You haven't used this usename for up to a month" placeholder="Alicra" name="my_username" id="myusername" maxlength="12" minlength="3" style="width: 100px;" disabled>
             </div>
             
             <div class="input-box">
@@ -450,12 +450,12 @@
             <div id="dersutop" style="display: none; flex-direction: row; justify-content: center; width: 100%;"><button class="actions acol2 la la-times" onclick="shrinkit()"></button></div>
             <div id="ethfund">
               <div id="dersu" class="input-box" style="display: none;">
-                <input oninput="currcon(this, 'conv0')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="$2" title="fund amount in dollars" name="fund_amount" id="fundinput" required>
+                <input oninput="currcon('fund_tokens', this, 'dollar')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="$2" title="fund amount in dollars" name="fund_amount" id="fundinput" required>
                 <span title="usd" class="actions acol1 lab la-dollar-sign"></span>
               </div>
               <div id="dersu2" class="input-box" style="display: none;">
-                <input oninput="currcon(this, 'conv0')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="2 MATIC" title="fund amount in tokens" name="fund_tokens" id="fundtokens" required>
-                <span title="ethereum" class="actions acol1 lab la-ethereum"></span>
+                <input oninput="currcon('fundinput', this, 'erc20')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="2 MATIC" title="fund amount in tokens" name="fund_tokens" id="fundtokens" required>
+                <span class="lops"><img id="kdpa" height="30px" alt="Matic"></span>
               </div>
             </div>
             <div class="malf"><button onclick="fund()" id="fundbutton" class="invertio"><p>Fund</p></button></div>
@@ -523,7 +523,7 @@
               <img class="gtext" height="296px" id="replacer" onclick="removeimg()" src="" style="height:auto; max-height: 300px; width: auto; max-width: 100%;" alt="project image">
             </div>
             <div id="special1" class="special-box">
-              <label for="p_image_input" titlex="Select an Image" id="lfimg">Select image</label>
+              <label for="p_image_input" titlex="Select an Image" id="lfimg" class="uploaders">Select image</label>
               <input class="gtext" id="p_image_input" name="p_image" spellcheck="false" title="image for project" type="file" accept=".png, .jpg, .jpeg, .bmp, .mp4" required/>
             </div>
             <div style="position: absolute; bottom:-10px; color:var(--sec); font-size: 15px; opacity: 0.7;">*wide images are recommended</div>
@@ -533,17 +533,17 @@
             <div class="input-box"><label for="inppname">Title</label><input onchange="checkpra(this)" onblur="offfocused(this)" onfocus="pfocused(this)" type="text" placeholder="once upon a time" name="p_name" id="inppname" maxlength="20" minlength="3" required autofocus><span class="beauts"><div id="avail"></div></span></div>
             
             <div id="ingib" class="input-box">
-              <label for="ingoaldolls">Goal $</label>
+              <label for="ingoaldolls">Goal</label>
               <input oninput="currcon('ingoal', this, 'dollar')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" placeholder="$3150" name="p_goaldolls" id="ingoaldolls" required>
               <span onclick="return false" title="ethereum" class="lops" style="margin-right: 0px;">usd</span>
             </div>
             <div id="ingib" class="input-box" style="align-self: flex-end; width: 250px;">
               <label>&#126;</label>
               <input oninput="currcon('ingoaldolls', this, 'erc20')" onblur="offfocused(this)" onfocus="pfocused(this)" type="number" placeholder="2 MATIC" name="p_goal" id="ingoal" required>
-              <span onclick="return false" title="ethereum" class="lops"><img id="oplas" style="height: 40px;" src="https://impera.onrender.com/img/polygonicon.svg"/></span>
+              <span onclick="return false" title="ethereum" class="lops"><img id="oplas" style="height: 30px;" src="https://impera.onrender.com/img/polygonicon.svg"/></span>
             </div>
             
-            <p style="margin-top: -15px; font-size: 15px; opacity: 0.8;">Note:The goal must be reached in Dollars($)</p>
+            <p style="margin-top: -15px; font-size: 15px; opacity: 0.8;">Note: The goal must be reached in Dollars($)</p>
             
             <div class="input-box" style="width: 200px;"><label for="deadline">Deadline</label><input onblur="offfocused(this)" onchange="if(this.value == '0' || this.value == ''){this.value = 1}" onfocus="pfocused(this)" type="number" minlength="1" maxlength="2" oninput="if(Number(this.value)>12){this.value = 12}else if(Number(this.value)<0){this.value = 1}else if(this.value.indexOf('e') == 'number'){this.value = 1}" max="12" min="1" value="1" name="months" id="deadline" style="width:30px; padding: 5px;" required><span style="padding-right:20px; color:var(--sec); opacity: 0.5; font-size: 14px;">months</span></div>
             <div class="tags-holder">
@@ -646,12 +646,12 @@
         <div class="simpleinputs">
           <div id="tipamountholder" class="input-box">
             <span onclick="return false" title="dollars" class="lops lab la-dollar-sign"></span>
-            <input oninput="equithis(this, 'dollar')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="1" name="p_tip_amount" id="tipamount" value="1" required>
+            <input oninput="currcon('equivalent', this, 'dollar')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="1" name="p_tip_amount" id="tipamount" value="1" required>
           </div>
           <div id="tipamountholdereq" class="input-box" style="width: 250px; align-self: flex-end;">
             <label>&#126;</label>
-            <input oninput="equithis(this, 'erc20')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="1" name="p_tip_equivalent" value="1" id="equivalent" required>
-            <span onclick="return false" title="erc20" class="lab la-ethereum" class="lops"></span>
+            <input oninput="currcon('tipamount', this, 'erc20')" onblur="offfocused(this);" onfocus="pfocused(this)" type="number" placeholder="1" name="p_tip_equivalent" value="1" id="equivalent" required>
+            <span class="lops"><img id="oplas3" alt="currency"/></span>
           </div>
           <div class="row center"><button onclick="tip()" class="specialb">Send Tip</button></div>
         </div>
@@ -765,6 +765,6 @@
 <script src="https://unpkg.com/@web3auth/web3auth@latest/dist/web3auth.umd.min.js"></script>
 <script src="https://impera.onrender.com/tools/croppie.js"></script>
 <script src="https://impera.onrender.com/tools/conversion.js"></script>
-<script src="app.js"></script>
+<script src="https://impera.onrender.com/app.js"></script>
 </body>
 </html>
