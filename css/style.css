@@ -624,6 +624,17 @@ button{
   -webkit-text-fill-color:transparent;
   -moz-text-fill-color:transparent;
 }
+.nonee{
+  font-weight: bold;
+  color:var(--sec);
+  background-image: none;
+  background-size: 100%;
+  background-repeat: repeat;
+  background-clip: unset;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color:var(--sec);
+  -moz-text-fill-color:unset;
+}
 .flowrent{
   background: linear-gradient(225deg, var(--color1), var(--color3), var(--color2));
   background-size: 600% 600%;
@@ -1036,11 +1047,12 @@ p.gtext::selection {
   box-shadow: 0 0 10px 0px var(--shadow);
 }
 #ethfund{
-  width: 120px;
+  width: 200px;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   border-radius: 25px;
   overflow: hidden;
+  gap: 5px;
 }
 #fundinput{
   width: 80px;

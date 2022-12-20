@@ -1385,7 +1385,7 @@ async function openuser(usernid, son){
                 //We are saving the goal in dollars... Funded is in in matic or ftm. PERFECT
                 ge('fnums').innerHTML = '$'+processnumbers(totald).toString()+' &#126; <span style="font-size:15px; opacity:0.7; color:var(--sec)">'+total+suffix+'</span>';
                 ge('fnums').setAttribute('titlex', (total).toString()+' '+suffix);
-                ge('final_goal').innerHTML = '$'+processnumbers(response.goal)+' &#126; <span style="font-size:15px; opacity:0.7; color:var(--sec)">'+(response.goal/await syncprice())+suffix+'</span>'
+                ge('final_goal').innerHTML = '$'+processnumbers(response.goal)+' &#126; <span style="font-size:15px; opacity:0.7; color:var(--sec); -webkit-text-fill-color:var(--sec); -moz-text-fill-color:var(--sec);">'+(response.goal/await syncprice())+suffix+'</span>'
                 
                 if((mex.get('watchlist')).indexOf(response.id)){
                     ge('atwy').className+=' lq'
@@ -3717,14 +3717,13 @@ async function openuser(usernid, son){
                         }
                         
                         function strinkit(){
-                            ge('dersu').style.display = 'none';
-                            ge('dersu2').style.display = 'none';
+                            ge('ethfund').style.display = 'none'
                             ge('dersutop').style.display = 'none';
                         }
                         async function fund(){
                             const me = (await requestUser()).username;
                             
-                            if((await Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+                            if(await Moralis.User.current().get('ethAddress') == undefined){
                                 //connect to wallet
                                 showToast('No wallet found', 2, 2000);
                                 setTimeout(() => {
@@ -3750,9 +3749,8 @@ async function openuser(usernid, son){
                                 }
                             }
                             
-                            if(ge('dersu').style.display == 'none'){
-                                ge('dersu').style.display = 'flex';
-                                ge('dersu2').style.display = 'flex';
+                            if(ge('ethfund').style.display == 'none'){
+                                ge('ethfund').style.display = 'flex';
                                 ge('dersutop').style.display = 'flex';
                                 ge('oplas2').src = 'https://impera.onrender.com/img/polygonicon.svg';
                                 if(testchains() == 'fantom') ge('oplas2').src = 'https://impera.onrender.com/img/fantomicon.svg';
