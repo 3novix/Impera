@@ -610,7 +610,6 @@ button{
 .slicki::placeholder, .gtext, #homeos:hover button, .tabb:hover::before, .pfilterb.active, .invertio:hover p, .specialb:hover p, .ersd .acolg{
   font-weight: bold;
   color: rgba(var(--col2), 0.9);
-  background-color: var(--color1);
   background-image: var(--grad3);
   background-size: 100%;
   background-repeat: repeat;
@@ -1837,8 +1836,8 @@ input:-webkit-autofill{
   backdrop-filter: blur(10px);
 }
 #userstop .underp, #edlksao .underp, #hppah .underp{
-  width: 156px;
-  height: 156px;
+  width: 160px;
+  height: 166px;
   border-radius: 100%;
 }
 #userstop .underp::before, #edlksao .underp::before, #hppah .underp::before{
@@ -1855,12 +1854,12 @@ input:-webkit-autofill{
   height: 150px;
   border-radius: 100%;
   outline: none;
-  outline: 2px solid var(--pri);
+  outline: 3px solid var(--pri);
 }
 
 .clxdf .underp{
-  width: 104px;
-  height: 104px;
+  width: 108px;
+  height: 108px;
   border-radius: 100%;
 }
 .clxdf .underp::before{

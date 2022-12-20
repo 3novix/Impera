@@ -211,8 +211,9 @@ async function done(){
 
     console.log(provider);
 
-    /*
-    if(!(Moralis.User.current().get('ethAddress')).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+    const getth = Moralis.User.current().get('ethAddress');
+    
+    if(getth && getth.length > 10){
     showToast('Connect to Metamask', 1, 20000, async function() {
         await Moralis.enableWeb3({
             throwOnError: true,
@@ -222,7 +223,7 @@ async function done(){
         })
     })
     }
-    */
+    
     const locval = location.pathname;
     
     console.log(locval);
@@ -1580,6 +1581,7 @@ async function openuser(usernid, son){
             } catch (error) {
                 const code = error.code;
                 const message = error.message;
+                console.log(error)
                 showToast('click to reload', 3, 5000, function(){
                     allprojectsload(params)
                 });
@@ -1682,6 +1684,7 @@ async function openuser(usernid, son){
                 showToast('Click to Change network', 2, 10000, function(){
                     addNetwork('polygon');
                 });
+                return '0x1'
             }
         }
         ge('tokenbal').onclick = async function(){ge('ownedtokens').innerText = await getTokenBalance()}
