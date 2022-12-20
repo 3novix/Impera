@@ -950,7 +950,7 @@ async function openuser(usernid, son){
         closedialog();
         
         ss.setItem('post_scroll', document.getElementById('ibczo-2').scrollTop);
-        opentab('ibczo-2');
+        opentab('ibczo-2', undefined, 1);
         switchviews('mainpost', ['postsholder']);
         
         if(!son){
@@ -1251,7 +1251,7 @@ async function openuser(usernid, son){
             if(!navigator.onLine) showToast(`You're offline`);
             
             closedialog();
-            opentab('iht7k');
+            opentab('iht7k', undefined, 1);
             ge('backbutton2').style.display = 'block';
             
             if(!son){
@@ -1330,7 +1330,7 @@ async function openuser(usernid, son){
                 console.log('percent', percent);
 
                 //test for deadline...
-                const dl = await checkdeadline(response.createdAt, response.get('deadline'));
+                const dl = await checkdeadline(response.createdAt, response.deadline);
                 if(dl == 'Concluded'){
                     ge('fundbox').style.display = 'none'
                 }
@@ -2000,7 +2000,7 @@ async function openuser(usernid, son){
                     return toasty
                 }
                 
-                async function opentab(tabn, ent){
+                async function opentab(tabn, ent, xp){
                     //change the layout due to the device used being mobile -- USING A CLASSIC TAB FUNCTION FROM W3SCHOOLS
                     let i, tabs, tabb;
                     
@@ -2022,6 +2022,8 @@ async function openuser(usernid, son){
                         showToast('Coming soon', 1, 7000)
                     }
                     
+                    if(ent) ent.className += " active";
+
                     if(this.event){
                         if(this.event.type == 'click'){
                         console.log(this.event);
@@ -2041,9 +2043,10 @@ async function openuser(usernid, son){
                         }
                     }
                 }
+                
                     }
 
-                    if(ent) ent.className += " active";
+                    if(!xp){
                     if(tabn == 'ibczo-2' && ge('postsholder').childElementCount<2){
                         const tagsu = Moralis.User.current().get('tags');
                         const params = {tags:tagsu, start:0, me:globalid};            
@@ -2061,6 +2064,7 @@ async function openuser(usernid, son){
                         
                         await sethome(tpppr);
                     }
+                }
                 }
                 
                 //FOR FILTERING THE PROJECTS
