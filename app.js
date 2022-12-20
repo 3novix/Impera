@@ -214,6 +214,7 @@ async function done(){
     const getth = Moralis.User.current().get('ethAddress');
     
     if(getth != undefined && getth.length > 10){
+        showToast('Enabling web3...');
         await Moralis.enableWeb3({
             throwOnError: true,
             provider,
@@ -1498,7 +1499,7 @@ async function openuser(usernid, son){
             ge('lh2').innerHTML = loadicon;
             if((ge('iht7k').getBoundingClientRect()).height == 0){opentab('iht7k'); switchviews('allprojs', ['overview'])}
 
-            
+            ge('backbutton2').style.display = 'none'
             //elap is the element to append them to
             let c = document.getElementsByClassName('projects').length;
             let forx = current_user;
@@ -3458,10 +3459,22 @@ async function openuser(usernid, son){
                             ge('allaboutme').value = nqer.get('about');
                         }
                         
-                        async function savenewprofile() {
+                        async function savenewprofile(){
                             const getName = ge('myname').value;
-                            const getAbout = ge('allaboutme').value;
+                            const getAbout = ge('about').value;
+                            const pic = ge('lsjdo').src;
                             
+                            const options = {
+                                abi: [
+                                    {
+                                        path: `${globalid}/me.${pic.slice(pic.indexOf('/')+1, pic.indexOf(';'))}`,
+                                        content: pic
+                                    }
+                                ]
+                            };
+                            
+                            const path = await Moralis.Web3API.storage.uploadFolder(options);
+
                             if(getName == ''){
                                 showToast('Name cannot be empty', 2, 5000);
                                 ge('myname').focus();
@@ -3482,6 +3495,7 @@ async function openuser(usernid, son){
                                 
                                 nqer.set('name', getName);
                                 nqer.set('about', getAbout);
+                                nqer.set('image', path[0].path);
                                 
                                 await nqer.save().then(()=>{
                                     showToast('Profile updated!', 1, 5000, function(){
