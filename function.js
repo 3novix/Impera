@@ -273,7 +273,6 @@ async function showcropper(img){
 }
 
 document.getElementById("p_image_input").onchange = async function(evt){
-    let replacer = document.getElementById("replacer");
     const file = evt.target.files[0];
     
     await showcropper(URL.createObjectURL(file));
