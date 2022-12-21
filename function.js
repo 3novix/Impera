@@ -398,7 +398,7 @@ async function uploadImg(abi){
       };
       
       const tf = await fetch('https://deep-index.moralis.io/api/v2/ipfs/uploadFolder', options);
-      const json = tf.json();
+      const json = await tf.json();
       return json[0].path;
 }
 async function newuser(){
