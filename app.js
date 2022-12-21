@@ -836,7 +836,7 @@ async function openuser(usernid, son){
     const fuis = (resultsq.createdAt).toString();
     const nfuis = fuis.slice(fuis.indexOf(' '), fuis.indexOf(':')-3);
     const frrf = resultsq.get('ethAddress');
-    
+
     if(frrf.includes('.') && frrf.includes('@')){
         if(me == userid){
             ge('wareti').innerText = 'Connect Wallet';
@@ -1757,7 +1757,8 @@ async function openuser(usernid, son){
                 showToast('Click to Change network', 2, 10000, function(){
                     addNetwork('polygon');
                 });
-                return '0x1'
+                if(hex) return '0x13881';
+                else return 'polygon'
             }
         }
         ge('tokenbal').onclick = async function(){ge('ownedtokens').innerText = await getTokenBalance()}
