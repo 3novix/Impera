@@ -327,7 +327,7 @@ async function addemoji(ltoemo){
             thi.target.remove();
             if(ge('images-s').innerHTML == '') ge('images-s').style.display = 'none';
         }
-        cr.innerHTML = `<img id='posyo' class='samples' src="${ress}"/>`;
+        cr.innerHTML = `<img id='posyo' style="width:150px; height:150px" class='samples' src="${ress}"/>`;
         ge('images-s').append(cr);
     })
 }
@@ -2278,9 +2278,9 @@ async function openuser(usernid, son){
                     let attachments = '';
                     let referredto = '';
                     
+                    if(ge('posyo') != null){                    
                     let attachment_name = ((ss.getItem('lastImage')).includes('3d-') ? ss.getItem('lastImage')+random_string() : random_string());
-                    
-                    if(ge('posyo') != null){
+
                         const imgx =  ge('posyo').src;
                         const options = [
                                 {
@@ -2347,9 +2347,9 @@ async function openuser(usernid, son){
                     const texts = ge('writecontent').value;
                     
                     let attachments = '';
+                    if(ge('posyo') != null){
                     let attachment_name = ((ss.getItem('lastImage')).includes('3d-') ? ss.getItem('lastImage')+random_string() : random_string());
                     
-                    if(ge('posyo') != null){
                         const imgx =  ge('posyo').src;
                         const options = [
                                 {
@@ -3550,7 +3550,7 @@ async function openuser(usernid, son){
                             }
                             else if(attax.indexOf('3d-') != -1){
                                 //For 3d emojis
-                                return `<img src="${attax}" style="outline:none; border:none; width:200px; height:200px"/>`
+                                return `<img src="${attax}" style="outline:none; border:none; width:150px; height:150px"/>`
                             }
                             else if(attax.includes('.mp4')){
                                 //for videos
