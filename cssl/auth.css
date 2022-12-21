@@ -159,7 +159,6 @@ margin: 45% 0px 0px 75%;
 }
 .first{
     width: 100%;
-    z-index: 2;
 }
 .second{
     background: var(--pri);
