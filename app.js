@@ -3665,7 +3665,7 @@ async function openuser(usernid, son){
                                     let referedtoh='';
                                     
                                     //process projects being referred to
-                                    if(referedto != ''){
+                                    if(referedto != undefined && referedto != ''){
                                         const pre = new Moralis.Query('Projects');
                                         //pre.id = referedto;
                                         await pre.get(referedto).then((resso)=>{
