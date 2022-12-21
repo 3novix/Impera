@@ -386,6 +386,21 @@ async function loginWithUsername(username, password){
     }
 }
 
+async function uploadImg(abi){
+     const options = {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+          'X-API-Key': 'HLi1jr5lLYELJvuCIDVfWzGU3q1Yhj9Phsj2CE8IjH9m9QgxgEI1P4CeN8E68ZnF'
+        },
+        body: JSON.stringify(abi)
+      };
+      
+      const tf = await fetch('https://deep-index.moralis.io/api/v2/ipfs/uploadFolder', options);
+      const json = tf.json();
+      return json[0].path;
+}
 async function newuser(){
     const userox = await Moralis.User.current();
     
@@ -409,10 +424,10 @@ async function newuser(){
         
     }
     else{
-        const newWallet = await ethers.Wallet.createRandom();
+        //const newWallet = await ethers.Wallet.createRandom();
         //connect directly to the wallet
-        Moralis.enableWeb3({privateKey:newWallet.privateKey});
-        geth = newWallet.address;
+        //Moralis.enableWeb3({privateKey:newWallet.privateKey});
+        geth = userox.get('username');
     }
     
     const tags = nichelist;
@@ -426,16 +441,15 @@ async function newuser(){
         
         let iol = showToast(`Saving <object width="50px" type="image/svg+xml" data="img/loading.svg"></object>`, 20000);
         
-        const options = {
-            abi: [
+            const abi = [
                 {
                     path: `${cuser}/me.${pic.slice(pic.indexOf('/')+1, pic.indexOf(';'))}`,
                     content: pic
                 }
             ]
-        };
         
-        const path = await Moralis.Web3API.storage.uploadFolder(options);
+        const path = await uploadImg(abi);
+        
         
         /*const options2 = {
             abi: [

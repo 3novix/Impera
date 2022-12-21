@@ -374,6 +374,21 @@ async function cperlink(){
     await navigator.clipboard.writeText('https://impera.onrender.com/me/'+globalid);
     showToast('Link copied');
 }
+async function uploadImg(abi){
+    const options = {
+       method: 'POST',
+       headers: {
+         accept: 'application/json',
+         'content-type': 'application/json',
+         'X-API-Key': 'HLi1jr5lLYELJvuCIDVfWzGU3q1Yhj9Phsj2CE8IjH9m9QgxgEI1P4CeN8E68ZnF'
+       },
+       body: JSON.stringify(abi)
+     };
+     
+     const tf = await fetch('https://deep-index.moralis.io/api/v2/ipfs/uploadFolder', options);
+     const json = tf.json();
+     return json[0].path;
+}
 async function sethome(new_params, son){
     switchviews('keeperx', ['homestuffs']);
     
@@ -2245,17 +2260,16 @@ async function openuser(usernid, son){
                     
                     if(ge('posyo') != null){
                         const imgx =  ge('posyo').src;
-                        const options = {
-                            abi: [
+                        const options = [
                                 {
                                     path: `${globalid}/posts/${attachment_name}.${imgx.slice(imgx.indexOf('/')+1, imgx.indexOf(';'))}`,
                                     content: imgx,
-                                },
-                            ],
-                        };
-                        const path = await Moralis.Web3API.storage.uploadFolder(options);
+                                }
+                            ];
+
+                        const path = await uploadImg(options)
                         
-                        attachments = path[0].path;
+                        attachments = path;
                     }
                     
                     if(texts.indexOf('$$') > -1){
@@ -2315,17 +2329,15 @@ async function openuser(usernid, son){
                     
                     if(ge('posyo') != null){
                         const imgx =  ge('posyo').src;
-                        const options = {
-                            abi: [
+                        const options = [
                                 {
                                     path: `${globalid}/posts/${attachment_name}.${imgx.slice(imgx.indexOf('/')+1, imgx.indexOf(';'))}`,
                                     content: imgx,
-                                },
-                            ],
-                        };
-                        const path = await Moralis.Web3API.storage.uploadFolder(options);
+                                }
+                            ]
+                        const path = await uploadImg(options)
                         
-                        attachments = path[0].path;
+                        attachments = path;
                     }
                     
                     if(texts.length > 3){
@@ -2825,15 +2837,14 @@ async function openuser(usernid, son){
                     loading('Creating Project...');
                     
                     const imgx =  pimage;
-                    const options = {
-                        abi: [
+                    const options = [
                             {
                                 path: `${globalid}/projects/${random_string()}.${imgx.slice(imgx.indexOf('/')+1, imgx.indexOf(';'))}`,
                                 content: imgx,
                             },
-                        ],
-                    };
-                    const path = await Moralis.Web3API.storage.uploadFolder(options);
+                        ];
+
+                    const path = await uploadImg(options);
                     
                     loading('Creating Wallet...');
                     const newWallet = await ethers.Wallet.createRandom();
@@ -2846,7 +2857,7 @@ async function openuser(usernid, son){
                     
                     const project = new projects();
                     project.set('title', pname);
-                    project.set('image', path[0].path);
+                    project.set('image', path);
                     project.set('contents', contents);
                     project.set('user', userinfo);
                     project.set('goal', pgoal);
@@ -3464,16 +3475,14 @@ async function openuser(usernid, son){
                             const getAbout = ge('about').value;
                             const pic = ge('lsjdo').src;
                             
-                            const options = {
-                                abi: [
+                            const options = [
                                     {
                                         path: `${globalid}/me.${pic.slice(pic.indexOf('/')+1, pic.indexOf(';'))}`,
                                         content: pic
                                     }
-                                ]
-                            };
+                                ];
                             
-                            const path = await Moralis.Web3API.storage.uploadFolder(options);
+                            const path = await uploadImg(options);
 
                             if(getName == ''){
                                 showToast('Name cannot be empty', 2, 5000);
@@ -3495,7 +3504,7 @@ async function openuser(usernid, son){
                                 
                                 nqer.set('name', getName);
                                 nqer.set('about', getAbout);
-                                nqer.set('image', path[0].path);
+                                nqer.set('image', path);
                                 
                                 await nqer.save().then(()=>{
                                     showToast('Profile updated!', 1, 5000, function(){
