@@ -483,7 +483,7 @@ async function sethome(new_params, son){
             let referedtoh='';
             
             //process projects being referred to
-            if(referedto != ''){
+            if(referedto != undefined && referedto != ''){
                 const pre = new Moralis.Query('Projects');
                 //pre.id = referedto;
                 await pre.get(referedto).then((resso)=>{
@@ -3605,7 +3605,7 @@ async function openuser(usernid, son){
                                 const responsex = await Moralis.Cloud.run('posts', new_params);
                                 const response = responsex;
                                 
-                                if(response == 'no posts'){ge('lh1').innerHTML = `<p style="width:100%; text-align:center">${response}</p>`; return ''}
+                                if(response === 'no posts'){ge('lh1').innerHTML = `<p style="width:100%; text-align:center">${response}</p>`; console.log(response); return ''}
                                 else{ge('lh1').innerHTML = loadicon}
                                 
                                 for(let r = 0; r<response.length; r++){
