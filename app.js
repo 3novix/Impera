@@ -323,7 +323,7 @@ async function addemoji(ltoemo){
         const cr = document.createElement('div');
         cr.className = 'imgs';
         cr.onclick = function(thi){
-            ge('attachj').value = '';
+            ge('attacj').value = '';
             thi.target.remove();
             if(ge('images-s').innerHTML == '') ge('images-s').style.display = 'none';
         }
@@ -1741,7 +1741,11 @@ async function openuser(usernid, son){
                 }
             }, 1000)
         }
-        
+        function closemenu() {
+            if(screen() == 'mobile'){
+                ge('suui').style.display = 'none';
+            }
+        }
         function laststep(){
             ge('secondstep').style.display = 'none';
             ge('firststep').style.display = 'flex';
@@ -2258,7 +2262,7 @@ async function openuser(usernid, son){
                     const cr = document.createElement('div');
                     cr.className = 'imgs';
                     cr.onclick = function(thi){
-                        ge('attachj').value = '';
+                        ge('attacj').value = '';
                         thi.target.remove();
                         if(ge('images-s').innerHTML == '') ge('images-s').style.display = 'none';
                     }
