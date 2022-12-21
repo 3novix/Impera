@@ -487,9 +487,12 @@ async function newuser(){
                 subscribed:[],
                 backed:[]
             }).then(()=>{
-                iol.innerHTML = 'Sign up complete';
+                showToast('Sign up complete', 1);
+
+                setTimeout(() => {
                 if(location.search != '') location.assign(location.search.slice(10));
-                location.assign('');
+                else location.assign('home')
+            }, 1000);
             })
         })
     }
