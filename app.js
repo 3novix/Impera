@@ -294,7 +294,7 @@ async function addemoji(ltoemo){
         dt.items.add(tis);
         ge('attacj').files = dt.files;
 
-        const files = ge('attacj').files;
+        const files = ge('attacj').files[0];
         let ress = files;
         ress = await compress(files);
 
@@ -836,7 +836,8 @@ async function openuser(usernid, son){
     const fuis = (resultsq.createdAt).toString();
     const nfuis = fuis.slice(fuis.indexOf(' '), fuis.indexOf(':')-3);
     const frrf = resultsq.get('ethAddress');
-    if(!(frrf.includes('.') && frrf.includes('@'))){
+    
+    if(frrf.includes('.') && frrf.includes('@')){
         if(me == userid){
             ge('wareti').innerText = 'Connect Wallet';
             showToast(loadicon);
@@ -2601,7 +2602,8 @@ async function openuser(usernid, son){
                             
                             const seael = document.createElement('div');
                             seael.className = 'searchresults';
-                            seael.innerHTML = `<div onclick="await openproject('${wefound[c].id}')" class="searchimg" style="border-radius:5px"><img style="border-radius:5px" src="${ima}"/></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3">@${username}</p></div><div class="sebot"><p>${sume}</p></div></div>`
+                            seael.onclick = async function(){await openproject(wefound[c].id)};
+                            seael.innerHTML = `<div class="searchimg" style="border-radius:5px"><img style="border-radius:5px" src="${ima}"/></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3">@${username}</p></div><div class="sebot"><p>${sume}</p></div></div>`
                             
                             ge('searchbody').append(seael)
                         }
@@ -2625,7 +2627,8 @@ async function openuser(usernid, son){
                             
                             const seael = document.createElement('div');
                             seael.className = 'searchresults';
-                            seael.innerHTML = `<div onclick="await openuser('${wefound[c].id}')" class="searchimg" style="border-radius:100%"><img style="border-radius:100%" src="${ima}"/></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3"> @${username}</p></div><div class="sebot"><p>${about}</p></div></div>`
+                            seael.onclick = async function(){await openuser(username)};
+                            seael.innerHTML = `<div class="searchimg" style="border-radius:100%"><img style="border-radius:100%" src="${ima}"/></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3"> @${username}</p></div><div class="sebot"><p>${about}</p></div></div>`
                             
                             ge('searchbody').append(seael)
                         }
@@ -2665,8 +2668,9 @@ async function openuser(usernid, son){
                                 const about = usersfound[c].get('about')  == '' ? 'I wrote nothing about myself ;)' : usersfound[c].get('about');
                                 
                                 const seael = document.createElement('div');
+                                seael.onclick = async function(){await openuser(username)};
                                 seael.className = 'searchresults';
-                                seael.innerHTML = `<div onclick="await openuser('${wefound[c].id}')" class="searchimg" style="border-radius:100%"><div class="underp siba"><img style="border-radius:100%" src="${ima}"/></div></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3"> @${username}</p></div><div class="sebot"><p>${about}</p></div></div>`
+                                seael.innerHTML = `<div class="searchimg" style="border-radius:100%"><div class="underp siba"><img style="border-radius:100%" src="${ima}"/></div></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3"> @${username}</p></div><div class="sebot"><p>${about}</p></div></div>`
                                 
                                 ge('searchbody').prepend(seael)
                             }
@@ -2681,7 +2685,8 @@ async function openuser(usernid, son){
                                 
                                 const seael = document.createElement('div');
                                 seael.className = 'searchresults';
-                                seael.innerHTML = `<div onclick="await openproject('${wefound[c].id}')" class="searchimg" style="border-radius:none"><img style="border-radius:none" src="${ima}"/></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3">${username}</p></div><div class="sebot"><p>${sume}</p></div></div>`
+                                seael.onclick = async function(){await openproject(projfound[c].id)};
+                                seael.innerHTML = `<div class="searchimg" style="border-radius:none"><img style="border-radius:none" src="${ima}"/></div><div class="searchdetails"><div class="setop"><p>${name}</p><p class="col3">${username}</p></div><div class="sebot"><p>${sume}</p></div></div>`
                                 
                                 ge('searchbody').prepend(seael)
                             }

@@ -466,12 +466,12 @@ async function newuser(){
         user.set('tags', tags);
         user.set('username', username);
         user.set('method', method);
-        await user.save().then(()=>{
+        await user.save().then(async ()=>{
             
             //then store them
             const users = Moralis.Object.extend('users');
             const newuser = new users();
-            newuser.save({
+            await newuser.save({
                 username:username,
                 name: name,
                 user:cuser,
