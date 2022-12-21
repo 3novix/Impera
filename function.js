@@ -75,7 +75,7 @@ async function addNetwork(network){
 const ethers = Moralis.web3Library;
 
 async function handleAuth(provider){
-    let chain = '0x1';
+    let chain = undefined;
     if(provider == 'web3Auth') chain = '0x13881';
 
     await Moralis.enableWeb3({

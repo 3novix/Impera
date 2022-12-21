@@ -210,15 +210,34 @@ async function done(){
     const provider = await Moralis.User.current().get('method');
 
     console.log(provider);
+    
+    let chainId = undefined;
+    if(provider == 'web3Auth') chainId = '0x13881';
 
     const getth = Moralis.User.current().get('ethAddress');
-    
+
     if(getth != undefined && getth.length > 10){
         showToast('Enabling web3...');
         await Moralis.enableWeb3({
             throwOnError: true,
             provider,
-        }).then(()=>{}, ()=>{
+            chainId,
+            chainConfig:{
+                chainNamespace: "eip155",
+                chainId: "0x13881", // hex of 80001, polygon testnet
+                rpcTarget: "https://rpc.ankr.com/polygon_mumbai",
+                displayName: "Polygon Mainnet",
+                blockExplorer: "https://mumbai.polygonscan.com/",
+                ticker: "MATIC",
+                tickerName: "Matic",
+              },
+              clientId:"BPhIj4b_UpJHLqLT0RO7FSeqJA1al6oQe8mDb25Xi1tTDdmZa8JtTVYsODQ2xdQ1-SdWtRK1VvnwORC6zDz5xX8",
+              appLogo:'https://impera.onrender.com/img/im.svg',
+              loginMethodsOrder:["google", "facebook", "twitter", "email_passwordless"]
+        }).then(()=>{
+
+        }, (error)=>{
+            console.log(error);
             showToast('Cannot Connect provider', 2);
         })
     }
@@ -1754,9 +1773,6 @@ async function openuser(usernid, son){
                 else return 'fantom'
             }
             else{
-                showToast('Click to Change network', 2, 10000, function(){
-                    addNetwork('polygon');
-                });
                 if(hex) return '0x13881';
                 else return 'polygon'
             }
