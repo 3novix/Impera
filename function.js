@@ -477,7 +477,7 @@ async function newuser(){
                 user:cuser,
                 ethAddress:geth,
                 about:about,
-                image:path[0].path,
+                image:path,
                 //large_image:path2[0].path,
                 watchlist:[],
                 likes:[],
