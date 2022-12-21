@@ -1907,17 +1907,17 @@ async function openuser(usernid, son){
                 if(opt!=undefined){
                     ge('wiww').innerText = 'Write Comment';
                     
-                    ge('posterre').onclick = function(){submit_comment(opt.postid)};
+                    ge('posterre').onclick = async function(){await submit_comment(opt.postid)};
                     
                     if(opt['comid']!=undefined){
                         ge('wiww').innerText = 'Compose Reply';
-                        ge('posterre').onclick = function(){submit_comment(opt.postid, opt.comid)};
+                        ge('posterre').onclick = async function(){await submit_comment(opt.postid, opt.comid)};
                         ge('eewi').innerText = 'Reply';
                     }
                 }
                 else{
                     ge('wiww').innerText = 'Write Post';
-                    ge('posterre').onclick = function(){submit_post();}
+                    ge('posterre').onclick = async function(){await submit_post();}
                     ge('eewi').innerText = 'Post';
                 }
             }
@@ -2320,7 +2320,7 @@ async function openuser(usernid, son){
                         post.setACL(ppACL);
                         post.set('tags', iofr);
                         
-                        const context = { referred: referredto };
+                        const context = { referredto: referredto };
                         await post.save(null, {context:context}).then(async (saved)=>{
                             tyu.remove();
                             //prependpost(saved);
