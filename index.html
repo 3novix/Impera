@@ -623,7 +623,7 @@
     </div>
     <div class="inwall" id="mywallet">
       <div class="column">
-        <div class="row eijrmc"><p id="myethaddress" class="col1"></p><span onclick="navigator.clipboard.writeText(ge('myethaddress').innerText)" class="actions acol7 las la-copy"></span></div>
+        <div class="row eijrmc"><p id="myethaddress" class="col1"></p><button onclick="navigator.clipboard.writeText(ge('myethaddress').innerText)" class="actions acol7 las la-copy"></button></div>
         <div id="orjfn"><a href="https://polygon.tor.us/" target="_blank">Manage Wallet</a><span onclick="howtotorus()" class="actions las la-question-circle" title="You can manage your wallet on Torus"></span></div>
       </div>
 
@@ -632,7 +632,7 @@
         <p id="currencyoftoken" class="ntext"></p>
       </div>
       
-      <div>You are on:<span id="current_chain"></span></div>
+      <div>You are on: <span id="current_chain"></span></div>
       <button id="switcher" class="snapb"><span>Switch to <img id="tokenIcon" class="smallicon"/></span></button>
     </div>
     

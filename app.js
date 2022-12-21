@@ -204,6 +204,7 @@ async function done(){
             ge('iasn').alt = sudet.name+'(me)';
             ge('hjkd').src = sudet.img;
             ge('hjkd').alt = sudet.name+'(me)';
+            ge('oilnm').src = sudet.img
         }
     }
     
@@ -327,7 +328,7 @@ async function addemoji(ltoemo){
             thi.target.remove();
             if(ge('images-s').innerHTML == '') ge('images-s').style.display = 'none';
         }
-        cr.innerHTML = `<img id='posyo' style="width:150px; height:150px" class='samples' src="${ress}"/>`;
+        cr.innerHTML = `<img id='posyo' style="width:150px; height:150px; filter: drop-shadow(0px 0px 10px 1px, var(--shadow)); webkit-filter:drop-shadow(0px 0px 10px 1px, var(--shadow))" class='samples' src="${ress}"/>`;
         ge('images-s').append(cr);
     })
 }
@@ -883,10 +884,12 @@ async function openuser(usernid, son){
     }
     else{
         if(me == userid){
-            ge('usereth').onclick = function() {
+            ge('wareti').innerText = 'My Wallet';
+            ge('usereth').onclick = function(){
                 opendialog('wallet', 0)//0 means 'mine'
             }}
             else{
+                ge('wareti').innerText = 'View Wallet';
                 ge('usereth').onclick = function() {
                     opendialog('wallet', {wallet:resultsq.get('ethAddress')})//object is 'someone else'
                 }
@@ -3492,6 +3495,7 @@ async function openuser(usernid, son){
                             const nqer = await nqe.first();
                             
                             ge('myname').value = nqer.get('name');
+                            ge('lsjdo').src = nqer.get('image');
                             ge('myusername').value = nqer.get('username');
                             ge('allaboutme').value = nqer.get('about');
                         }
@@ -3550,7 +3554,7 @@ async function openuser(usernid, son){
                             }
                             else if(attax.indexOf('3d-') != -1){
                                 //For 3d emojis
-                                return `<img src="${attax}" style="outline:none; border:none; width:150px; height:150px"/>`
+                                return `<img src="${attax}" style="outline:none; border:none; width:150px; height:150px; filter: drop-shadow(0px 0px 10px 1px, var(--shadow)); webkit-filter:drop-shadow(0px 0px 10px 1px, var(--shadow))"/>`
                             }
                             else if(attax.includes('.mp4')){
                                 //for videos

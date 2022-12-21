@@ -1094,6 +1094,10 @@ p.gtext::selection {
 }
 #wallet .divc{
   max-width: 500px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 25px;
+  overflow: hidden;
 }
 .inwall{
   width: calc(100% - 20px);
@@ -1106,10 +1110,20 @@ p.gtext::selection {
   padding: 10px;
   max-width: 300px;
   background-color: var(--pri);
+  border-radius: 10px;
 }
 .eijrmc p{
   max-width: 100%;
   padding: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#switcher span{
+  display: flex;
+  flex-direction: column;
+}
+#tokenIcon{
+  max-height: 30px;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
