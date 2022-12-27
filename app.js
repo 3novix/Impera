@@ -1148,7 +1148,7 @@ async function openuser(usernid, son){
         async function loadcomments(commentx){
             const comm = commentx;
             
-            let nceel = createElement('div');
+            let nceel = document.createElement('div');
             nceel.className = 'tcomments opxx';
             nceel.id = comm.id;
             const ud = await getuserdetails(comm.get('idu'));
@@ -3214,21 +3214,17 @@ async function openuser(usernid, son){
                             tar.parentElement.style.display = 'none'
                         } break;
                         case 'save':{
-                            let wts;
-                            if(poc == 'post' || poc == undefined){
+                            let html;
+                            if(poc == 'post'){
                                 const pocq = new Moralis.Query('Posts');
-                                wts = await pocq.get(postId);
-                            }
-                            else{
-                                const pocq = new Moralis.Query('Comments');
-                                wts = await pocq.get(postId);
-                            }
+                                const wts = await pocq.get(postId);
+
                             const ud = await getuserdetails(wts.get('idu'));
                             
                             let att = '';
                             if(wts.get('attachments') != '' || wts.get('attachments') != undefined) att = import_attachments(wts.get('attachments'));
                             
-                            const html = `
+                            html = `
                             <style>
                             
                             :root{
@@ -3293,7 +3289,84 @@ async function openuser(usernid, son){
                             
                             </div>
                             </div>
-                            `;
+                            `}
+                            else{
+                                    const pocq = new Moralis.Query('Comments');
+                                    const wts = await pocq.get(postId);
+
+                                    const ud = await getuserdetails(wts.get('idu'));
+                                    
+                                    let att = '';
+                                    if(wts.get('attachments') != '' || wts.get('attachments') != undefined) att = import_attachments(wts.get('attachments'));
+                                    
+                                    html = `
+                                    <style>
+                                    
+                                    :root{
+                                        --col1:29, 155, 240;
+                                        --col2:255, 77, 181;
+                                        --col3:179, 29, 236;
+                                        --primary:230, 230, 230;
+                                        --secondary:0, 0, 0;
+                                        --color1:rgb(var(--col1));
+                                        --color2:rgb(var(--col2));
+                                        --color3:rgb(var(--col3));
+                                        --gray1:rgba(107, 107, 107, 0.41);
+                                        --shadow:rgba(0,0,0,0.4);
+                                        --gray2:rgba(113, 113, 113, 0.462);
+                                        --gray3:#222222;
+                                        --gray4:#3f3f3f;
+                                        --thread:#222222;
+                                        --darkg:rgb(19, 19, 19);
+                                        --pri:rgb(var(--secondary));
+                                        --sec:rgb(var(--primary));
+                                        --pri9:rgb(127, 127, 127);
+                                        --gradi: linear-gradient(135deg, var(--color1), var(--color3), var(--color2));
+                                        --grad3: linear-gradient(45deg, var(--color2), var(--color3), var(--color1));
+                                        --grad4: linear-gradient(225deg, var(--color2), var(--color3), var(--color1));
+                                        --bwe:10px 0px;
+                                        --custom: rgba(0,0,0,0.4);
+                                    }
+                                    .row{
+                                        display: flex;
+                                        flex-direction: row;
+                                    }
+                                    .column{
+                                        display: flex;
+                                        flex-direction: column;
+                                    }
+                                    span{
+                                        color: #eeeeee
+                                    }
+                                    .content img{
+                                        border-radius:10px;
+                                        margin-top:5px
+                                    }
+                                    </style>
+                                    <div style="width: 300px; padding: 3px; display: flex; justify-content: center; align-items: center; background: var(--grad3);">
+                                    <div class="column" style="display: flex; width: 294px; flex-direction: column; gap: 2px; align-items: stretch; border-radius: 25px; background-color: #090909; padding: 2px;">
+                                    <div class="row" style="display: flex; flex-direction: row; width: 100%; height: 50px; gap: 3px;">
+                                    <div style="background: var(--grad3); border-radius: 25px; padding: 2px;"><img width="40px" height="40px" src="${ud.image}"/></div>
+                                    <div class="column">
+                                    <p style="font-size: 1.1rem;">${ud.name}</p>
+                                    <p style="color: var(--color2);">@${ud.username}</p>
+                                    </div>
+                                    <div><img height="30px" style="margin-top: 5px;" src="https://impera.onrender.com/img/im.svg"/></div>
+                                    </div>
+                                    
+                                    <div style="padding-top: 3px;" class="column content">
+                                    ${await processtext(wts.get('content'))}
+                                    ${att}
+                                    </div>
+                                    <div class="row">
+                                    <div>${wts.get('likes').length}<span> likes</span></div><span>${await processdate(wts.createdAt)}</span>
+                                    </div>
+                                    
+                                    </div>
+                                    </div>
+                                    `
+                            }
+
                             //Takes pic of a post or comment
                             const json = {
                                 html: html
@@ -3709,7 +3782,7 @@ async function openuser(usernid, son){
                                     <div><p class="time">${timep}</p></div>
                                     <div class="postActions">
                                     <!--contains actions related to the post... i.e like, share, save and reply/comment-->
-                                    <button title='comment' onclick="actions('${response[r].id}', 'comment', this)" class="actions acol6 la la-comment"><span class="countso">${processnumbers(response[r].commentcount)}</span></button>
+                                    <button title='comment' onclick="opendialog('writepost', {postid:'${response[r].id}'})" class="actions acol6 la la-comment"><span class="countso">${processnumbers(response[r].commentcount)}</span></button>
                                     <button title='quote' onclick="actions('${response[r].id}', 'quote', this)" class="actions acol5 las la-quote-right ${response[r].quoted}"><span class="countso">${processnumbers(quoio)}</span></button>
                                     <button title='like' onclick="actions('${response[r].id}', 'like', this)" class="actions acol4 la la-heart ${response[r].liked}"><span class="countso">${processnumbers(likes)}</span></button>
                                     <button title='share' onclick="actions('${response[r].id}', 'share', this)" class="actions acol7 la la-share"></button>
